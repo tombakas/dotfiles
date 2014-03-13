@@ -21,7 +21,6 @@ Bundle 'ervandew/supertab'
 Bundle 'sjl/gundo.vim'
 Bundle 'othree/html5.vim'
 Bundle 'davidhalter/jedi-vim'
-Bundle 'tsaleh/vim-matchit'
 Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-repeat'
@@ -42,6 +41,7 @@ Bundle 'tmhedberg/SimpylFold'
 Bundle 'nvie/vim-flake8'
 Bundle 'hynek/vim-python-pep8-indent'
 Bundle 'Shougo/vimproc'
+Bundle 'gcmt/breeze.vim'
 
 filetype plugin indent on " required!
 
@@ -191,7 +191,7 @@ let g:SimpylFold_docstring_preview = 1
 
 " unite
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async:!<cr>
+nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async<CR>
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
@@ -221,3 +221,6 @@ map <leader>. :bn<CR>
 " Syntastic lnext lprev
 nmap <leader>[ :lprev<CR>
 nmap <leader>] :lnext<CR>
+
+" Breeze mappings
+nmap <leader><tab> :BreezeMatchTag<CR>
