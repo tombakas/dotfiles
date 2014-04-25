@@ -1,48 +1,54 @@
-
+set nocompatible
 filetype off " required!
+if has('vim_starting')
+   set nocompatible               " Be iMproved
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+   " Required:
+   set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
 
-" My Bundles here:
-"
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+
 " original repos on github
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'thisivan/vim-bufexplorer'
-Bundle 'Shougo/unite.vim'
-Bundle 'Raimondi/delimitMate'
-Bundle 'ervandew/supertab'
-Bundle 'sjl/gundo.vim'
-Bundle 'othree/html5.vim'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'tpope/vim-repeat'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'SirVer/ultisnips'
-Bundle 'scrooloose/syntastic'
-Bundle 'majutsushi/tagbar'
-Bundle 'tpope/vim-haml'
-Bundle 'pangloss/vim-javascript'
-Bundle 'tpope/vim-surround'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'vim-scripts/ZoomWin'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'vim-scripts/tlib'
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'tmhedberg/SimpylFold'
-Bundle 'nvie/vim-flake8'
-Bundle 'hynek/vim-python-pep8-indent'
-Bundle 'Shougo/vimproc'
-Bundle 'gcmt/breeze.vim'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+NeoBundle 'thisivan/vim-bufexplorer'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'ervandew/supertab'
+NeoBundle 'sjl/gundo.vim'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'cakebaker/scss-syntax.vim'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'tpope/vim-haml'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'vim-scripts/ZoomWin'
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+NeoBundle 'vim-scripts/tlib'
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'tmhedberg/SimpylFold'
+NeoBundle 'nvie/vim-flake8'
+NeoBundle 'hynek/vim-python-pep8-indent'
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'gcmt/breeze.vim'
+NeoBundle 'bling/vim-airline'
 
+call neobundle#end()
 filetype plugin indent on " required!
 
 set ai " auto indentingGc
@@ -57,9 +63,9 @@ autocmd BufReadPost *
 \ endif |
 \ endif
 
+syntax enable
 set t_Co=256
 colo Mustang
-syntax enable
 set number
 set foldmethod=indent
 set foldlevel=99
@@ -224,3 +230,6 @@ nmap <leader>] :lnext<CR>
 
 " Breeze mappings
 nmap <leader><tab> :BreezeMatchTag<CR>
+
+" Airline jellybean theme
+let g:airline_theme = "jellybeans"
