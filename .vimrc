@@ -1,49 +1,75 @@
+" Note: Skip initialization for vim-tiny or vim-small.
+if !1 | finish | endif
 
-filetype off " required!
+if has('vim_starting')
+set nocompatible " Be iMproved
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+" Required:
+set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-" let Vundle manage Vundle
-" required!
-Bundle 'gmarik/vundle'
+" Required:
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
 
 " My Bundles here:
-"
-" original repos on github
-Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-Bundle 'thisivan/vim-bufexplorer'
-Bundle 'Shougo/unite.vim'
-Bundle 'Raimondi/delimitMate'
-Bundle 'ervandew/supertab'
-Bundle 'sjl/gundo.vim'
-Bundle 'othree/html5.vim'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'tpope/vim-repeat'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'SirVer/ultisnips'
-Bundle 'scrooloose/syntastic'
-Bundle 'majutsushi/tagbar'
-Bundle 'tpope/vim-haml'
-Bundle 'pangloss/vim-javascript'
-Bundle 'tpope/vim-surround'
-Bundle 'terryma/vim-multiple-cursors'
-Bundle 'vim-scripts/ZoomWin'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'vim-scripts/tlib'
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'tmhedberg/SimpylFold'
-Bundle 'nvie/vim-flake8'
-Bundle 'hynek/vim-python-pep8-indent'
-Bundle 'Shougo/vimproc'
-Bundle 'gcmt/breeze.vim'
+" Refer to |:NeoBundle-examples|.
+" Note: You don't set neobundle setting in .gvimrc!
 
-filetype plugin indent on " required!
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'Lokaltog/vim-easymotion'
+NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'ervandew/supertab'
+NeoBundle 'sjl/gundo.vim'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'scrooloose/nerdcommenter'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'cakebaker/scss-syntax.vim'
+NeoBundle 'SirVer/ultisnips'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'majutsushi/tagbar'
+NeoBundle 'tpope/vim-haml'
+NeoBundle 'pangloss/vim-javascript'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'vim-scripts/ZoomWin'
+NeoBundle 'MarcWeber/vim-addon-mw-utils'
+NeoBundle 'vim-scripts/tlib'
+NeoBundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'tmhedberg/SimpylFold'
+NeoBundle 'nvie/vim-flake8'
+NeoBundle 'hynek/vim-python-pep8-indent'
+NeoBundle 'Shougo/vimproc.vim', {
+      \ 'build' : {
+      \     'windows' : 'tools\\update-dll-mingw',
+      \     'cygwin' : 'make -f make_cygwin.mak',
+      \     'mac' : 'make -f make_mac.mak',
+      \     'unix' : 'make -f make_unix.mak',
+      \    },
+      \ }
+NeoBundle 'gcmt/breeze.vim'
+NeoBundle 'beloglazov/vim-online-thesaurus'
+NeoBundle 'Valloric/MatchTagAlways'
+NeoBundle 'vim-scripts/fountain.vim'
+
+call neobundle#end()
+
+" Required:
+filetype plugin indent on
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+
+filetype plugin indent on
 
 set ai " auto indentingGc
 set history=100 " keep 100 lines of history syntax on " syntax highlighting
@@ -201,6 +227,7 @@ function! s:unite_settings()
   imap <buffer> <C-j>   <Plug>(unite_select_next_line)
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
+nmap <leader>be :Unite buffer<CR>
 
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
@@ -222,5 +249,11 @@ map <leader>. :bn<CR>
 nmap <leader>[ :lprev<CR>
 nmap <leader>] :lnext<CR>
 
-" Breeze mappings
-nmap <leader><tab> :BreezeMatchTag<CR>
+" Thesaurus
+nmap <leader>k :OnlineThesaurusCurrentWord<cr>
+
+" Default html files to javascripthtml
+au BufRead *.html set filetype=html.javascript
+
+" Fountain
+au BufRead,BufNewFile *.fountain setfiletype fountain
