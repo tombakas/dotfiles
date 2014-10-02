@@ -59,6 +59,7 @@ NeoBundle 'gcmt/breeze.vim'
 NeoBundle 'beloglazov/vim-online-thesaurus'
 NeoBundle 'Valloric/MatchTagAlways'
 NeoBundle 'vim-scripts/fountain.vim'
+NeoBundle 'mileszs/ack.vim'
 
 call neobundle#end()
 
@@ -228,6 +229,16 @@ function! s:unite_settings()
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
 endfunction
 nmap <leader>be :Unite buffer<CR>
+"unite ack
+if executable('ack-grep')
+  let g:unite_source_grep_command = 'ack-grep'
+  let g:unite_source_grep_default_opts = '-i --no-heading --no-color -k -H'
+endif
+nnoremap <leader>f :<C-u>Unite grep:.<CR>
+nnoremap <leader>F :<C-u>Unite grep:%<CR>
+"yank history
+let g:unite_source_history_yank_enable = 1
+nnoremap <leader>y :<C-u>Unite history/yank<CR>
 
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
