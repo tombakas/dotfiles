@@ -33,6 +33,7 @@ NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'cakebaker/scss-syntax.vim'
 NeoBundle 'SirVer/ultisnips'
+NeoBundle 'honza/vim-snippets'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'tpope/vim-haml'
@@ -59,7 +60,6 @@ NeoBundle 'gcmt/breeze.vim'
 NeoBundle 'beloglazov/vim-online-thesaurus'
 NeoBundle 'Valloric/MatchTagAlways'
 NeoBundle 'vim-scripts/fountain.vim'
-NeoBundle 'mileszs/ack.vim'
 
 call neobundle#end()
 
@@ -230,9 +230,9 @@ function! s:unite_settings()
 endfunction
 nmap <leader>be :Unite buffer<CR>
 "unite ack
-if executable('ack-grep')
-  let g:unite_source_grep_command = 'ack-grep'
-  let g:unite_source_grep_default_opts = '-i --no-heading --no-color -k -H'
+if executable('ag')
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '-i --nogroup --nocolor --hidden -g "" --ignore "*.pyc"'
 endif
 nnoremap <leader>f :<C-u>Unite grep:.<CR>
 nnoremap <leader>F :<C-u>Unite grep:%<CR>
@@ -268,3 +268,6 @@ au BufRead *.html set filetype=html.javascript
 
 " Fountain
 au BufRead,BufNewFile *.fountain setfiletype fountain
+
+" All html is djangohtml
+au BufNewFile,BufRead *.html set filetype=htmldjango
