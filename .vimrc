@@ -227,12 +227,14 @@ function! s:unite_settings()
   " Enable navigation with control-j and control-k in insert mode
   imap <buffer> <C-j>   <Plug>(unite_select_next_line)
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+  imap <buffer> <C-r>   <Plug>(unite_redraw)
 endfunction
 nmap <leader>be :Unite buffer<CR>
 "unite ack
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '-i --nogroup --nocolor --hidden -g "" --ignore "*.pyc"'
+  let g:unite_source_grep_default_opts = '-i --nogroup --nocolor --hidden -g ""'
+  let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
 endif
 nnoremap <leader>f :<C-u>Unite grep:.<CR>
 nnoremap <leader>F :<C-u>Unite grep:%<CR>
