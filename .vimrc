@@ -234,7 +234,7 @@ nmap <leader>be :Unite buffer<CR>
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
   let g:unite_source_grep_default_opts = '-i --nogroup --nocolor --hidden'
-  let g:unite_source_rec_async_command='ag --nocolor --nogroup'
+  let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
 endif
 nnoremap <leader>f :<C-u>Unite grep:.<CR>
 nnoremap <leader>F :<C-u>Unite grep:%<CR>
