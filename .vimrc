@@ -233,8 +233,8 @@ nmap <leader>be :Unite buffer<CR>
 "unite ack
 if executable('ag')
   let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '-i --nogroup --nocolor --hidden -g ""'
-  let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
+  let g:unite_source_grep_default_opts = '-i --nogroup --nocolor --hidden'
+  let g:unite_source_rec_async_command='ag --nocolor --nogroup'
 endif
 nnoremap <leader>f :<C-u>Unite grep:.<CR>
 nnoremap <leader>F :<C-u>Unite grep:%<CR>
@@ -252,7 +252,7 @@ function! <SID>SynStack()
 endfunc
 
 " Shorten lines above 80 characters sensibly
-nmap <C-S-x> 80<S-\|><S-B>i<CR><ESC>
+nmap <C-S-x> 80<S-\|>2<S-B>Eldwi<CR><ESC>
 
 " Next and previous buffer mappigns
 nmap <leader>m :bp<CR>
