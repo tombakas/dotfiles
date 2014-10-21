@@ -1,5 +1,9 @@
 #!/bin/bash
 mkdir -p ~/.vim/bundle/
 mkdir -p ~/.vim/colors/
-ln -s Mustang.vim ~/vim/colors/Mustang.vim
+if [ -f ./Mustang.vim ]
+then
+    ln -s `pwd`/Mustang.vim /home/tomas/.vim/colors/Mustang.vim
+fi
+
 git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
