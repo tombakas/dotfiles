@@ -39,7 +39,6 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'tpope/vim-haml'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'tpope/vim-surround'
-NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'vim-scripts/ZoomWin'
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'vim-scripts/tlib'
@@ -135,14 +134,6 @@ set wrap
 set textwidth=79
 set formatoptions=qrn1
 
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
@@ -219,6 +210,7 @@ let g:SimpylFold_docstring_preview = 1
 " unite
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async<CR>
+
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
