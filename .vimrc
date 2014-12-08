@@ -21,45 +21,20 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'sjl/gundo.vim'
-NeoBundle 'othree/html5.vim'
-NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'tpope/vim-repeat'
-NeoBundle 'cakebaker/scss-syntax.vim'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'tpope/vim-haml'
-NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'tpope/vim-surround'
-NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'vim-scripts/ZoomWin'
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'vim-scripts/tlib'
-NeoBundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'tmhedberg/SimpylFold'
-NeoBundle 'nvie/vim-flake8'
-NeoBundle 'hynek/vim-python-pep8-indent'
-NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'windows' : 'tools\\update-dll-mingw',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-NeoBundle 'gcmt/breeze.vim'
 NeoBundle 'beloglazov/vim-online-thesaurus'
-NeoBundle 'Valloric/MatchTagAlways'
 NeoBundle 'vim-scripts/fountain.vim'
+NeoBundle 'junegunn/goyo.vim'
 
 call neobundle#end()
 
@@ -108,12 +83,10 @@ set hidden
 set wildmenu
 set wildmode=list:longest
 set visualbell
-set cursorline
 set ttyfast
 set ruler
 set backspace=indent,eol,start
 set laststatus=2
-set relativenumber
 set undofile " Save undo's after file closes
 set undodir=$HOME/.vim/undo " where to save undo histories
 set undolevels=1000 " How many undos
@@ -182,25 +155,8 @@ endif
 "taglist
 nnoremap <F3> :TagbarToggle<CR>
 
-"jedi
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0
-let g:jedi#show_call_signatures = 1
-
 "gundo
 nnoremap <F5> :GundoToggle<CR>
-
-"delimitMate
-set backspace=2
-let delimitMate_expand_cr = 1
-let delimitMate_expand_space = 1
-
-" powerline
-let g:Powerline_symbols = 'fancy'
-
-" sparkup
-let g:sparkupExecuteMapping = '<c-h>'
-let g:sparkupNextMapping = '<c-j>'
 
 " indent guide
 let g:indent_guides_auto_colors = 0
