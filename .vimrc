@@ -73,7 +73,7 @@ NeoBundleCheck
 filetype plugin indent on
 
 set ai " auto indentingGc
-set history=100 " keep 100 lines of history syntax on " syntax highlighting
+set history=100 " keep 100 lines of history 
 set hlsearch " highlight the last searched term
 
 " When editing a file, always jump to the last cursor position
