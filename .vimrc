@@ -24,11 +24,21 @@ NeoBundle 'Lokaltog/vim-easymotion'
 NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Raimondi/delimitMate'
-NeoBundle 'ervandew/supertab'
+
+" YouCompleteMe
+let g:neobundle#install_process_timeout = 1500
+NeoBundle 'Valloric/YouCompleteMe', {
+     \ 'build'      : {
+        \ 'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+        \ 'unix'    : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+        \ 'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+        \ 'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
+        \ }
+     \ }
+
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'davidhalter/jedi-vim'
-NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'cakebaker/scss-syntax.vim'
@@ -39,10 +49,12 @@ NeoBundle 'majutsushi/tagbar'
 NeoBundle 'tpope/vim-haml'
 NeoBundle 'pangloss/vim-javascript'
 NeoBundle 'tpope/vim-surround'
-NeoBundle 'terryma/vim-multiple-cursors'
 NeoBundle 'vim-scripts/ZoomWin'
+
+" Vim utility functions
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'vim-scripts/tlib'
+
 NeoBundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'tmhedberg/SimpylFold'
@@ -56,8 +68,9 @@ NeoBundle 'Shougo/vimproc.vim', {
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
+" XML tag navigation
 NeoBundle 'gcmt/breeze.vim'
-NeoBundle 'beloglazov/vim-online-thesaurus'
+" XML tag highliting
 NeoBundle 'Valloric/MatchTagAlways'
 NeoBundle 'vim-scripts/fountain.vim'
 
@@ -165,13 +178,9 @@ cmap w!! %!sudo tee > /dev/null %
 
 setlocal omnifunc=syntaxcomplete#Complete
 
-map <leader>N :NERDTreeToggle<CR>
 map <leader>gg :GundoToggle<CR>
 " pipe through bc
 imap <C-p> <ESC>:.! sed 's/^/scale=2;/' \| bc -l<CR>
-
-let g:SuperTabDefaultCompletionType = "context"
-"let g:SuperTabCrMapping = 1
 
 "window resizing
 if bufwinnr(1)
@@ -222,8 +231,6 @@ nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files -start-insert file_r
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
-  " Play nice with supertab
-  let b:SuperTabDisabled=1
   " Enable navigation with control-j and control-k in insert mode
   imap <buffer> <C-j>   <Plug>(unite_select_next_line)
   imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
@@ -262,9 +269,6 @@ map <leader>. :bn<CR>
 nmap <leader>[ :lprev<CR>
 nmap <leader>] :lnext<CR>
 
-" Thesaurus
-nmap <leader>k :OnlineThesaurusCurrentWord<cr>
-
 " Default html files to javascripthtml
 au BufRead *.html set filetype=html.javascript
 
@@ -273,3 +277,14 @@ au BufRead,BufNewFile *.fountain setfiletype fountain
 
 " All html is djangohtml
 au BufNewFile,BufRead *.html set filetype=htmldjango
+
+" YouCompleteMe settings
+
+let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
+let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
+let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
+let g:ycm_complete_in_comments = 1 " Completion in comments
+let g:ycm_complete_in_strings = 1 " Completion in string
+
+" Tell flake8 to ignore lines above 80 chars long
+let g:syntastic_python_flake8_args='--ignore=E501'
