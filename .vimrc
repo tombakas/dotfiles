@@ -37,8 +37,8 @@ NeoBundle 'Valloric/YouCompleteMe', {
      \ }
 
 NeoBundle 'sjl/gundo.vim'
-NeoBundle 'othree/html5.vim'
-NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'othree/html5.vim' "html5 syntax highliting and indentation
+NeoBundle 'davidhalter/jedi-vim' 
 NeoBundle 'scrooloose/nerdcommenter'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'cakebaker/scss-syntax.vim'
@@ -55,7 +55,7 @@ NeoBundle 'vim-scripts/ZoomWin'
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'vim-scripts/tlib'
 
-NeoBundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+NeoBundle 'bling/vim-airline'
 NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'tmhedberg/SimpylFold'
 NeoBundle 'nvie/vim-flake8'
@@ -73,6 +73,7 @@ NeoBundle 'gcmt/breeze.vim'
 " XML tag highliting
 NeoBundle 'Valloric/MatchTagAlways'
 NeoBundle 'vim-scripts/fountain.vim'
+NeoBundle 'tpope/vim-vinegar'
 
 call neobundle#end()
 
@@ -148,14 +149,6 @@ set wrap
 set textwidth=79
 set formatoptions=qrn1
 
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-nnoremap <left> <nop>
-nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
@@ -183,10 +176,10 @@ map <leader>gg :GundoToggle<CR>
 imap <C-p> <ESC>:.! sed 's/^/scale=2;/' \| bc -l<CR>
 
 "window resizing
-if bufwinnr(1)
-  map + <C-W>+
-  map - <C-W>-
-endif
+"if bufwinnr(1)
+"  map + <C-W>+
+"  map - <C-W>-
+"endif
 
 "taglist
 nnoremap <F3> :TagbarToggle<CR>
@@ -204,8 +197,8 @@ set backspace=2
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 
-" powerline
-let g:Powerline_symbols = 'fancy'
+"airline
+let g:airline_theme="powerlineish"
 
 " sparkup
 let g:sparkupExecuteMapping = '<c-h>'
@@ -278,8 +271,23 @@ au BufRead,BufNewFile *.fountain setfiletype fountain
 " All html is djangohtml
 au BufNewFile,BufRead *.html set filetype=htmldjango
 
-" YouCompleteMe settings
+" Ultisnips
+"let g:UltiSnipsExpandTrigger = "<nop>"
+let g:ulti_expand_or_jump_res = 0
+function ExpandSnippetOrCarriageReturn()
+    let snippet = UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+        return snippet
+    else
+        return "\<CR>"
+    endif
+endfunction
+inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+let g:UltiSnipsExpandTrigger='<F6>' "Trigger snippet with F6
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+" YouCompleteMe settings
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
 let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
 let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
