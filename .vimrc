@@ -196,7 +196,7 @@ nnoremap <F5> :GundoToggle<CR>
 set backspace=2
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
-imap <C-[> <Plug>delimitMateS-BS
+imap <C-Del> <Plug>delimitMateS-BS
 
 "airline
 let g:airline_theme="powerlineish"
