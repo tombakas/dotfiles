@@ -196,6 +196,7 @@ nnoremap <F5> :GundoToggle<CR>
 set backspace=2
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
+imap <C-[> <Plug>delimitMateS-BS
 
 "airline
 let g:airline_theme="powerlineish"
@@ -283,7 +284,7 @@ function ExpandSnippetOrCarriageReturn()
     endif
 endfunction
 inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
-let g:UltiSnipsExpandTrigger='<F6>' "Trigger snippet with F6
+let g:UltiSnipsExpandTrigger='<C-]>' "Trigger snippet
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
