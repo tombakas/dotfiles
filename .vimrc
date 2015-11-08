@@ -19,11 +19,11 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " Refer to |:NeoBundle-examples|.
 " Note: You don't set neobundle setting in .gvimrc!
 
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'}
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'tpope/vim-fugitive' " Git wrapper for vim
+NeoBundle 'Lokaltog/vim-easymotion' " Fast way to get places; trigger with <leader><leader>w
+NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'} " HTML completion
+NeoBundle 'Shougo/unite.vim' " A wrapper for a bunch of stuff, like fuzzy file search and yank history
+NeoBundle 'Raimondi/delimitMate' " Auto add brackets
 
 " YouCompleteMe
 let g:neobundle#install_process_timeout = 1500
@@ -36,30 +36,24 @@ NeoBundle 'Valloric/YouCompleteMe', {
         \ }
      \ }
 
-NeoBundle 'sjl/gundo.vim'
-NeoBundle 'othree/html5.vim' "html5 syntax highliting and indentation
-NeoBundle 'davidhalter/jedi-vim' 
-NeoBundle 'scrooloose/nerdcommenter'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'cakebaker/scss-syntax.vim'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'honza/vim-snippets'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'tpope/vim-haml'
-NeoBundle 'pangloss/vim-javascript'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'vim-scripts/ZoomWin'
+NeoBundle 'sjl/gundo.vim' " Undo history tree
+NeoBundle 'othree/html5.vim' " HTML5 syntax highliting and indentation
+NeoBundle 'davidhalter/jedi-vim' " Wrapper for python syntax/autocompletion library Jedi
+NeoBundle 'scrooloose/nerdcommenter' " Comment wrapper
+NeoBundle 'tpope/vim-repeat' " Use . to repeat more complicated commands
+NeoBundle 'cakebaker/scss-syntax.vim' " SCSS syntax highliting
+NeoBundle 'SirVer/ultisnips' " Snippets for code completion
+NeoBundle 'honza/vim-snippets' " Snippet library
+NeoBundle 'scrooloose/syntastic' " Syntax
+NeoBundle 'majutsushi/tagbar' " Tag browser
+NeoBundle 'pangloss/vim-javascript' " Javascript syntax
+NeoBundle 'tpope/vim-surround' " Wrapper for surrounding objects with quotes, tags, etc.
+NeoBundle 'vim-scripts/ZoomWin' " Fullscreen a split
 
 " Vim utility functions
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'vim-scripts/tlib'
-
-NeoBundle 'bling/vim-airline'
-NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'tmhedberg/SimpylFold'
-NeoBundle 'nvie/vim-flake8'
-NeoBundle 'hynek/vim-python-pep8-indent'
+NeoBundle 'tpope/vim-haml'
 NeoBundle 'Shougo/vimproc.vim', {
       \ 'build' : {
       \     'windows' : 'tools\\update-dll-mingw',
@@ -68,12 +62,15 @@ NeoBundle 'Shougo/vimproc.vim', {
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ }
-" XML tag navigation
-NeoBundle 'gcmt/breeze.vim'
-" XML tag highliting
-NeoBundle 'Valloric/MatchTagAlways'
-NeoBundle 'vim-scripts/fountain.vim'
-NeoBundle 'tpope/vim-vinegar'
+
+NeoBundle 'bling/vim-airline' " Statusline
+NeoBundle 'nathanaelkane/vim-indent-guides' " Highlight levels of indentation
+NeoBundle 'tmhedberg/SimpylFold' " Python folding
+NeoBundle 'nvie/vim-flake8' " pep8 syntax
+NeoBundle 'hynek/vim-python-pep8-indent' " pep8 indentation
+NeoBundle 'Valloric/MatchTagAlways' " Highlighting matching XML tags
+NeoBundle 'vim-scripts/fountain.vim' " Fountain syntax highlighting
+NeoBundle 'tpope/vim-vinegar' " Simple wrapper for netrw
 
 call neobundle#end()
 
@@ -87,7 +84,7 @@ NeoBundleCheck
 filetype plugin indent on
 
 set ai " auto indentingGc
-set history=100 " keep 100 lines of history 
+set history=100 " keep 100 lines of history
 set hlsearch " highlight the last searched term
 
 " When editing a file, always jump to the last cursor position
@@ -188,9 +185,6 @@ nnoremap <F3> :TagbarToggle<CR>
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
 let g:jedi#show_call_signatures = 1
-
-"gundo
-nnoremap <F5> :GundoToggle<CR>
 
 "delimitMate
 set backspace=2
