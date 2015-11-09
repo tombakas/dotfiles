@@ -3,16 +3,23 @@
 # Bundle directory creation
 if [ ! -d ~/.vim/bundle ]
 then
-    echo "Creating ~/.vim/bundle directory"
+    echo "Creating ~/.vim/bundle directory."
     mkdir -p ~/.vim/bundle
 fi
 
 # Color scheme directory
 if [ ! -d ~/.vim/colors ]
 then
-    echo "Creating ~/.vim/colors directory"
+    echo "Creating ~/.vim/colors directory."
     mkdir -p ~/.vim/colors
 fi
+
+# Undo directory
+if [[ ! -d ~/.vim/undo ]]; then
+    echo "Creating ~/.vim/undo directory."
+    mkdir ~/.vim/undo
+fi
+
 
 # Mustang colorscheme symlink creation
 if [ -f ./Mustang.vim ]
@@ -37,7 +44,7 @@ if [ ! -f ~/.vimrc ]
 then
     ln -s $(pwd)/.vimrc ~/.vimrc
 else
-    if [[ $(readlink -f ./.vimrc) != $(readlink -f ~/.vimrc) ]] 
+    if [[ $(readlink -f ./.vimrc) != $(readlink -f ~/.vimrc) ]]
     then
         read -r -p ".vimrc already exists. Replace with new version?(This will create a backup copy of present .vimrc) [y/n] " response
         if [[ $response =~ ^([yY][eE][sS]|[yY])$  ]]
