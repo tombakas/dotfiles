@@ -227,9 +227,10 @@ endfunction
 nmap <leader>be :Unite buffer<CR>
 "unite ack
 if executable('ag')
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '-i --nogroup --nocolor --hidden'
-  let g:unite_source_rec_async_command='ag --nocolor --nogroup -g ""'
+  let g:unite_source_grep_command = ['ag']
+  let g:unite_source_grep_default_opts = ['-i', '--nogroup', '--nocolor', '--hidden']
+  "let g:unite_source_rec_async_command = 'ag --nocolor --nogroup -g ""'
+  let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup',  '--hidden', '-g', '']
 endif
 nnoremap <leader>f :<C-u>Unite grep:.<CR>
 nnoremap <leader>F :<C-u>Unite grep:%<CR>
