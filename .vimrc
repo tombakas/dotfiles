@@ -2,10 +2,10 @@
 if !1 | finish | endif
 
 if has('vim_starting')
-set nocompatible " Be iMproved
+    set nocompatible " Be iMproved
 
-" Required:
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+    " Required:
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 " Required:
@@ -22,19 +22,21 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'tpope/vim-fugitive' " Git wrapper for vim
 NeoBundle 'Lokaltog/vim-easymotion' " Fast way to get places; trigger with <leader><leader>w
 NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'} " HTML completion
+NeoBundle 'jeetsukumaran/vim-filebeagle' " Simple wrapper for netrw
 NeoBundle 'Shougo/unite.vim' " A wrapper for a bunch of stuff, like fuzzy file search and yank history
+NeoBundle 'Shougo/neoyank.vim' " Yank history
 NeoBundle 'Raimondi/delimitMate' " Auto add brackets
 
 " YouCompleteMe
 let g:neobundle#install_process_timeout = 1500
 NeoBundle 'Valloric/YouCompleteMe', {
-     \ 'build'      : {
-        \ 'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-        \ 'unix'    : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-        \ 'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-        \ 'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
-        \ }
-     \ }
+            \ 'build'      : {
+            \ 'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+            \ 'unix'    : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+            \ 'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+            \ 'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
+            \ }
+            \ }
 
 NeoBundle 'sjl/gundo.vim' " Undo history tree
 NeoBundle 'othree/html5.vim' " HTML5 syntax highliting and indentation
@@ -55,13 +57,13 @@ NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'vim-scripts/tlib'
 NeoBundle 'tpope/vim-haml'
 NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'windows' : 'tools\\update-dll-mingw',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
+            \ 'build' : {
+            \     'windows' : 'tools\\update-dll-mingw',
+            \     'cygwin' : 'make -f make_cygwin.mak',
+            \     'mac' : 'make -f make_mac.mak',
+            \     'unix' : 'make -f make_unix.mak',
+            \    },
+            \ }
 
 NeoBundle 'bling/vim-airline' " Statusline
 NeoBundle 'nathanaelkane/vim-indent-guides' " Highlight levels of indentation
@@ -70,7 +72,6 @@ NeoBundle 'nvie/vim-flake8' " pep8 syntax
 NeoBundle 'hynek/vim-python-pep8-indent' " pep8 indentation
 NeoBundle 'Valloric/MatchTagAlways' " Highlighting matching XML tags
 NeoBundle 'vim-scripts/fountain.vim' " Fountain syntax highlighting
-NeoBundle 'tpope/vim-vinegar' " Simple wrapper for netrw
 
 call neobundle#end()
 
@@ -89,11 +90,11 @@ set hlsearch " highlight the last searched term
 
 " When editing a file, always jump to the last cursor position
 autocmd BufReadPost *
-\ if ! exists("g:leave_my_cursor_position_alone") |
-\ if line("'\"") > 0 && line ("'\"") <= line("$") |
-\ exe "normal g'\"" |
-\ endif |
-\ endif
+            \ if ! exists("g:leave_my_cursor_position_alone") |
+            \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+            \ exe "normal g'\"" |
+            \ endif |
+            \ endif
 
 set t_Co=256
 colo Mustang
@@ -219,20 +220,21 @@ nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files -start-insert file_r
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
 function! s:unite_settings()
-  " Enable navigation with control-j and control-k in insert mode
-  imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-  imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-  imap <buffer> <C-r>   <Plug>(unite_redraw)
+    " Enable navigation with control-j and control-k in insert mode
+    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+    imap <buffer> <C-r>   <Plug>(unite_redraw)
 endfunction
 nmap <leader>be :Unite buffer<CR>
 "unite ack
 if executable('ag')
-  let g:unite_source_grep_command = ['ag']
-  let g:unite_source_grep_default_opts = ['-i', '--nogroup', '--nocolor', '--hidden']
-  "let g:unite_source_rec_async_command = 'ag --nocolor --nogroup -g ""'
-  let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup',  '--hidden', '-g', '']
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden '
+    let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup',  '--hidden', '-g', '']
 endif
-nnoremap <leader>f :<C-u>Unite grep:.<CR>
+"Remove filebeagle mapping
+noremap <leader>f :<C-u>Unite grep:.<CR>
 nnoremap <leader>F :<C-u>Unite grep:%<CR>
 "yank history
 let g:unite_source_history_yank_enable = 1
@@ -241,10 +243,10 @@ nnoremap <leader>y :<C-u>Unite history/yank<CR>
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+    if !exists("*synstack")
+        return
+    endif
+    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
 " Shorten lines above 80 characters sensibly
@@ -292,3 +294,7 @@ let g:ycm_complete_in_strings = 1 " Completion in string
 
 " Tell flake8 to ignore lines above 80 chars long
 let g:syntastic_python_flake8_args='--ignore=E501'
+
+" Filebeagle
+let g:filebeagle_suppress_keymaps=1
+map <silent> -  <Plug>FileBeagleOpenCurrentWorkingDir
