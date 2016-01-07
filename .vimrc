@@ -124,6 +124,7 @@ set cursorline
 set ttyfast
 set ruler
 set backspace=indent,eol,start
+set backspace=2
 set laststatus=2
 set relativenumber
 set undofile " Save undo's after file closes
@@ -188,10 +189,9 @@ let g:jedi#popup_select_first = 0
 let g:jedi#show_call_signatures = 1
 
 "delimitMate
-set backspace=2
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
-imap <C-Del> <Plug>delimitMateS-BS
+imap <C-[> <Plug>delimitMateS-BS
 
 "airline
 let g:airline_theme="powerlineish"
