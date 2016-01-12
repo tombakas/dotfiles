@@ -1,25 +1,25 @@
 #!/bin/bash
 
-# Bundle directory creation
-if [ ! -d ~/.vim/bundle ]
+# .vim directory creation function
+function mkvimdir {
+if [ ! -d ~/.vim/$1 ]
 then
-    echo "Creating ~/.vim/bundle directory."
-    mkdir -p ~/.vim/bundle
+    echo "Creating ~/.vim/$1 directory."
+    mkdir -p ~/.vim/$1
 fi
+}
+
+# Bundle directory creation
+mkvimdir bundle
 
 # Color scheme directory
-if [ ! -d ~/.vim/colors ]
-then
-    echo "Creating ~/.vim/colors directory."
-    mkdir -p ~/.vim/colors
-fi
+mkvimdir colors
 
 # Undo directory
-if [[ ! -d ~/.vim/undo ]]; then
-    echo "Creating ~/.vim/undo directory."
-    mkdir ~/.vim/undo
-fi
+mkvimdir undo
 
+# Indent directory
+mkvimdir indent
 
 # Mustang colorscheme symlink creation
 if [ -f ./Mustang.vim ]
@@ -30,6 +30,15 @@ then
     else
         echo "Mustang.vim already exists."
     fi
+fi
+
+# djangohtml indentation
+if [ ! -e ~/.vim/indent/htmldjango.vim ]
+then
+    echo "Copying djangohtml.vim to ~/.vim/indent/"
+    ln -s $(pwd)/htmldjango.vim /home/$(whoami)/.vim/indent/
+else
+    echo "htmldjango.vim already exists."
 fi
 
 # Neobundle setup
