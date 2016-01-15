@@ -38,7 +38,7 @@ NeoBundle 'Valloric/YouCompleteMe', {
             \ }
             \ }
 
-NeoBundle 'sjl/gundo.vim' " Undo history tree
+NeoBundle 'simnalamburt/vim-mundo' " Undo history 
 NeoBundle 'othree/html5.vim' " HTML5 syntax highliting and indentation
 NeoBundle 'davidhalter/jedi-vim' " Wrapper for python syntax/autocompletion library Jedi
 NeoBundle 'scrooloose/nerdcommenter' " Comment wrapper
