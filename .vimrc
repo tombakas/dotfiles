@@ -50,7 +50,6 @@ NeoBundle 'scrooloose/syntastic' " Syntax
 NeoBundle 'majutsushi/tagbar' " Tag browser
 NeoBundle 'pangloss/vim-javascript' " Javascript syntax
 NeoBundle 'tpope/vim-surround' " Wrapper for surrounding objects with quotes, tags, etc.
-NeoBundle 'vim-scripts/ZoomWin' " Fullscreen a split
 
 " Vim utility functions
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
@@ -298,3 +297,18 @@ let g:syntastic_python_flake8_args='--ignore=E501'
 " Filebeagle
 let g:filebeagle_suppress_keymaps=1
 map <silent> -  <Plug>FileBeagleOpenCurrentWorkingDir
+
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        execute t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <leader><leader>z :ZoomToggle<CR>
