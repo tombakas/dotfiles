@@ -108,23 +108,23 @@ done
 
 if [[ $SET_UP_VIM == 1 ]]
 then
-    horizontal_rule "SETTING UP VIM"
+    horizontal_rule "Setting up Vim"
 fi
 horizontal_rule "Setting up vim dotfiles"
 
 # .vim directory creation function
 function verbose_mkdir {
-if [ ! -d ~/.vim/$1 ]
+if [ ! -d $1 ]
 then
     echo -e "Creating ${GREEN}$1${NORMAL} directory."
-    mkdir -p ~/.vim/$1
+    mkdir -p $1
 else
     echo -e "${YELLOW}$1${NORMAL} already exists."
 fi
 }
 
 function verbose_ln {
-    if [ ! -e $1 ]
+    if [ ! -e $2 ]
     then
         echo -e "Creating symlink for ${GREEN}$1${NORMAL} at ${GREEN}$2${NORMAL}"
         ln -s $(readlink -f $1) $(readlink -f $2)
@@ -138,17 +138,29 @@ verbose_mkdir ~/.vim/colors # Color scheme directory
 verbose_mkdir ~/.vim/undo # Undo directory
 verbose_mkdir ~/.vim/indent # Indent file directory
 
+verbose_ln Mustang.vim ~/.vim/colors/Mustang.vim # Mustang colorscheme 
+verbose_ln htmldjango.vim /home/$(whoami)/.vim/indent/htmldjango.vim # Django template indentation
+
+if [ ! -d ~/.vim/bundle/vimproc.vim ]
+then
+    echo -e "Cloning ${GREEN}vimproc${NORMAL} into ~/.vim/bundle/"
+    git clone https://github.com/Shougo/vimproc.vim.git ~/.vim/bundle/vimproc.vim
+    pushd ~/.vim/bundle/vimproc.vim
+    make
+    popd
+else
+    echo -e "${YELLOW}vimproc${NORMAL} already installed."
+fi
+
 # Neobundle setup
 if [ ! -d ~/.vim/bundle/neobundle.vim ]
 then
-    echo -e "Cloning ${GEEN}NeoBundle${NORMAL} into ~/.vim/bundle/"
+    echo -e "Cloning ${GREEN}NeoBundle${NORMAL} into ~/.vim/bundle/"
     git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+    ~/.vim/bundle/neobundle.vim/bin/neoinstall
 else
     echo -e "${YELLOW}NeoBundle${NORMAL} already installed."
 fi
-
-verbose_ln Mustang.vim ~/.vim/colors/ # Mustang colorscheme 
-verbose_ln htmldjango.vim /home/$(whoami)/.vim/indent/ # Django template indentation
 
 if [ ! -f ~/.vimrc ]
 then
@@ -174,7 +186,7 @@ fi
 
 if [ "$SET_UP_NVIM" -eq 1 ]
 then
-    horizontal_rule "SETTING UP NEOVIM"
+    horizontal_rule "Setting up Neovim"
     if ! command -v nvim >/dev/null 2>&1
     then
         if grep -qR neovim /etc/apt/
@@ -189,4 +201,13 @@ then
         verbose_ln ~/.vim ~/.config/nvim
         verbose_ln init.vim ~/.config/nvim/init.vim 
     fi
+fi
+
+# Compile YouCompleteMe
+horizontal_rule YouCompleteMe
+if [ ! -f ~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so  ]
+then
+    ~/.vim/bundle/YouCompleteMe/install.py
+else
+    echo -e "${YELLOW}YouCompleteMe already compiled."
 fi
