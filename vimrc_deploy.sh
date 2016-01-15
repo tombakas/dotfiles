@@ -1,61 +1,163 @@
 #!/bin/bash
+set -o errexit
+set -o nounset
 
-# .vim directory creation function
-function mkvimdir {
-if [ ! -d ~/.vim/$1 ]
+GREEN="\e[92m"
+YELLOW="\e[93m"
+RED="\e[91m"
+BLUE="\e[34m"
+BOLD="\e[1m"
+NORMAL="\e[0m"
+
+SET_UP_NVIM=0
+SET_UP_VIM=0
+
+function color_text {
+
+color=$1
+if [[ $2 == "-n" ]]
 then
-    echo "Creating ~/.vim/$1 directory."
-    mkdir -p ~/.vim/$1
+    flags="-ne"
+    shift 2
+else
+    flags="-e"
+    shift
+fi
+
+case $color in
+    green)
+        text="$GREEN$@$NORMAL"
+        ;;
+    red)
+        text="$RED$@$NORMAL"
+        ;;
+    blue)
+        text="$BLUE$@$NORMAL"
+        ;;
+    yellow)
+        text="$YELLOW$@$NORMAL"
+        ;;
+    bold)
+        text="$BOLD$@$NORMAL"
+        ;;
+esac
+eval "echo $flags \"$text\""
+}
+
+function horizontal_rule {
+rule_length=80
+rule=$(eval printf '%0.1s' "-"{1..$rule_length})
+
+front_length=$(echo $rule_length/2-${#1}/2 | bc)
+front=$(eval printf '%0.1s' "-"{1..$front_length})
+back_length=$(echo $rule_length/2-${#1}+${#1}/2 |bc )
+back=$(eval printf '%0.1s' "-"{1..$back_length})
+
+if [ -z "$1" ]
+then
+    echo -e "\n$rule"
+else
+    echo -e "\n$rule"
+    echo -n $front
+    color_text green -n $@
+    echo $back
+    echo $rule
+
 fi
 }
 
-# Bundle directory creation
-mkvimdir bundle
+function print_help {
+color_text bold -n "\nVim/Neovim "; echo -e "deployment script\n"
+echo "Run it with one of the following options:"
+echo -e "\t-v\tSet up vim"
+echo -e "\t-n\tSet up neovim"
+echo -e "\t-y\tAssume -y for all prompts"
+echo -e "\t-h\tThis help message"
+echo
+}
 
-# Color scheme directory
-mkvimdir colors
-
-# Undo directory
-mkvimdir undo
-
-# Indent directory
-mkvimdir indent
-
-# Mustang colorscheme symlink creation
-if [ -f ./Mustang.vim ]
+# If no arguments provided, print help
+if [ $# == 0 ]
 then
-    if [ ! -f ~/.vim/colors/Mustang.vim ]
-    then
-        ln -s `pwd`/Mustang.vim /home/$(whoami)/.vim/colors/Mustang.vim
-    else
-        echo "Mustang.vim already exists."
-    fi
+    print_help
+    exit 0
 fi
 
-# djangohtml indentation
-if [ ! -e ~/.vim/indent/htmldjango.vim ]
+while getopts ":vnh" opt; do
+    case $opt in
+        v)
+            SET_UP_VIM=1
+            ;;
+        n)
+            SET_UP_NVIM=1
+            ;;
+        y)
+            YES=1
+            ;;
+        h)
+            print_help
+            ;;
+        ?)
+            helptext
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            ;;
+    esac
+done
+
+if [[ $SET_UP_VIM == 1 ]]
 then
-    echo "Copying djangohtml.vim to ~/.vim/indent/"
-    ln -s $(pwd)/htmldjango.vim /home/$(whoami)/.vim/indent/
+    horizontal_rule "SETTING UP VIM"
+fi
+horizontal_rule "Setting up vim dotfiles"
+
+# .vim directory creation function
+function verbose_mkdir {
+if [ ! -d ~/.vim/$1 ]
+then
+    echo -e "Creating ${GREEN}$1${NORMAL} directory."
+    mkdir -p ~/.vim/$1
 else
-    echo "htmldjango.vim already exists."
+    echo -e "${YELLOW}$1${NORMAL} already exists."
 fi
+}
+
+function verbose_ln {
+    if [ ! -e $1 ]
+    then
+        echo -e "Creating symlink for ${GREEN}$1${NORMAL} at ${GREEN}$2${NORMAL}"
+        ln -s $(readlink -f $1) $(readlink -f $2)
+    else
+        echo -e "${YELLOW}$1${NORMAL} already exists."
+    fi
+}
+
+verbose_mkdir ~/.vim/bundle  # Plugin directory
+verbose_mkdir ~/.vim/colors # Color scheme directory
+verbose_mkdir ~/.vim/undo # Undo directory
+verbose_mkdir ~/.vim/indent # Indent file directory
 
 # Neobundle setup
 if [ ! -d ~/.vim/bundle/neobundle.vim ]
 then
+    echo -e "Cloning ${GEEN}NeoBundle${NORMAL} into ~/.vim/bundle/"
     git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 else
-    echo "NeoBundle already installed."
+    echo -e "${YELLOW}NeoBundle${NORMAL} already installed."
 fi
+
+verbose_ln Mustang.vim ~/.vim/colors/ # Mustang colorscheme 
+verbose_ln htmldjango.vim /home/$(whoami)/.vim/indent/ # Django template indentation
 
 if [ ! -f ~/.vimrc ]
 then
     ln -s $(pwd)/.vimrc ~/.vimrc
 else
-    if [[ $(readlink -f ./.vimrc) != $(readlink -f ~/.vimrc) ]]
+    if [ ! -e $(readlink -f ~/.vimrc) ] || ! cmp -s $(pwd)/.vimrc ~/.vimrc
     then
-        read -r -p ".vimrc already exists. Replace with new version?(This will create a backup copy of present .vimrc) [y/n] " response
+        echo -en "${YELLOW}.vimrc${NORMAL} already exists. Replace with new version? (This will create a backup copy of present .vimrc) ${RED}[y/n]${NORMAL} "
+        read -r -p "" response
         if [[ $response =~ ^([yY][eE][sS]|[yY])$  ]]
         then
             echo "Backing up to ~.vimrc.$(date +"%H%M%S").bak"
@@ -66,6 +168,25 @@ else
             echo ".vimrc unchanged."
         fi
     else
-        echo ".vimrc symlink to dotfiles already exists"
+        echo -e "${YELLOW}.vimrc${NORMAL} symlink to dotfiles already exists"
+    fi
+fi
+
+if [ "$SET_UP_NVIM" -eq 1 ]
+then
+    horizontal_rule "SETTING UP NEOVIM"
+    if ! command -v nvim >/dev/null 2>&1
+    then
+        if grep -qR neovim /etc/apt/
+        then
+            sudo add-apt-repository -y ppa:neovim-ppa/unstable
+        fi
+        sudo apt-get -y update
+        sudo apt-get -y install neovim
+        sudo pip2 install neovim
+    else
+        echo -e "${RED}neovim already installed${NORMAL}"
+        verbose_ln ~/.vim ~/.config/nvim
+        verbose_ln init.vim ~/.config/nvim/init.vim 
     fi
 fi
