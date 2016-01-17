@@ -13,6 +13,9 @@ NORMAL="\e[0m"
 
 SET_UP_NVIM=0
 SET_UP_VIM=0
+SET_UP_TUMX_CONF=0
+SET_UP_BASH_ALIASES=0
+YES=0
 
 function color_text {
 
@@ -73,6 +76,8 @@ color_text bold -n "\nVim/Neovim "; echo -e "deployment script\n"
 echo "Run it with one of the following options:"
 echo -e "\t-v\tSet up vim"
 echo -e "\t-n\tSet up neovim"
+echo -e "\t-t\tCreate symlink for tmux.conf"
+echo -e "\t-g\tCreate symlink for .bash_aliases that color git folders"
 echo -e "\t-y\tAssume -y for all prompts"
 echo -e "\t-h\tThis help message"
 echo
@@ -85,7 +90,7 @@ then
     exit 0
 fi
 
-while getopts ":vnh" opt; do
+while getopts ":vnhgty" opt; do
     case $opt in
         v)
             SET_UP_VIM=1
@@ -96,11 +101,14 @@ while getopts ":vnh" opt; do
         y)
             YES=1
             ;;
+        t)
+            SET_UP_TUMX_CONF=1
+            ;;
+        g)
+            SET_UP_BASH_ALIASES=1
+            ;;
         h)
             print_help
-            ;;
-        ?)
-            helptext
             ;;
         \?)
             echo "Invalid option: -$OPTARG" >&2
@@ -109,39 +117,47 @@ while getopts ":vnh" opt; do
 done
 
 # OS check
-if grep Ubuntu /etc/lsb-release; then
+if grep -q Ubuntu /etc/lsb-release; then
     OS=ubuntu
 fi
 
-if [[ $SET_UP_VIM == 1 ]]
-then
-    horizontal_rule "Setting up Vim"
-fi
-
-horizontal_rule "Setting up vim dotfiles"
-# .vim directory creation function
 function verbose_mkdir {
-    if [ ! -d $1 ]
-    then
-        echo -e "Creating ${GREEN}$1${NORMAL} directory."
-        mkdir -p $1
-    else
-        echo -e "${YELLOW}$1${NORMAL} already exists."
-    fi
+if [ ! -d $1 ]
+then
+    echo -e "Creating ${GREEN}$1${NORMAL} directory."
+    mkdir -p $1
+else
+    echo -e "${YELLOW}$1${NORMAL} already exists."
+fi
 }
 
 function verbose_ln {
-    if [ ! -e $2 ]
-    then
-        echo -e "Creating symlink for ${GREEN}$1${NORMAL} at ${GREEN}$2${NORMAL}"
-        ln -s $(readlink -f $1) $(readlink -f $2)
-    else
-        echo -e "${YELLOW}$1${NORMAL} already exists."
-    fi
+if [ ! -e $2 ]
+then
+    echo -e "Creating symlink for ${GREEN}$1${NORMAL} at ${GREEN}$2${NORMAL}"
+    ln -s $(readlink -f $1) $(readlink -f $2)
+else
+    echo -e "Symlink to ${YELLOW}$1${NORMAL} already exists."
+fi
 }
+
+# Bash aliases
+if [[ $SET_UP_BASH_ALIASES == 1 ]]
+then
+    horizontal_rule "Setting up bash_aliases"
+    verbose_ln .bash_aliases ~/.bash_aliases
+fi
+
+# Tmux c
+if [[ $SET_UP_TUMX_CONF == 1 ]]
+then
+    horizontal_rule "Setting up tmux.conf"
+    verbose_ln .tmux.conf ~/.tmux.conf
+fi
 
 if [ $SET_UP_VIM -eq 1 ] || [ $SET_UP_NVIM -eq 1 ]
 then
+    horizontal_rule "Setting up vim dotfiles"
     verbose_mkdir ~/.vim/bundle  # Plugin directory
     verbose_mkdir ~/.vim/colors # Color scheme directory
     verbose_mkdir ~/.vim/undo # Undo directory
@@ -149,56 +165,65 @@ then
 
     verbose_ln Mustang.vim ~/.vim/colors/Mustang.vim # Mustang colorscheme 
     verbose_ln htmldjango.vim /home/$(whoami)/.vim/indent/htmldjango.vim # Django template indentation
-fi
 
-# vimrc setup
-if [ ! -f ~/.vimrc ]
-then
-    ln -s $(pwd)/.vimrc ~/.vimrc
-else
-    if [ ! -e $(readlink -f ~/.vimrc) ] || ! cmp -s $(pwd)/.vimrc ~/.vimrc
+    # vimrc setup
+    if [ ! -f ~/.vimrc ]
     then
-        echo -en "${YELLOW}.vimrc${NORMAL} already exists. Replace with new version? (This will create a backup copy of present .vimrc) ${RED}[y/n]${NORMAL} "
-        read -r -p "" response
-        if [[ $response =~ ^([yY][eE][sS]|[yY])$  ]]
-        then
-            echo "Backing up to ~.vimrc.$(date +"%H%M%S").bak"
-            mv ~/.vimrc{,.$(date +"%H%M%S").bak}
-            ln -s $(pwd)/.vimrc ~/.vimrc
-            echo "Symlink created."
-        else
-            echo ".vimrc unchanged."
-        fi
+        ln -s $(pwd)/.vimrc ~/.vimrc
     else
-        echo -e "${YELLOW}.vimrc${NORMAL} symlink to dotfiles already exists"
+        if [ ! -e $(readlink -f ~/.vimrc) ] || ! cmp -s $(pwd)/.vimrc ~/.vimrc
+        then
+            echo -en "${YELLOW}.vimrc${NORMAL} already exists. Replace with new version? (This will create a backup copy of present .vimrc) ${RED}[y/n]${NORMAL} "
+            read -r -p "" response
+            if [[ $response =~ ^([yY][eE][sS]|[yY])$  ]]
+            then
+                echo "Backing up to ~.vimrc.$(date +"%H%M%S").bak"
+                mv ~/.vimrc{,.$(date +"%H%M%S").bak}
+                ln -s $(pwd)/.vimrc ~/.vimrc
+                echo "Symlink created."
+            else
+                echo ".vimrc unchanged."
+            fi
+        else
+            echo -e "Symlink to ${YELLOW}.vimrc${NORMAL} already exists."
+        fi
+    fi
+
+    # Neobundle setup
+    horizontal_rule "Setting up NeoBundle"
+
+    # vimproc
+    if [ ! -d ~/.vim/bundle/vimproc.vim ]
+    then
+        echo -e "Cloning ${GREEN}vimproc${NORMAL} into ~/.vim/bundle/"
+        git clone https://github.com/Shougo/vimproc.vim.git ~/.vim/bundle/vimproc.vim
+        pushd ~/.vim/bundle/vimproc.vim
+        make
+        popd
+    else
+        echo -e "${YELLOW}vimproc${NORMAL} already installed."
+
+
+    fi
+    if [ ! -d ~/.vim/bundle/neobundle.vim ]
+    then
+        echo -e "Cloning ${GREEN}NeoBundle${NORMAL} into ~/.vim/bundle/"
+        git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+        ~/.vim/bundle/neobundle.vim/bin/neoinstall
+    else
+        echo -e "${YELLOW}NeoBundle${NORMAL} already installed."
+    fi
+    # /Neobundle setup
+
+    # Compile YouCompleteMe
+    horizontal_rule "Setting up YouCompleteMe"
+    if [ ! -f ~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so  ]
+    then
+        ~/.vim/bundle/YouCompleteMe/install.py
+    else
+        echo -e "${YELLOW}YouCompleteMe${NORMAL} already compiled."
     fi
 fi
-
-# Neobundle setup
-horizontal_rule "Setting up NeoBundle"
-
-# vimproc
-if [ ! -d ~/.vim/bundle/vimproc.vim ]
-then
-    echo -e "Cloning ${GREEN}vimproc${NORMAL} into ~/.vim/bundle/"
-    git clone https://github.com/Shougo/vimproc.vim.git ~/.vim/bundle/vimproc.vim
-    pushd ~/.vim/bundle/vimproc.vim
-    make
-    popd
-else
-    echo -e "${YELLOW}vimproc${NORMAL} already installed."
-
-
-fi
-if [ ! -d ~/.vim/bundle/neobundle.vim ]
-then
-    echo -e "Cloning ${GREEN}NeoBundle${NORMAL} into ~/.vim/bundle/"
-    git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-    ~/.vim/bundle/neobundle.vim/bin/neoinstall
-else
-    echo -e "${YELLOW}NeoBundle${NORMAL} already installed."
-fi
-# /Neobundle setup
 
 
 # Neovim
@@ -222,11 +247,108 @@ then
     fi
 fi
 
-# Compile YouCompleteMe
-horizontal_rule YouCompleteMe
-if [ ! -f ~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so  ]
+
+# Vim
+if [[ $SET_UP_VIM == 1 ]]
 then
-    ~/.vim/bundle/YouCompleteMe/install.py
-else
-    echo -e "${YELLOW}YouCompleteMe already compiled."
+    horizontal_rule "Setting up Vim"
+
+    VIM_CLONE_DIR=""
+    VIM_INSTALL_DIR=""
+
+    if [ -z "$VIM_CLONE_DIR" ]
+    then
+        VIM_CLONE_DIR="~/Downloads/"
+    fi
+
+    if [ -z "$VIM_INSTALL_DIR" ]
+    then
+        VIM_INSTALL_DIR="~/local/vim"
+    fi
+
+    if [ $YES -ne 1 ]
+    then
+        echo -e "The default directory to clone ${GREEN}vim${NORMAL} is ${GREEN}$VIM_CLONE_DIR${NORMAL}."
+        echo -en "Choose ${YELLOW}y${NORMAL} to continue, ${YELLOW}e${NORMAL} to edit or ${YELLOW}n${NORMAL} to cancel installation. ${RED}[y/e/n]${NORMAL} "
+
+        while true; do
+            read -p "" response
+            case $response in
+                [Yy]* ) break
+                    ;;
+                [Nn]* ) exit
+                    ;;
+                [Ee]* ) echo -n "Please enter a new clone path: "
+                    read -rp "" VIM_CLONE_DIR; break
+                    ;;
+                * ) echo "Not a valid option."
+                    * ;;
+            esac
+        done
+
+        if [ ! -d "$VIM_CLONE_DIR" ]
+        then
+            echo -e "Directory ${YELLOW}$VIM_CLONE_DIR${RED} does not exist${NORMAL}. Create directory? ${RED}[y/n]${NORMAL} "
+            while true; do
+                read -p "" response
+                case $response in
+                    [Yy]* ) mkdir -v $VIM_CLONE_DIR; break
+                        ;;
+                    [Nn]* ) exit
+                        ;;
+                    * ) echo "Not a valid option."
+                        * ;;
+                esac
+            done
+        fi
+
+        echo -e "The default directory to install ${GREEN}vim${NORMAL} is ${GREEN}$VIM_INSTALL_DIR${NORMAL}."
+        echo -en "Choose ${YELLOW}y${NORMAL} to continue, ${YELLOW}e${NORMAL} to edit or ${YELLOW}n${NORMAL} to cancel installation. ${RED}[y/e/n]${NORMAL} "
+
+        while true; do
+            read -p "" response
+            case $response in
+                [Yy]* ) echo YAY; exit; break;;
+                [Nn]* ) echo NAY; exit;;
+                [Ee]* ) echo EAY; exit;;
+                * ) echo "Not a valid option.";;
+            esac
+        done
+
+        if [ ! -d "$VIM_CLONE_DIR" ]
+        then
+            echo "Directory ${YELLOW}VIM_CLONE_DIR${NORMAL} does not exist. Create directory? ${RED}[y/n]${NORMAL} "
+            while true; do
+                read -p "" response
+                case $response in
+                    [Yy]* ) echo YAY; exit; break;;
+                    [Nn]* ) echo NAY; exit;;
+                    [Ee]* ) echo EAY; exit;;
+                    * ) echo "Not a valid option.";;
+                esac
+            done
+        fi
+    fi
+
+    if [ ! -d ~/local/vim ];
+    then
+        echo -e "Cloning ${GREEN}vim${NORMAL} into ${GREEN}$VIM_CLONE_DIR${NORMAL}."
+        pushd $VIM_CLONE_DIR
+        git clone https://github.com/vim/vim.git
+        popd
+    else
+        echo -e "${YELLOW}~/local/vim${NORMAL} already exists. Attempting to pull newest version."
+        pushd ~/local/vim/
+        git pull
+        popd
+    fi
+
+    #case $OS in
+    #ubuntu)
+    #ubuntu_nvim_install
+    #;;
+#centos)
+    #echo "Can't deal with CentOS"
+    #;;
+    #esac
 fi
