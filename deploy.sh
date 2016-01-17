@@ -279,7 +279,7 @@ then
                 [Nn]* ) exit
                     ;;
                 [Ee]* ) echo -n "Please enter a new clone path: "
-                    read -rp "" VIM_CLONE_DIR; break
+                    read -rp "" VIM_CLONE_DIR; VIM_CLONE_DIR="${VIM_CLONE_DIR/#\~/$HOME}"; echo $VIM_CLONE_DIR; break
                     ;;
                 * ) echo "Not a valid option."
                     * ;;
@@ -292,7 +292,7 @@ then
             while true; do
                 read -p "" response
                 case $response in
-                    [Yy]* ) mkdir -v $VIM_CLONE_DIR; break
+                    [Yy]* ) mkdir -pv "$VIM_CLONE_DIR"; break
                         ;;
                     [Nn]* ) exit
                         ;;
