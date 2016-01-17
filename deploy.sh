@@ -1,6 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -o errexit
 set -o nounset
+
+source ./dotfile_deploy_modules/install_options.sh
 
 GREEN="\e[92m"
 YELLOW="\e[93m"
@@ -106,21 +108,26 @@ while getopts ":vnh" opt; do
     esac
 done
 
+# OS check
+if grep Ubuntu /etc/lsb-release; then
+    OS=ubuntu
+fi
+
 if [[ $SET_UP_VIM == 1 ]]
 then
     horizontal_rule "Setting up Vim"
 fi
-horizontal_rule "Setting up vim dotfiles"
 
+horizontal_rule "Setting up vim dotfiles"
 # .vim directory creation function
 function verbose_mkdir {
-if [ ! -d $1 ]
-then
-    echo -e "Creating ${GREEN}$1${NORMAL} directory."
-    mkdir -p $1
-else
-    echo -e "${YELLOW}$1${NORMAL} already exists."
-fi
+    if [ ! -d $1 ]
+    then
+        echo -e "Creating ${GREEN}$1${NORMAL} directory."
+        mkdir -p $1
+    else
+        echo -e "${YELLOW}$1${NORMAL} already exists."
+    fi
 }
 
 function verbose_ln {
@@ -133,35 +140,18 @@ function verbose_ln {
     fi
 }
 
-verbose_mkdir ~/.vim/bundle  # Plugin directory
-verbose_mkdir ~/.vim/colors # Color scheme directory
-verbose_mkdir ~/.vim/undo # Undo directory
-verbose_mkdir ~/.vim/indent # Indent file directory
-
-verbose_ln Mustang.vim ~/.vim/colors/Mustang.vim # Mustang colorscheme 
-verbose_ln htmldjango.vim /home/$(whoami)/.vim/indent/htmldjango.vim # Django template indentation
-
-if [ ! -d ~/.vim/bundle/vimproc.vim ]
+if [ $SET_UP_VIM -eq 1 ] || [ $SET_UP_NVIM -eq 1 ]
 then
-    echo -e "Cloning ${GREEN}vimproc${NORMAL} into ~/.vim/bundle/"
-    git clone https://github.com/Shougo/vimproc.vim.git ~/.vim/bundle/vimproc.vim
-    pushd ~/.vim/bundle/vimproc.vim
-    make
-    popd
-else
-    echo -e "${YELLOW}vimproc${NORMAL} already installed."
+    verbose_mkdir ~/.vim/bundle  # Plugin directory
+    verbose_mkdir ~/.vim/colors # Color scheme directory
+    verbose_mkdir ~/.vim/undo # Undo directory
+    verbose_mkdir ~/.vim/indent # Indent file directory
+
+    verbose_ln Mustang.vim ~/.vim/colors/Mustang.vim # Mustang colorscheme 
+    verbose_ln htmldjango.vim /home/$(whoami)/.vim/indent/htmldjango.vim # Django template indentation
 fi
 
-# Neobundle setup
-if [ ! -d ~/.vim/bundle/neobundle.vim ]
-then
-    echo -e "Cloning ${GREEN}NeoBundle${NORMAL} into ~/.vim/bundle/"
-    git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-    ~/.vim/bundle/neobundle.vim/bin/neoinstall
-else
-    echo -e "${YELLOW}NeoBundle${NORMAL} already installed."
-fi
-
+# vimrc setup
 if [ ! -f ~/.vimrc ]
 then
     ln -s $(pwd)/.vimrc ~/.vimrc
@@ -184,18 +174,47 @@ else
     fi
 fi
 
+# Neobundle setup
+horizontal_rule "Setting up NeoBundle"
+
+# vimproc
+if [ ! -d ~/.vim/bundle/vimproc.vim ]
+then
+    echo -e "Cloning ${GREEN}vimproc${NORMAL} into ~/.vim/bundle/"
+    git clone https://github.com/Shougo/vimproc.vim.git ~/.vim/bundle/vimproc.vim
+    pushd ~/.vim/bundle/vimproc.vim
+    make
+    popd
+else
+    echo -e "${YELLOW}vimproc${NORMAL} already installed."
+
+
+fi
+if [ ! -d ~/.vim/bundle/neobundle.vim ]
+then
+    echo -e "Cloning ${GREEN}NeoBundle${NORMAL} into ~/.vim/bundle/"
+    git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+    ~/.vim/bundle/neobundle.vim/bin/neoinstall
+else
+    echo -e "${YELLOW}NeoBundle${NORMAL} already installed."
+fi
+# /Neobundle setup
+
+
+# Neovim
 if [ "$SET_UP_NVIM" -eq 1 ]
 then
     horizontal_rule "Setting up Neovim"
-    if ! command -v nvim >/dev/null 2>&1
+    if ! command -v nvimas >/dev/null 2>&1
     then
-        if grep -qR neovim /etc/apt/
-        then
-            sudo add-apt-repository -y ppa:neovim-ppa/unstable
-        fi
-        sudo apt-get -y update
-        sudo apt-get -y install neovim
-        sudo pip2 install neovim
+        case $OS in
+            ubuntu)
+                ubuntu_nvim_install
+                ;;
+            centos)
+                echo "Can't deal with CentOS"
+                ;;
+        esac
     else
         echo -e "${RED}neovim already installed${NORMAL}"
         verbose_ln ~/.vim ~/.config/nvim
