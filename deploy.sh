@@ -189,40 +189,6 @@ then
         fi
     fi
 
-    # Neobundle setup
-    horizontal_rule "Setting up NeoBundle"
-
-    # vimproc
-    if [ ! -d ~/.vim/bundle/vimproc.vim ]
-    then
-        echo -e "Cloning ${GREEN}vimproc${NORMAL} into ~/.vim/bundle/"
-        git clone https://github.com/Shougo/vimproc.vim.git ~/.vim/bundle/vimproc.vim
-        pushd ~/.vim/bundle/vimproc.vim
-        make
-        popd
-    else
-        echo -e "${YELLOW}vimproc${NORMAL} already installed."
-
-
-    fi
-    if [ ! -d ~/.vim/bundle/neobundle.vim ]
-    then
-        echo -e "Cloning ${GREEN}NeoBundle${NORMAL} into ~/.vim/bundle/"
-        git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-        ~/.vim/bundle/neobundle.vim/bin/neoinstall
-    else
-        echo -e "${YELLOW}NeoBundle${NORMAL} already installed."
-    fi
-    # /Neobundle setup
-
-    # Compile YouCompleteMe
-    horizontal_rule "Setting up YouCompleteMe"
-    if [ ! -f ~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so  ]
-    then
-        ~/.vim/bundle/YouCompleteMe/install.py
-    else
-        echo -e "${YELLOW}YouCompleteMe${NORMAL} already compiled."
-    fi
 fi
 
 
@@ -356,6 +322,12 @@ then
         popd
     fi
 
+    case $OS in 
+        ubuntu)
+            sudo apt-get -y update
+            ;;
+    esac
+
     if [ $SET_UP_VIM -eq 1 ]
     then
         case $OS in
@@ -368,12 +340,52 @@ then
                 ;;
         esac
     fi
-        #case $OS in
-        #ubuntu)
-        #ubuntu_nvim_install
-        #;;
-    #centos)
-        #echo "Can't deal with CentOS"
-        #;;
-        #esac
+
+    if [ $SET_UP_NVIM -eq 1 ]
+    then
+        case $OS in
+            ubuntu)
+                ubuntu_vim_dep_install
+                ubuntu_nvim_install
+                ;;
+            centos)
+                echo "Can't deal with CentOS"
+                ;;
+        esac
     fi
+
+    # Neobundle setup
+    horizontal_rule "Setting up NeoBundle"
+
+    # vimproc
+    if [ ! -d ~/.vim/bundle/vimproc.vim ]
+    then
+        echo -e "Cloning ${GREEN}vimproc${NORMAL} into ~/.vim/bundle/"
+        git clone https://github.com/Shougo/vimproc.vim.git ~/.vim/bundle/vimproc.vim
+        pushd ~/.vim/bundle/vimproc.vim
+        make
+        popd
+    else
+        echo -e "${YELLOW}vimproc${NORMAL} already installed."
+
+
+    fi
+    if [ ! -d ~/.vim/bundle/neobundle.vim ]
+    then
+        echo -e "Cloning ${GREEN}NeoBundle${NORMAL} into ~/.vim/bundle/"
+        git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+        ~/.vim/bundle/neobundle.vim/bin/neoinstall
+    else
+        echo -e "${YELLOW}NeoBundle${NORMAL} already installed."
+    fi
+    # /Neobundle setup
+
+    # Compile YouCompleteMe
+    horizontal_rule "Setting up YouCompleteMe"
+    if [ ! -f ~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so  ]
+    then
+        ~/.vim/bundle/YouCompleteMe/install.py
+    else
+        echo -e "${YELLOW}YouCompleteMe${NORMAL} already compiled."
+    fi
+fi

@@ -3,15 +3,13 @@ if ! sudo grep -qR neovim /etc/apt/
 then
     sudo add-apt-repository -y ppa:neovim-ppa/unstable
 fi
-sudo apt-get -y update
 sudo apt-get -y install neovim
 sudo pip2 install neovim
 }
 
 function ubuntu_vim_dep_install {
 horizontal_rule "Installing vim dependencies"
-sudo apt-get -y update
-sudo apt-get install libperl-dev python-dev ruby-dev ncurses-dev
+sudo apt-get -y install libperl-dev python-dev ruby-dev ncurses-dev python-flake8 python3-flake8 python-dev python3-dev python-jedi python3-jedi 
 }
 
 function compile_vim {
