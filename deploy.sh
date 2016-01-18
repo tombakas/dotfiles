@@ -230,13 +230,6 @@ then
         VIM_INSTALL_DIR="~/local/vim/"
     fi
 
-    case $OS in 
-        ubuntu)
-            sudo apt-get -y update
-            ubuntu_vim_dep_install
-            ;;
-    esac
-
     if [ $YES -ne 1 ]
     then
         echo -e "The default directory to clone ${GREEN}vim${NORMAL} is ${GREEN}$VIM_CLONE_DIR${NORMAL}."
@@ -307,6 +300,14 @@ then
             done
         fi
     fi
+
+
+    case $OS in 
+        ubuntu)
+            sudo apt-get -y update
+            ubuntu_vim_dep_install
+            ;;
+    esac
 
     if [ ! -d "${VIM_CLONE_DIR%/}/vim" ];
     then
