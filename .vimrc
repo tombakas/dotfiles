@@ -173,12 +173,6 @@ map <leader>gg :GundoToggle<CR>
 " pipe through bc
 imap <C-p> <ESC>:.! sed 's/^/scale=2;/' \| bc -l<CR>
 
-"window resizing
-"if bufwinnr(1)
-"  map + <C-W>+
-"  map - <C-W>-
-"endif
-
 "taglist
 nnoremap <F3> :TagbarToggle<CR>
 
