@@ -263,7 +263,7 @@ then
 
     if [ -z "$VIM_INSTALL_DIR" ]
     then
-        VIM_INSTALL_DIR="~/local/vim"
+        VIM_INSTALL_DIR="~/local/vim/"
     fi
 
     if [ $YES -ne 1 ]
@@ -279,12 +279,15 @@ then
                 [Nn]* ) exit
                     ;;
                 [Ee]* ) echo -n "Please enter a new clone path: "
-                    read -rp "" VIM_CLONE_DIR; VIM_CLONE_DIR="${VIM_CLONE_DIR/#\~/$HOME}"; echo $VIM_CLONE_DIR; break
+                    read -rp "" VIM_CLONE_DIR; break
                     ;;
                 * ) echo "Not a valid option."
                     * ;;
             esac
         done
+
+        # expanding home path
+        VIM_CLONE_DIR="${VIM_CLONE_DIR/#\~/$HOME}"
 
         if [ ! -d "$VIM_CLONE_DIR" ]
         then
@@ -308,12 +311,20 @@ then
         while true; do
             read -p "" response
             case $response in
-                [Yy]* ) echo YAY; exit; break;;
-                [Nn]* ) echo NAY; exit;;
-                [Ee]* ) echo EAY; exit;;
+                [Yy]* ) break
+                    ;;
+                [Nn]* ) exit
+                    ;;
+                [Ee]* ) echo -n "Please enter a new clone path: "
+                    read -rp "" VIM_INSTALL_DIR
+                    break
+                    ;;
                 * ) echo "Not a valid option.";;
             esac
         done
+
+        # expanding home path
+        VIM_INSTALL_DIR="${VIM_INSTALL_DIR/#\~/$HOME}"
 
         if [ ! -d "$VIM_CLONE_DIR" ]
         then
@@ -321,34 +332,48 @@ then
             while true; do
                 read -p "" response
                 case $response in
-                    [Yy]* ) echo YAY; exit; break;;
-                    [Nn]* ) echo NAY; exit;;
-                    [Ee]* ) echo EAY; exit;;
+                    [Yy]* ) mkdir -pv "$VIM_INSTALL_DIR"; break
+                        ;;
+                    [Nn]* ) exit
+                        ;;
                     * ) echo "Not a valid option.";;
                 esac
             done
         fi
     fi
 
-    if [ ! -d ~/local/vim ];
+    if [ ! -d "${VIM_CLONE_DIR%/}/vim" ];
     then
+        echo "${VIM_CLONE_DIR%/}/vim"
         echo -e "Cloning ${GREEN}vim${NORMAL} into ${GREEN}$VIM_CLONE_DIR${NORMAL}."
-        pushd $VIM_CLONE_DIR
+        pushd $VIM_CLONE_DIR > /dev/null
         git clone https://github.com/vim/vim.git
         popd
     else
-        echo -e "${YELLOW}~/local/vim${NORMAL} already exists. Attempting to pull newest version."
-        pushd ~/local/vim/
+        echo -e "${YELLOW}${VIM_CLONE_DIR%/}${NORMAL} already exists. Attempting to pull newest version."
+        pushd ${VIM_CLONE_DIR%/}/vim > /dev/null
         git pull
         popd
     fi
 
-    #case $OS in
-    #ubuntu)
-    #ubuntu_nvim_install
-    #;;
-#centos)
-    #echo "Can't deal with CentOS"
-    #;;
-    #esac
-fi
+    if [ $SET_UP_VIM -eq 1 ]
+    then
+        case $OS in
+            ubuntu)
+                ubuntu_vim_dep_install
+                compile_vim ${VIM_CLONE_DIR%/}/vim $VIM_INSTALL_DIR
+                ;;
+            centos)
+                echo "Can't deal with CentOS"
+                ;;
+        esac
+    fi
+        #case $OS in
+        #ubuntu)
+        #ubuntu_nvim_install
+        #;;
+    #centos)
+        #echo "Can't deal with CentOS"
+        #;;
+        #esac
+    fi
