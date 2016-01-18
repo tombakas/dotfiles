@@ -11,76 +11,62 @@ BLUE="\e[34m"
 BOLD="\e[1m"
 NORMAL="\e[0m"
 
+
+
 SET_UP_NVIM=0
 SET_UP_VIM=0
 SET_UP_TUMX_CONF=0
 SET_UP_BASH_ALIASES=0
 YES=0
 
-function color_text {
+color_text() {
 
-color=$1
-if [[ $2 == "-n" ]]
-then
-    flags="-ne"
-    shift 2
-else
-    flags="-e"
-    shift
-fi
+    color=$(echo $1 | tr [a-z] [A-Z])
+    if [[ $2 == "-n" ]]
+    then
+        flags="-ne"
+        shift 2
+    else
+        flags="-e"
+        shift
+    fi
 
-case $color in
-    green)
-        text="$GREEN$@$NORMAL"
-        ;;
-    red)
-        text="$RED$@$NORMAL"
-        ;;
-    blue)
-        text="$BLUE$@$NORMAL"
-        ;;
-    yellow)
-        text="$YELLOW$@$NORMAL"
-        ;;
-    bold)
-        text="$BOLD$@$NORMAL"
-        ;;
-esac
-eval "echo $flags \"$text\""
+    text=${!color}$@$NORMAL
+    eval "echo $flags \"$text\""
 }
 
-function horizontal_rule {
-rule_length=80
-rule=$(eval printf '%0.1s' "-"{1..$rule_length})
+horizontal_rule() {
+    rule_length=80
+    rule=$(eval printf '%0.1s' "-"{1..$rule_length})
 
-front_length=$(echo $rule_length/2-${#1}/2 | bc)
-front=$(eval printf '%0.1s' "-"{1..$front_length})
-back_length=$(echo $rule_length/2-${#1}+${#1}/2 |bc )
-back=$(eval printf '%0.1s' "-"{1..$back_length})
+    front_length=$(echo $rule_length/2-${#1}/2 | bc)
+    front=$(eval printf '%0.1s' "-"{1..$front_length})
+    back_length=$(echo $rule_length/2-${#1}+${#1}/2 |bc )
+    back=$(eval printf '%0.1s' "-"{1..$back_length})
 
-if [ -z "$1" ]
-then
-    echo -e "\n$rule"
-else
-    echo -e "\n$rule"
-    echo -n $front
-    color_text green -n $@
-    echo $back
-    echo $rule
+    if [ -z "$1" ]
+    then
+        echo -e "\n$rule"
+    else
+        echo -e "\n$rule"
+        echo -n $front
+        color_text green -n $@
+        echo $back
+        echo $rule
 
-fi
+    fi
 }
 
-function print_help {
-color_text bold -n "\nVim/Neovim "; echo -e "deployment script\n"
-echo "Run it with one of the following options:"
-echo -e "\t-v\tSet up vim"
-echo -e "\t-n\tSet up neovim"
-echo -e "\t-t\tCreate symlink for tmux.conf"
-echo -e "\t-g\tCreate symlink for .bash_aliases that color git folders"
-echo -e "\t-y\tAssume -y for all prompts"
-echo -e "\t-h\tThis help message"
-echo
+print_help() {
+    color_text bold -n "\nVim/Neovim "; echo -e "deployment script\n"
+    echo "Run it with one of the following options:"
+    echo -e "\t-v\tSet up vim"
+    echo -e "\t-n\tSet up neovim"
+    echo -e "\t-t\tCreate symlink for tmux.conf"
+    echo -e "\t-g\tCreate symlink for .bash_aliases that color git folders"
+    echo -e "\t-y\tAssume -y for all prompts"
+    echo -e "\t-h\tThis help message"
+    echo
 }
 
 # If no arguments provided, print help
@@ -121,24 +107,24 @@ if grep -q Ubuntu /etc/lsb-release; then
     OS=ubuntu
 fi
 
-function verbose_mkdir {
-if [ ! -d $1 ]
-then
-    echo -e "Creating ${GREEN}$1${NORMAL} directory."
-    mkdir -p $1
-else
-    echo -e "${YELLOW}$1${NORMAL} already exists."
-fi
+verbose_mkdir() {
+    if [ ! -d $1 ]
+    then
+        echo -e "Creating ${GREEN}$1${NORMAL} directory."
+        mkdir -p $1
+    else
+        echo -e "${YELLOW}$1${NORMAL} already exists."
+    fi
 }
 
-function verbose_ln {
-if [ ! -e $2 ]
-then
-    echo -e "Creating symlink for ${GREEN}$1${NORMAL} at ${GREEN}$2${NORMAL}"
-    ln -s $(readlink -f $1) $(readlink -f $2)
-else
-    echo -e "Symlink to ${YELLOW}$1${NORMAL} already exists."
-fi
+verbose_ln() {
+    if [ ! -e $2 ]
+    then
+        echo -e "Creating symlink for ${GREEN}$1${NORMAL} at ${GREEN}$2${NORMAL}"
+        ln -s $(readlink -f $1) $(readlink -f $2)
+    else
+        echo -e "Symlink to ${YELLOW}$1${NORMAL} already exists."
+    fi
 }
 
 # Bash aliases
@@ -157,6 +143,18 @@ fi
 
 if [ $SET_UP_VIM -eq 1 ] || [ $SET_UP_NVIM -eq 1 ]
 then
+
+    MISSING=""
+    for missing in make cmake; do
+        command -v $missing >/dev/null 2>&1 || MISSING="$missing $MISSING"
+    done
+    if [ ! -z "$MISSING" ]
+    then
+        echo -e "The following packages ${RED}need to be installed${NORMAL} to proceed:"
+        echo -e "${GREEN}$MISSING${NORMAL}"
+        exit
+    fi
+
     horizontal_rule "Setting up vim dotfiles"
     verbose_mkdir ~/.vim/bundle  # Plugin directory
     verbose_mkdir ~/.vim/colors # Color scheme directory
@@ -232,6 +230,38 @@ then
         VIM_INSTALL_DIR="~/local/vim/"
     fi
 
+    case $OS in 
+        ubuntu)
+            sudo apt-get -y update
+            ;;
+    esac
+
+    if [ $SET_UP_VIM -eq 1 ]
+    then
+        case $OS in
+            ubuntu)
+                ubuntu_vim_dep_install
+                compile_vim ${VIM_CLONE_DIR%/}/vim $VIM_INSTALL_DIR
+                ;;
+            centos)
+                echo "Can't deal with CentOS"
+                ;;
+        esac
+    fi
+
+    if [ $SET_UP_NVIM -eq 1 ]
+    then
+        case $OS in
+            ubuntu)
+                ubuntu_vim_dep_install
+                ubuntu_nvim_install
+                ;;
+            centos)
+                echo "Can't deal with CentOS"
+                ;;
+        esac
+    fi
+
     if [ $YES -ne 1 ]
     then
         echo -e "The default directory to clone ${GREEN}vim${NORMAL} is ${GREEN}$VIM_CLONE_DIR${NORMAL}."
@@ -282,12 +312,7 @@ then
                 [Nn]* ) exit
                     ;;
                 [Ee]* ) echo -n "Please enter a new clone path: "
-                    read -rp "" VIM_INSTALL_DIR
-                    break
-                    ;;
-                * ) echo "Not a valid option.";;
-            esac
-        done
+                    read -rp "" VIM_INSTALL_DIR break ;; * ) echo "Not a valid option.";; esac done
 
         # expanding home path
         VIM_INSTALL_DIR="${VIM_INSTALL_DIR/#\~/$HOME}"
@@ -320,38 +345,6 @@ then
         pushd ${VIM_CLONE_DIR%/}/vim > /dev/null
         git pull
         popd
-    fi
-
-    case $OS in 
-        ubuntu)
-            sudo apt-get -y update
-            ;;
-    esac
-
-    if [ $SET_UP_VIM -eq 1 ]
-    then
-        case $OS in
-            ubuntu)
-                ubuntu_vim_dep_install
-                compile_vim ${VIM_CLONE_DIR%/}/vim $VIM_INSTALL_DIR
-                ;;
-            centos)
-                echo "Can't deal with CentOS"
-                ;;
-        esac
-    fi
-
-    if [ $SET_UP_NVIM -eq 1 ]
-    then
-        case $OS in
-            ubuntu)
-                ubuntu_vim_dep_install
-                ubuntu_nvim_install
-                ;;
-            centos)
-                echo "Can't deal with CentOS"
-                ;;
-        esac
     fi
 
     # Neobundle setup
