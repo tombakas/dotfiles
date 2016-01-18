@@ -194,7 +194,7 @@ fi
 if [ "$SET_UP_NVIM" -eq 1 ]
 then
     horizontal_rule "Setting up Neovim"
-    if ! command -v nvimas >/dev/null 2>&1
+    if ! command -v nvim >/dev/null 2>&1
     then
         case $OS in
             ubuntu)
@@ -233,34 +233,9 @@ then
     case $OS in 
         ubuntu)
             sudo apt-get -y update
+            ubuntu_vim_dep_install
             ;;
     esac
-
-    if [ $SET_UP_VIM -eq 1 ]
-    then
-        case $OS in
-            ubuntu)
-                ubuntu_vim_dep_install
-                compile_vim ${VIM_CLONE_DIR%/}/vim $VIM_INSTALL_DIR
-                ;;
-            centos)
-                echo "Can't deal with CentOS"
-                ;;
-        esac
-    fi
-
-    if [ $SET_UP_NVIM -eq 1 ]
-    then
-        case $OS in
-            ubuntu)
-                ubuntu_vim_dep_install
-                ubuntu_nvim_install
-                ;;
-            centos)
-                echo "Can't deal with CentOS"
-                ;;
-        esac
-    fi
 
     if [ $YES -ne 1 ]
     then
@@ -345,6 +320,30 @@ then
         pushd ${VIM_CLONE_DIR%/}/vim > /dev/null
         git pull
         popd
+    fi
+
+    if [ $SET_UP_VIM -eq 1 ]
+    then
+        case $OS in
+            ubuntu)
+                compile_vim ${VIM_CLONE_DIR%/}/vim $VIM_INSTALL_DIR
+                ;;
+            centos)
+                echo "Can't deal with CentOS"
+                ;;
+        esac
+    fi
+
+    if [ $SET_UP_NVIM -eq 1 ]
+    then
+        case $OS in
+            ubuntu)
+                ubuntu_nvim_install
+                ;;
+            centos)
+                echo "Can't deal with CentOS"
+                ;;
+        esac
     fi
 
     # Neobundle setup
