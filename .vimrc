@@ -21,7 +21,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'tpope/vim-fugitive' " Git wrapper for vim
 NeoBundle 'Lokaltog/vim-easymotion' " Fast way to get places; trigger with <leader><leader>w
-NeoBundle 'rstacruz/sparkup', {'rtp': 'vim/'} " HTML completion
+NeoBundle 'mattn/emmet-vim'
 NeoBundle 'jeetsukumaran/vim-filebeagle' " Simple wrapper for netrw
 NeoBundle 'Shougo/unite.vim' " A wrapper for a bunch of stuff, like fuzzy file search and yank history
 NeoBundle 'Shougo/neoyank.vim' " Yank history
@@ -30,13 +30,13 @@ NeoBundle 'Raimondi/delimitMate' " Auto add brackets
 " YouCompleteMe
 let g:neobundle#install_process_timeout = 1500
 NeoBundle 'Valloric/YouCompleteMe', {
-            \ 'build'      : {
-            \ 'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-            \ 'unix'    : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-            \ 'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-            \ 'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
-            \ }
-            \ }
+        \ 'build'      : {
+        \ 'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+        \ 'unix'    : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+        \ 'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
+        \ 'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
+        \ }
+        \ }
 
 NeoBundle 'simnalamburt/vim-mundo' " Undo history 
 NeoBundle 'othree/html5.vim' " HTML5 syntax highliting and indentation
@@ -56,13 +56,13 @@ NeoBundle 'MarcWeber/vim-addon-mw-utils'
 NeoBundle 'vim-scripts/tlib'
 NeoBundle 'tpope/vim-haml'
 NeoBundle 'Shougo/vimproc.vim', {
-            \ 'build' : {
-            \     'windows' : 'tools\\update-dll-mingw',
-            \     'cygwin' : 'make -f make_cygwin.mak',
-            \     'mac' : 'make -f make_mac.mak',
-            \     'unix' : 'make -f make_unix.mak',
-            \    },
-            \ }
+        \ 'build' : {
+        \     'windows' : 'tools\\update-dll-mingw',
+        \     'cygwin' : 'make -f make_cygwin.mak',
+        \     'mac' : 'make -f make_mac.mak',
+        \     'unix' : 'make -f make_unix.mak',
+        \    },
+        \ }
 
 NeoBundle 'bling/vim-airline' " Statusline
 NeoBundle 'nathanaelkane/vim-indent-guides' " Highlight levels of indentation
@@ -89,11 +89,11 @@ set hlsearch " highlight the last searched term
 
 " When editing a file, always jump to the last cursor position
 autocmd BufReadPost *
-            \ if ! exists("g:leave_my_cursor_position_alone") |
-            \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-            \ exe "normal g'\"" |
-            \ endif |
-            \ endif
+        \ if ! exists("g:leave_my_cursor_position_alone") |
+        \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+        \ exe "normal g'\"" |
+        \ endif |
+        \ endif
 
 set t_Co=256
 colo Mustang
@@ -189,9 +189,10 @@ imap <C-d> <Plug>delimitMateS-BS
 "airline
 let g:airline_theme="powerlineish"
 
-" sparkup
-let g:sparkupExecuteMapping = '<c-h>'
-let g:sparkupNextMapping = '<c-j>'
+" emmet
+imap <leader>h <plug>(emmet-expand-abbr)
+imap <C-j> <plug>(emmet-move-next)
+imap <C-k> <plug>(emmet-move-prev)
 
 " indent guide
 let g:indent_guides_auto_colors = 0
