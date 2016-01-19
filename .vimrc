@@ -136,7 +136,6 @@ vnoremap / /\v
 let mapleader = ","
 set ignorecase
 set smartcase
-set gdefault
 set incsearch
 set showmatch
 set hlsearch
@@ -170,6 +169,7 @@ cmap w!! %!sudo tee > /dev/null %
 setlocal omnifunc=syntaxcomplete#Complete
 
 map <leader>gg :GundoToggle<CR>
+
 " pipe through bc
 imap <C-p> <ESC>:.! sed 's/^/scale=2;/' \| bc -l<CR>
 
