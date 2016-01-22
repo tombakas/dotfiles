@@ -316,3 +316,6 @@ function! s:ZoomToggle() abort
 endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <leader><leader>z :ZoomToggle<CR>
+
+" Python fold method
+au FileType python set foldmethod=expr
