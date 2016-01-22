@@ -103,8 +103,17 @@ while getopts ":vnhgty" opt; do
 done
 
 # OS check
-if grep -q Ubuntu /etc/lsb-release; then
-    OS=ubuntu
+if [ -f "/etc/lsb-release" ]; then
+    if grep -q Ubuntu /etc/lsb-release; then
+        OS=ubuntu
+    fi
+elif [ -f "/etc/redhat-release" ]; then
+    if grep -qi centos /etc/redhat-release 2>/dev/null; then
+        OS=centos
+    fi
+else
+    echo "${RED}Unidentified OS${NORMAL}"
+    exit 1
 fi
 
 verbose_mkdir() {
@@ -121,7 +130,7 @@ verbose_ln() {
     if [ ! -e $2 ]
     then
         echo -e "Creating symlink for ${GREEN}$1${NORMAL} at ${GREEN}$2${NORMAL}"
-        ln -s $(readlink -f $1) $(readlink -f $2)
+        ln -s $(readlink -fm $1) $(readlink -fm $2)
     else
         echo -e "Symlink to ${YELLOW}$1${NORMAL} already exists."
     fi
@@ -162,7 +171,7 @@ then
     verbose_mkdir ~/.vim/indent # Indent file directory
 
     verbose_ln Mustang.vim ~/.vim/colors/Mustang.vim # Mustang colorscheme 
-    verbose_ln htmldjango.vim /home/$(whoami)/.vim/indent/htmldjango.vim # Django template indentation
+    verbose_ln htmldjango.vim $HOME/.vim/indent/htmldjango.vim # Django template indentation
 
     # vimrc setup
     if [ ! -f ~/.vimrc ]
@@ -307,6 +316,10 @@ then
             sudo apt-get -y update
             ubuntu_vim_dep_install
             ;;
+        centos)
+            sudo yum -y update
+            centos_vim_dep_install
+            ;;
     esac
 
     if [ ! -d "${VIM_CLONE_DIR%/}/vim" ];
@@ -317,7 +330,7 @@ then
         git clone https://github.com/vim/vim.git
         popd
     else
-        echo -e "${YELLOW}${VIM_CLONE_DIR%/}${NORMAL} already exists. Attempting to pull newest version."
+        echo -e "${YELLOW}${VIM_CLONE_DIR%/}/vim${NORMAL} already exists. Attempting to pull newest version."
         pushd ${VIM_CLONE_DIR%/}/vim > /dev/null
         git pull
         popd
@@ -330,7 +343,8 @@ then
                 compile_vim ${VIM_CLONE_DIR%/}/vim $VIM_INSTALL_DIR
                 ;;
             centos)
-                echo "Can't deal with CentOS"
+                echo almost
+                compile_vim ${VIM_CLONE_DIR%/}/vim $VIM_INSTALL_DIR
                 ;;
         esac
     fi
