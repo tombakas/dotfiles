@@ -154,6 +154,8 @@ inoremap <F1> <ESC>
 nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
+imap jj <ESC>
+
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <leader>w <C-w>v<C-w>l
 nnoremap <C-h> <C-w>h
@@ -210,7 +212,7 @@ set completeopt+=preview
 let g:SimpylFold_docstring_preview = 1
 
 " unite
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#matcher_default#use(['matcher_fuzzy', 'sorter_reverse'])
 nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async<CR>
 " Custom mappings for the unite buffer
 autocmd FileType unite call s:unite_settings()
