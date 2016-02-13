@@ -321,3 +321,11 @@ nnoremap <leader><leader>z :ZoomToggle<CR>
 
 " Python fold method
 au FileType python set foldmethod=expr
+
+" Indentation for yaml
+au BufRead *.yml call SetRubyOptions()
+function SetRubyOptions()
+  set shiftwidth=2
+  set tabstop=2
+  set softtabstop=2
+endfunction
