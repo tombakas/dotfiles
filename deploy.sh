@@ -362,37 +362,16 @@ then
     fi
 
     # Neobundle setup
-    horizontal_rule "Setting up NeoBundle"
+    horizontal_rule "Setting up vim-plug"
 
     # vimproc
-    if [ ! -d ~/.vim/bundle/vimproc.vim ]
+    if [ ! -f ~/.vim/autoload/plug.vim ]
     then
-        echo -e "Cloning ${GREEN}vimproc${NORMAL} into ~/.vim/bundle/"
-        git clone https://github.com/Shougo/vimproc.vim.git ~/.vim/bundle/vimproc.vim
-        pushd ~/.vim/bundle/vimproc.vim
-        make
-        popd
+        echo -e "Placing ${GREEN}vim-plug${NORMAL} into ~/.vim/autoload/plug.vim"
+        curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+            https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     else
-        echo -e "${YELLOW}vimproc${NORMAL} already installed."
-
-
-    fi
-    if [ ! -d ~/.vim/bundle/neobundle.vim ]
-    then
-        echo -e "Cloning ${GREEN}NeoBundle${NORMAL} into ~/.vim/bundle/"
-        git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-        ~/.vim/bundle/neobundle.vim/bin/neoinstall
-    else
-        echo -e "${YELLOW}NeoBundle${NORMAL} already installed."
+        echo -e "${YELLOW}vim-plug${NORMAL} already installed."
     fi
     # /Neobundle setup
-
-    # Compile YouCompleteMe
-    horizontal_rule "Setting up YouCompleteMe"
-    if [ ! -f ~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycm_core.so  ]
-    then
-        ~/.vim/bundle/YouCompleteMe/install.py
-    else
-        echo -e "${YELLOW}YouCompleteMe${NORMAL} already compiled."
-    fi
 fi
