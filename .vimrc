@@ -8,78 +8,43 @@ if has('vim_starting')
     set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
-" Required:
-call neobundle#begin(expand('~/.vim/bundle/'))
+call plug#begin('~/.vim/plugged')
 
-" Let NeoBundle manage NeoBundle
-" Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
-
-" My Bundles here:
-" Refer to |:NeoBundle-examples|.
-" Note: You don't set neobundle setting in .gvimrc!
-
-NeoBundle 'tpope/vim-fugitive' " Git wrapper for vim
-NeoBundle 'Lokaltog/vim-easymotion' " Fast way to get places; trigger with <leader><leader>w
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'jeetsukumaran/vim-filebeagle' " Simple wrapper for netrw
-NeoBundle 'Shougo/unite.vim' " A wrapper for a bunch of stuff, like fuzzy file search and yank history
-NeoBundle 'Shougo/neoyank.vim' " Yank history
-NeoBundle 'Raimondi/delimitMate' " Auto add brackets
-
-" YouCompleteMe
-let g:neobundle#install_process_timeout = 1500
-NeoBundle 'Valloric/YouCompleteMe', {
-        \ 'build'      : {
-        \ 'mac'     : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-        \ 'unix'    : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-        \ 'windows' : './install.sh --clang-completer --system-libclang --omnisharp-completer',
-        \ 'cygwin'  : './install.sh --clang-completer --system-libclang --omnisharp-completer'
-        \ }
-        \ }
-
-NeoBundle 'simnalamburt/vim-mundo' " Undo history 
-NeoBundle 'othree/html5.vim' " HTML5 syntax highliting and indentation
-NeoBundle 'davidhalter/jedi-vim' " Wrapper for python syntax/autocompletion library Jedi
-NeoBundle 'scrooloose/nerdcommenter' " Comment wrapper
-NeoBundle 'tpope/vim-repeat' " Use . to repeat more complicated commands
-NeoBundle 'cakebaker/scss-syntax.vim' " SCSS syntax highliting
-NeoBundle 'SirVer/ultisnips' " Snippets for code completion
-NeoBundle 'honza/vim-snippets' " Snippet library
-NeoBundle 'scrooloose/syntastic' " Syntax
-NeoBundle 'majutsushi/tagbar' " Tag browser
-NeoBundle 'pangloss/vim-javascript' " Javascript syntax
-NeoBundle 'tpope/vim-surround' " Wrapper for surrounding objects with quotes, tags, etc.
+Plug 'tpope/vim-fugitive' " Git wrapper for vim
+Plug 'Lokaltog/vim-easymotion' " Fast way to get places; trigger with <leader><leader>w
+Plug 'mattn/emmet-vim'
+Plug 'jeetsukumaran/vim-filebeagle' " Simple wrapper for netrw
+Plug 'Shougo/unite.vim' " A wrapper for a bunch of stuff, like fuzzy file search and yank history
+Plug 'Shougo/neoyank.vim' " Yank history
+Plug 'Raimondi/delimitMate' " Auto add brackets
+Plug 'Valloric/YouCompleteMe', {'do': './install.py'} " YouCompleteMe
+Plug 'simnalamburt/vim-mundo' " Undo history
+Plug 'othree/html5.vim' " HTML5 syntax highliting and indentation
+Plug 'davidhalter/jedi-vim' " Wrapper for python syntax/autocompletion library Jedi
+Plug 'scrooloose/nerdcommenter' " Comment wrapper
+Plug 'tpope/vim-repeat' " Use . to repeat more complicated commands
+Plug 'cakebaker/scss-syntax.vim' " SCSS syntax highliting
+Plug 'SirVer/ultisnips' " Snippets for code completion
+Plug 'honza/vim-snippets' " Snippet library
+Plug 'scrooloose/syntastic' " Syntax
+Plug 'majutsushi/tagbar' " Tag browser
+Plug 'pangloss/vim-javascript' " Javascript syntax
+Plug 'tpope/vim-surround' " Wrapper for surrounding objects with quotes, tags, etc.
 
 " Vim utility functions
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'vim-scripts/tlib'
-NeoBundle 'tpope/vim-haml'
-NeoBundle 'Shougo/vimproc.vim', {
-        \ 'build' : {
-        \     'windows' : 'tools\\update-dll-mingw',
-        \     'cygwin' : 'make -f make_cygwin.mak',
-        \     'mac' : 'make -f make_mac.mak',
-        \     'unix' : 'make -f make_unix.mak',
-        \    },
-        \ }
+Plug 'vim-scripts/tlib'
+Plug 'tpope/vim-haml'
+Plug 'Shougo/vimproc.vim', {'do': 'make'}
+Plug 'vim-airline/vim-airline' " Statusline
+Plug 'vim-airline/vim-airline-themes' " Statusline
+Plug 'nathanaelkane/vim-indent-guides' " Highlight levels of indentation
+Plug 'tmhedberg/SimpylFold' " Python folding
+Plug 'nvie/vim-flake8' " pep8 syntax
+Plug 'hynek/vim-python-pep8-indent' " pep8 indentation
+Plug 'Valloric/MatchTagAlways' " Highlighting matching XML tags
+Plug 'vim-scripts/fountain.vim' " Fountain syntax highlighting
 
-NeoBundle 'bling/vim-airline' " Statusline
-NeoBundle 'nathanaelkane/vim-indent-guides' " Highlight levels of indentation
-NeoBundle 'tmhedberg/SimpylFold' " Python folding
-NeoBundle 'nvie/vim-flake8' " pep8 syntax
-NeoBundle 'hynek/vim-python-pep8-indent' " pep8 indentation
-NeoBundle 'Valloric/MatchTagAlways' " Highlighting matching XML tags
-NeoBundle 'vim-scripts/fountain.vim' " Fountain syntax highlighting
-
-call neobundle#end()
-
-" Required:
-filetype plugin indent on
-
-" If there are uninstalled bundles found on startup,
-" this will conveniently prompt you to install them.
-NeoBundleCheck
+call plug#end()
 
 filetype plugin indent on
 
