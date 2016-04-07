@@ -14,7 +14,6 @@ Plug 'tpope/vim-fugitive' " Git wrapper for vim
 Plug 'Lokaltog/vim-easymotion' " Fast way to get places; trigger with <leader><leader>w
 Plug 'mattn/emmet-vim'
 Plug 'jeetsukumaran/vim-filebeagle' " Simple wrapper for netrw
-Plug 'Shougo/unite.vim' " A wrapper for a bunch of stuff, like fuzzy file search and yank history
 Plug 'Shougo/neoyank.vim' " Yank history
 Plug 'Raimondi/delimitMate' " Auto add brackets
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'} " YouCompleteMe
@@ -43,6 +42,8 @@ Plug 'nvie/vim-flake8' " pep8 syntax
 Plug 'hynek/vim-python-pep8-indent' " pep8 indentation
 Plug 'Valloric/MatchTagAlways' " Highlighting matching XML tags
 Plug 'vim-scripts/fountain.vim' " Fountain syntax highlighting
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
@@ -176,32 +177,6 @@ set completeopt+=preview
 " simply fold
 let g:SimpylFold_docstring_preview = 1
 
-" unite
-call unite#filters#matcher_default#use(['matcher_fuzzy', 'sorter_reverse'])
-nnoremap <leader>t :<C-u>Unite -no-split -buffer-name=files -start-insert file_rec/async<CR>
-" Custom mappings for the unite buffer
-autocmd FileType unite call s:unite_settings()
-function! s:unite_settings()
-    " Enable navigation with control-j and control-k in insert mode
-    imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-    imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-    imap <buffer> <C-r>   <Plug>(unite_redraw)
-endfunction
-nmap <leader>be :Unite buffer<CR>
-"unite ack
-if executable('ag')
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden '
-    let g:unite_source_grep_recursive_opt = ''
-    let g:unite_source_rec_async_command = ['ag', '--follow', '--nocolor', '--nogroup',  '--hidden', '-g', '']
-endif
-"Remove filebeagle mapping
-noremap <leader>f :<C-u>Unite grep:.<CR>
-nnoremap <leader>F :<C-u>Unite grep:%<CR>
-"yank history
-let g:unite_source_history_yank_enable = 1
-nnoremap <leader>y :<C-u>Unite history/yank<CR>
-
 " Show syntax highlighting groups for word under cursor
 nmap <C-S-P> :call <SID>SynStack()<CR>
 function! <SID>SynStack()
@@ -231,6 +206,10 @@ let g:syntastic_check_on_wq = 0
 
 " Default html files to javascripthtml
 au BufRead *.html set filetype=html.javascript
+
+" fzf
+nmap <leader>t :FZF<CR>
+nmap <leader>be :Buffers<CR>
 
 " Fountain
 au BufRead,BufNewFile *.fountain setfiletype fountain

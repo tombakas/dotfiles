@@ -1,0 +1,6 @@
+export PATH=$PATH:$HOME/local/bin
+export FZF_DEFAULT_COMMAND='ag -g ""'
+
+alias rm="rm -v"
+alias tmux="tmux -2"
+alias redshiftvno="redshift -l 54.686237:25.285560"

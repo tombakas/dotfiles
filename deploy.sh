@@ -17,6 +17,7 @@ SET_UP_NVIM=0
 SET_UP_VIM=0
 SET_UP_TUMX_CONF=0
 SET_UP_BASH_ALIASES=0
+SET_UP_BASHRC=0
 YES=0
 
 color_text() {
@@ -64,6 +65,7 @@ print_help() {
     echo -e "\t-n\tSet up neovim"
     echo -e "\t-t\tCreate symlink for tmux.conf"
     echo -e "\t-g\tCreate symlink for .bash_aliases that color git folders"
+    echo -e "\t-b\tSet up bash to link to ~/.tomasrc"
     echo -e "\t-y\tAssume -y for all prompts"
     echo -e "\t-h\tThis help message"
     echo
@@ -76,7 +78,7 @@ then
     exit 0
 fi
 
-while getopts ":vnhgty" opt; do
+while getopts ":vnhgbty" opt; do
     case $opt in
         v)
             SET_UP_VIM=1
@@ -92,6 +94,9 @@ while getopts ":vnhgty" opt; do
             ;;
         g)
             SET_UP_BASH_ALIASES=1
+            ;;
+        b)
+            SET_UP_BASHRC=1
             ;;
         h)
             print_help
@@ -198,6 +203,19 @@ then
 
 fi
 
+# Bashrc
+if [ "$SET_UP_BASHRC" -eq 1 ]
+then
+    horizontal_rule "Setting up .bashrc"
+    if ! grep -q "source ~/.tomasrc" ~/.bashrc
+    then
+        echo -e "${GREEN}.tomasrc${NORMAL} not sourced in ${GREEN}.bashrc${NORMAL}. Adding instruction."
+        sed -ie "\$asource ~/.tomasrc" ~/.bashrc
+    else
+        echo -e "${GREEN}.tomasrc${NORMAL} already sourced in ${GREEN}.bashrc${NORMAL}"
+    fi
+    verbose_ln .tomasrc ~/.tomasrc
+fi
 
 # Neovim
 if [ "$SET_UP_NVIM" -eq 1 ]
