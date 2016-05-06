@@ -155,6 +155,7 @@ let g:jedi#show_call_signatures = 1
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 imap <C-d> <Plug>delimitMateS-BS
+imap <C-l> <Plug>delimitMateJumpMany
 
 "airline
 let g:airline_theme="powerlineish"
