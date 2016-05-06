@@ -161,9 +161,9 @@ imap <C-l> <Plug>delimitMateJumpMany
 let g:airline_theme="powerlineish"
 
 " emmet
-imap <C-h> <plug>(emmet-expand-abbr)
-imap <C-j> <plug>(emmet-move-next)
-imap <C-k> <plug>(emmet-move-prev)
+autocmd FileType html imap <C-h> <plug>(emmet-expand-abbr)
+autocmd FileType html imap <C-j> <plug>(emmet-move-next)
+autocmd FileType html imap <C-k> <plug>(emmet-move-prev)
 
 " indent guide
 let g:indent_guides_auto_colors = 0
@@ -232,8 +232,8 @@ function ExpandSnippetOrCarriageReturn()
 endfunction
 inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 let g:UltiSnipsExpandTrigger='<C-]>' "Trigger snippet
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " YouCompleteMe settings
 let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
