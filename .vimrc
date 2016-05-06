@@ -44,6 +44,7 @@ Plug 'Valloric/MatchTagAlways' " Highlighting matching XML tags
 Plug 'vim-scripts/fountain.vim' " Fountain syntax highlighting
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'wellle/targets.vim'
 
 call plug#end()
 
