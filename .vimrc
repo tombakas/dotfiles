@@ -160,7 +160,7 @@ imap <C-d> <Plug>delimitMateS-BS
 let g:airline_theme="powerlineish"
 
 " emmet
-imap <leader>h <plug>(emmet-expand-abbr)
+imap <C-h> <plug>(emmet-expand-abbr)
 imap <C-j> <plug>(emmet-move-next)
 imap <C-k> <plug>(emmet-move-prev)
 
