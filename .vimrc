@@ -157,6 +157,7 @@ imap <C-l> <Plug>delimitMateJumpMany
 
 "airline
 let g:airline_theme="powerlineish"
+let g:airline_right_sep=''
 
 " emmet
 autocmd FileType html imap <C-h> <plug>(emmet-expand-abbr)
