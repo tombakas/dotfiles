@@ -86,13 +86,11 @@ set hidden
 set wildmenu
 set wildmode=list:longest
 set visualbell
-set cursorline
 set ttyfast
 set ruler
 set backspace=indent,eol,start
 set backspace=2
 set laststatus=2
-set relativenumber
 set undofile " Save undo's after file closes
 set undodir=$HOME/.vim/undo " where to save undo histories
 set undolevels=1000 " How many undos
