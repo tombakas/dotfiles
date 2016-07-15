@@ -271,3 +271,5 @@ function SetRubyOptions()
   set tabstop=2
   set softtabstop=2
 endfunction
+
+let g:syntastic_python_flake8_exe=system("echo -n $(which python)") . " -m flake8"
