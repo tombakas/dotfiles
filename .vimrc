@@ -272,4 +272,5 @@ function SetRubyOptions()
   set softtabstop=2
 endfunction
 
+" Flake8 python version hack
 let g:syntastic_python_flake8_exe=system("echo -n $(which python)") . " -m flake8"
