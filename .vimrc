@@ -38,7 +38,7 @@ Plug 'vim-airline/vim-airline' " Statusline
 Plug 'vim-airline/vim-airline-themes' " Statusline
 Plug 'nathanaelkane/vim-indent-guides' " Highlight levels of indentation
 Plug 'tmhedberg/SimpylFold' " Python folding
-Plug 'nvie/vim-flake8' " pep8 syntax
+"Plug 'nvie/vim-flake8' " pep8 syntax
 Plug 'hynek/vim-python-pep8-indent' " pep8 indentation
 Plug 'Valloric/MatchTagAlways' " Highlighting matching XML tags
 Plug 'vim-scripts/fountain.vim' " Fountain syntax highlighting
@@ -273,7 +273,30 @@ function SetRubyOptions()
 endfunction
 
 " Flake8 python version hack
-let g:syntastic_python_flake8_exe=system("echo -n $(which python)") . " -m flake8"
+function! Setup_flake8()
+
+   let g:syntastic_python_flake8_exe=""
+
+   let output=system("echo -n $(which python)" . " -m flake8 -h")
+   if v:shell_error
+       let g:syntastic_python_flake8_exe=system("echo -n $(which python)" . " -m flake8")
+       return
+   endif
+
+   let output=system("which flake8")
+   if !v:shell_error
+       let g:syntastic_python_flake8_exe="flake8"
+       return
+   endif
+
+   let output=system("echo -n $(which python)" . " -m pyflakes -h")
+   if !v:shell_error
+       let g:syntastic_python_flake8_exe=system("echo -n $(which python)" . " -m pyflakes")
+       return
+   endif
+endfunction
+call Setup_flake8()
+
 
 " FZF buffer search function
 function! s:line_handler(l)
