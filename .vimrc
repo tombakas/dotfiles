@@ -1,20 +1,12 @@
 " Note: Skip initialization for vim-tiny or vim-small.
 if !1 | finish | endif
 
-if has('vim_starting')
-    set nocompatible " Be iMproved
-
-    " Required:
-    set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-fugitive' " Git wrapper for vim
 Plug 'Lokaltog/vim-easymotion' " Fast way to get places; trigger with <leader><leader>w
 Plug 'mattn/emmet-vim'
 Plug 'jeetsukumaran/vim-filebeagle' " Simple wrapper for netrw
-Plug 'Shougo/neoyank.vim' " Yank history
 Plug 'Raimondi/delimitMate' " Auto add brackets
 Plug 'Valloric/YouCompleteMe', {'do': './install.py'} " YouCompleteMe
 Plug 'simnalamburt/vim-mundo' " Undo history
