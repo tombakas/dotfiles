@@ -48,11 +48,11 @@ set hlsearch " highlight the last searched term
 
 " When editing a file, always jump to the last cursor position
 autocmd BufReadPost *
-        \ if ! exists("g:leave_my_cursor_position_alone") |
-        \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-        \ exe "normal g'\"" |
-        \ endif |
-        \ endif
+            \ if ! exists("g:leave_my_cursor_position_alone") |
+            \ if line("'\"") > 0 && line ("'\"") <= line("$") |
+            \ exe "normal g'\"" |
+            \ endif |
+            \ endif
 
 set t_Co=256
 colo Mustang
@@ -259,9 +259,9 @@ au FileType python set foldmethod=expr
 " Indentation for yaml
 au BufRead *.yml call SetRubyOptions()
 function SetRubyOptions()
-  set shiftwidth=2
-  set tabstop=2
-  set softtabstop=2
+    set shiftwidth=2
+    set tabstop=2
+    set softtabstop=2
 endfunction
 
 " Flake8 python version hack
@@ -292,25 +292,25 @@ call Setup_flake8()
 
 " FZF buffer search function
 function! s:line_handler(l)
-  let keys = split(a:l, ':\t')
-  exec 'buf' keys[0]
-  exec keys[1]
-  normal! ^zz
+    let keys = split(a:l, ':\t')
+    exec 'buf' keys[0]
+    exec keys[1]
+    normal! ^zz
 endfunction
 
 function! s:buffer_lines()
-  let res = []
-  for b in filter(range(1, bufnr('$')), 'buflisted(v:val)')
-    call extend(res, map(getbufline(b,0,"$"), 'bufname(b) . ":\t" . (v:key + 1) . ":\t" . v:val '))
-  endfor
-  return res
+    let res = []
+    for b in filter(range(1, bufnr('$')), 'buflisted(v:val)')
+        call extend(res, map(getbufline(b,0,"$"), 'bufname(b) . ":\t" . (v:key + 1) . ":\t" . v:val '))
+    endfor
+    return res
 endfunction
 
 command! FZFLines call fzf#run({
-\   'source':  <sid>buffer_lines(),
-\   'sink':    function('<sid>line_handler'),
-\   'options': '--extended --nth=3..',
-\   'down':    '60%'
-\})
+            \   'source':  <sid>buffer_lines(),
+            \   'sink':    function('<sid>line_handler'),
+            \   'options': '--extended --nth=3..',
+            \   'down':    '60%'
+            \})
 
 nnoremap <leader>f :FZFLines<CR>
