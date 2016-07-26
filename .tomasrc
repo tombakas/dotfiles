@@ -1,5 +1,11 @@
 export PATH=$PATH:$HOME/local/bin
 export FZF_DEFAULT_COMMAND='ag -g ""'
+if which nvim > /dev/null
+then
+    export EDITOR=nvim
+else
+    export EDITOR=vim
+fi
 
 alias rm="rm -v"
 alias tmux="tmux -2"
