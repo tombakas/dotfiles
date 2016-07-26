@@ -267,25 +267,39 @@ endfunction
 " Flake8 python version hack
 function! Setup_flake8()
 
-   let g:syntastic_python_flake8_exe=""
+    let g:pversion=strpart(split(system("python --version 2>&1"))[1], 0, 1)
 
-   let output=system("echo -n $(which python)" . " -m flake8 -h")
-   if v:shell_error
-       let g:syntastic_python_flake8_exe=system("echo -n $(which python)" . " -m flake8")
-       return
-   endif
+    if g:pversion == 2
+        let output=system("/usr/bin/python2 -m flake8 -h")
+        if !v:shell_error
+            let g:syntastic_python_flake8_exe="/usr/bin/python2 -m flake8"
+            return
+        endif
+    elseif g:pversion == 3
+        let output=system("/usr/bin/python3 -m flake8 -h")
+        if !v:shell_error
+            let g:syntastic_python_flake8_exe="/usr/bin/python3 -m flake8"
+            return
+        endif
+    endif
 
-   let output=system("which flake8")
-   if !v:shell_error
-       let g:syntastic_python_flake8_exe="flake8"
-       return
-   endif
+    let output=system("echo -n $(which python)" . " -m flake8 -h")
+    if v:shell_error
+        let g:syntastic_python_flake8_exe=system("echo -n $(which python)" . " -m flake8")
+        return
+    endif
 
-   let output=system("echo -n $(which python)" . " -m pyflakes -h")
-   if !v:shell_error
-       let g:syntastic_python_flake8_exe=system("echo -n $(which python)" . " -m pyflakes")
-       return
-   endif
+    let output=system("which flake8")
+    if !v:shell_error
+        let g:syntastic_python_flake8_exe="flake8"
+        return
+    endif
+
+    let output=system("echo -n $(which python)" . " -m pyflakes -h")
+    if !v:shell_error
+        let g:syntastic_python_flake8_exe=system("echo -n $(which python)" . " -m pyflakes")
+        return
+    endif
 endfunction
 call Setup_flake8()
 
