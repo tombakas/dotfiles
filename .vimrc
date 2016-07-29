@@ -128,7 +128,7 @@ cmap w!! %!sudo tee > /dev/null %
 
 setlocal omnifunc=syntaxcomplete#Complete
 
-map <leader>gg :GundoToggle<CR>
+map <leader>gg :MundoToggle<CR>
 
 "taglist
 nnoremap <F3> :TagbarToggle<CR>
