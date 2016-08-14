@@ -1,5 +1,9 @@
 export PATH=$PATH:$HOME/local/bin
 export FZF_DEFAULT_COMMAND='ag -g ""'
+
+# vim as manpager
+export MANPAGER="env MAN_PN=1 vim -M +MANPAGER -"
+
 if which nvim > /dev/null
 then
     export EDITOR=nvim
