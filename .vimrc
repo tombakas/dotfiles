@@ -128,7 +128,7 @@ cmap w!! %!sudo tee > /dev/null %
 
 setlocal omnifunc=syntaxcomplete#Complete
 
-map <leader>gg :MundoToggle<CR>
+map <leader>gg :GundoToggle<CR>
 
 "taglist
 nnoremap <F3> :TagbarToggle<CR>
@@ -150,9 +150,9 @@ let g:airline_theme="powerlineish"
 let g:airline_right_sep=''
 
 " emmet
-autocmd FileType html imap <C-h> <plug>(emmet-expand-abbr)
-autocmd FileType html imap <C-j> <plug>(emmet-move-next)
-autocmd FileType html imap <C-k> <plug>(emmet-move-prev)
+autocmd FileType html,htmldjango imap <C-h> <plug>(emmet-expand-abbr)
+autocmd FileType html,htmldjango imap <C-j> <plug>(emmet-move-next)
+autocmd FileType html,htmldjango imap <C-k> <plug>(emmet-move-prev)
 
 " indent guide
 let g:indent_guides_auto_colors = 0
