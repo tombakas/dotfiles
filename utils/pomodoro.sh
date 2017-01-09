@@ -54,4 +54,6 @@ while [ $pom_stop -ne 1 ]; do
         sleep 1
     done
 
+    if [ $pom_stop -eq 0 ]; then notify-send "Work!"; fi
+
 done
