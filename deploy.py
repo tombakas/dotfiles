@@ -3,6 +3,7 @@
 from __future__ import print_function
 
 import argparse
+import sys
 import os
 from datetime import datetime as dt
 
@@ -36,30 +37,42 @@ def create_symlink(source, target):
 
     if os.path.isfile(full_target):
         if os.path.islink(full_target):
-            print("Symlink to ", end="")
-            sexy_print.yellow(target, "")
-            print(" already exists")
-            print()
+            sexy_print.yellow("Symlink to ", target, " already exists")
             return
         else:
-            sexy_print.yellow(target, "")
-            print(" already exists")
+            sexy_print.yellow("", target, " already exists")
 
-            print("Creating backup at ", end="")
-            sexy_print.yellow(new_name)
+            sexy_print.yellow("Creating backup at ", new_name)
             os.rename(full_target, new_name)
+    elif os.path.islink(full_target):
+        print("Symlink ", end="")
+        sexy_print.red("Symlink ", target, " is broken, unlinking... ")
 
     print("Creating symlink to ", end="")
     sexy_print.green(full_target)
+    try:
+        os.symlink(os.path.join(BASE_DIR, source), full_target)
+    except OSError:
+        print("Full path to {} does not exist".format(full_target))
+        sexy_print.red("Exiting")
+        sys.exit(1)
     print()
-    os.symlink(os.path.join(BASE_DIR, source), full_target)
 
     return
 
 
-def setup_dotfile(source, name):
-    sexy_print.header("Setting up " + name)
-    create_symlink(source, "~/" + name)
+def setup_dotfile(source, target, name=None):
+    if name is None:
+        sexy_print.header("Setting up " + os.path.basename(target))
+    else:
+        sexy_print.header("Setting up " + target)
+    create_symlink(source, target)
+
+
+def directory_make(target):
+    if not os.path.isdir(os.path.expanduser(target)):
+        sexy_print.yellow("Directory ", target, " does not exist, creating...")
+        os.makedirs(os.path.expanduser(target))
 
 
 if __name__ == "__main__":
@@ -68,10 +81,14 @@ if __name__ == "__main__":
 
     VIM = arguments.vim
     NVIM = arguments.nvim
-    DOTFILES = arguments.dotfiles[0]
+    DOTFILES = arguments.dotfiles
 
     if DOTFILES is not None:
         if "t" in DOTFILES:
-            setup_dotfile(os.path.join(BASE_DIR, ".tmux.conf"), ".tmux.conf")
+            setup_dotfile(os.path.join(BASE_DIR, ".tmux.conf"), "~/.tmux.conf")
         if "v" in DOTFILES:
-            setup_dotfile(os.path.join(BASE_DIR, "vimrc_files/.vimrc"), ".vimrc")
+            setup_dotfile(os.path.join(BASE_DIR, "vimrc_files/.vimrc"), "~/.vimrc")
+            directory_make("~/.vim/indent")
+            setup_dotfile(os.path.join(BASE_DIR, "vimrc_files/htmldjango.vim"), "~/.vim/indent/htmldjango.vim")
+        if "n" in DOTFILES:
+            setup_dotfile(os.path.join(BASE_DIR, "vimrc_files/init.vim"), "~/.config/nvim/init.vim")

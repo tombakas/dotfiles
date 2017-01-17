@@ -13,17 +13,29 @@ class sexy_print(object):
     def __init__(self):
         pass
 
-    def bold(self, text, end="\n"):
-        print(self.BOLD + text + self.NORMAL, end=end)
+    def bold(self, start="", text="", finish="", end="\n"):
+        if start != "" and text == "" and finish == "":
+            text = start
+            start = ""
+        print(start + self.BOLD + text + self.NORMAL + finish, end=end)
 
-    def green(self, text, end="\n"):
-        print (self.GREEN + text + self.NORMAL, end=end)
+    def green(self, start="", text="", finish="", end="\n"):
+        if start != "" and text == "" and finish == "":
+            text = start
+            start = ""
+        print (start + self.GREEN + text + self.NORMAL + finish, end=end)
 
-    def red(self, text, end="\n"):
-        print (self.RED + text + self.NORMAL, end=end)
+    def red(self, start="", text="", finish="", end="\n"):
+        if start != "" and text == "" and finish == "":
+            text = start
+            start = ""
+        print (start + self.RED + text + self.NORMAL + finish, end=end)
 
-    def yellow(self, text, end="\n"):
-        print (self.YELLOW + text + self.NORMAL, end=end)
+    def yellow(self, start="", text="", finish="", end="\n"):
+        if start != "" and text == "" and finish == "":
+            text = start
+            start = ""
+        print (start + self.YELLOW + text + self.NORMAL + finish, end=end)
 
     def header(self, text=""):
         text_length = len(text)
