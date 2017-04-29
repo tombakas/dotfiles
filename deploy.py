@@ -5,7 +5,9 @@ from __future__ import print_function
 import argparse
 import sys
 import os
+
 from datetime import datetime as dt
+from subprocess import call
 
 from sexy_print import sexy_print
 
@@ -28,6 +30,10 @@ def parse_arguments():
     args = parser.parse_args()
 
     return args
+
+
+def set_up_vimplug():
+    call(["curl", "-fLo", os.path.expanduser("~/.vim/autoload/plug.vim"), "--create-dirs", "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"])
 
 
 def create_symlink(source, target):
