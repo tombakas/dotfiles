@@ -3,7 +3,7 @@ export FZF_DEFAULT_COMMAND='ag -g ""'
 # vim as manpager
 #export MANPAGER="env MAN_PN=1 vim -M +MANPAGER -"
 
-if which nvim 2>/dev/null
+if which nvim >/dev/null 2>&1
 then
     export EDITOR=nvim
 else
