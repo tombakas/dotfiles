@@ -3,7 +3,7 @@ Plug 'Lokaltog/vim-easymotion' " Fast way to get places; trigger with <leader><l
 Plug 'mattn/emmet-vim'
 Plug 'jeetsukumaran/vim-filebeagle' " Simple wrapper for netrw
 Plug 'Raimondi/delimitMate' " Auto add brackets
-Plug 'Valloric/YouCompleteMe', {'do': './install.py'} " YouCompleteMe
+Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --racer-completer'} " YouCompleteMe
 Plug 'simnalamburt/vim-mundo' " Undo history
 Plug 'othree/html5.vim' " HTML5 syntax highliting and indentation
 Plug 'davidhalter/jedi-vim' " Wrapper for python syntax/autocompletion library Jedi
@@ -33,3 +33,5 @@ Plug 'vim-scripts/fountain.vim' " Fountain syntax highlighting
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'wellle/targets.vim'
+
+Plug 'rust-lang/rust.vim'

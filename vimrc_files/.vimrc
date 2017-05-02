@@ -95,7 +95,7 @@ cmap w!! %!sudo tee > /dev/null %
 
 setlocal omnifunc=syntaxcomplete#Complete
 
-map <leader>gg :GundoToggle<CR>
+map <leader>gg :MundoToggle<CR>
 
 "taglist
 nnoremap <F3> :TagbarToggle<CR>
@@ -198,6 +198,7 @@ let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language
 let g:ycm_complete_in_comments = 1 " Completion in comments
 let g:ycm_complete_in_strings = 1 " Completion in string
 let g:ycm_global_ycm_extra_conf = './.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
 
 " Tell flake8 to ignore lines above 80 chars long
 let g:syntastic_python_flake8_args='--ignore=E501'
@@ -296,3 +297,6 @@ command! FZFLines call fzf#run({
             \})
 
 nnoremap <leader>f :FZFLines<CR>
+
+let g:rustc_path = '/home/tomas/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc'
+let g:ycm_rust_src_path = '/home/tomas/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
