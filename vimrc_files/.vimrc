@@ -1,7 +1,7 @@
 " Note: Skip initialization for vim-tiny or vim-small.
 if !1 | finish | endif
 
-call plug#begin('~/.vim/plugged')
+call plug#begin("~/.vim/plugged")
 
 source $DOTFILE_DIR/vimrc_files/common_pluggins.vimrc
 
@@ -151,17 +151,6 @@ nmap <C-S-x> 80<S-\|>2<S-B>Eldwi<CR><ESC>
 nmap <leader>m :bp<CR>
 map <leader>. :bn<CR>
 
-" Syntastic lnext lprev
-nmap <leader>[ :lprev<CR>
-nmap <leader>] :lnext<CR>
-nmap <leader>s :SyntasticReset<CR>
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
 " Default html files to javascripthtml
 au BufRead *.html set filetype=html.javascript
 
@@ -200,9 +189,6 @@ let g:ycm_complete_in_strings = 1 " Completion in string
 let g:ycm_global_ycm_extra_conf = './.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
 let g:ycm_confirm_extra_conf = 0
 
-" Tell flake8 to ignore lines above 80 chars long
-let g:syntastic_python_flake8_args='--ignore=E501'
-
 " Filebeagle
 let g:filebeagle_suppress_keymaps=1
 map <silent> -  <Plug>FileBeagleOpenCurrentWorkingDir
@@ -233,46 +219,6 @@ function SetRubyOptions()
     set softtabstop=2
 endfunction
 
-" Flake8 python version hack
-function! Setup_flake8()
-
-    let g:pversion=strpart(split(system("python --version 2>&1"))[1], 0, 1)
-
-    if g:pversion == 2
-        let output=system("/usr/bin/python2 -m flake8 -h")
-        if !v:shell_error
-            let g:syntastic_python_flake8_exe="/usr/bin/python2 -m flake8"
-            return
-        endif
-    elseif g:pversion == 3
-        let output=system("/usr/bin/python3 -m flake8 -h")
-        if !v:shell_error
-            let g:syntastic_python_flake8_exe="/usr/bin/python3 -m flake8"
-            return
-        endif
-    endif
-
-    let output=system("echo -n $(which python)" . " -m flake8 -h")
-    if v:shell_error
-        let g:syntastic_python_flake8_exe=system("echo -n $(which python)" . " -m flake8")
-        return
-    endif
-
-    let output=system("which flake8")
-    if !v:shell_error
-        let g:syntastic_python_flake8_exe="flake8"
-        return
-    endif
-
-    let output=system("echo -n $(which python)" . " -m pyflakes -h")
-    if !v:shell_error
-        let g:syntastic_python_flake8_exe=system("echo -n $(which python)" . " -m pyflakes")
-        return
-    endif
-endfunction
-call Setup_flake8()
-
-
 " FZF buffer search function
 function! s:line_handler(l)
     let keys = split(a:l, ':\t')
@@ -300,3 +246,30 @@ nnoremap <leader>f :FZFLines<CR>
 
 let g:rustc_path = '/home/tomas/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc'
 let g:ycm_rust_src_path = '/home/tomas/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+
+function! Setup_flake8()
+    let g:pversion=strpart(split(system("python --version 2>&1"))[1], 0, 1)
+    if g:pversion == 2
+        let g:ale_python_flake8_executable = 'python'
+    elseif g:pversion == 3
+        let g:ale_python_flake8_executable = 'python3'
+    endif
+endfunction
+
+function! Toggle_flake8_python_executable()
+    if g:ale_python_flake8_executable == 'python3'
+        echom "Setting flake 8 executable to python"
+        let g:ale_python_flake8_executable = 'python'
+    elseif g:ale_python_flake8_executable == 'python'
+        echom "Setting flake 8 executable to python3"
+        let g:ale_python_flake8_executable = 'python3'
+    endif
+endfunction
+
+autocmd FileType python nmap <leader><leader>p :call Toggle_flake8_python_executable()<CR>
+
+call Setup_flake8()
+let g:ale_python_flake8_options = '-m flake8 --ignore=E501'
+let g:ale_linters = {
+\   'cpp': [''],
+\}
