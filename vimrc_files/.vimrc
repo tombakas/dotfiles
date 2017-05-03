@@ -264,6 +264,7 @@ function! Toggle_flake8_python_executable()
         echom "Setting flake 8 executable to python3"
         let g:ale_python_flake8_executable = 'python3'
     endif
+    ALELint
 endfunction
 
 autocmd FileType python nmap <leader><leader>p :call Toggle_flake8_python_executable()<CR>
