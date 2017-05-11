@@ -161,6 +161,7 @@ au BufRead *.html set filetype=html.javascript
 " fzf
 nmap <leader>t :FZF<CR>
 nmap <leader>be :Buffers<CR>
+nmap <Up> :History<CR>
 
 " Fountain
 au BufRead,BufNewFile *.fountain setfiletype fountain
