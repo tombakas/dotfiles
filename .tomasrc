@@ -1,8 +1,4 @@
-export FZF_DEFAULT_COMMAND='ag -g ""'
-
-# vim as manpager
-#export MANPAGER="env MAN_PN=1 vim -M +MANPAGER -"
-
+# Set nvim or vim as default editor
 if which nvim >/dev/null 2>&1
 then
     export EDITOR=nvim
@@ -10,40 +6,36 @@ else
     export EDITOR=vim
 fi
 
+# Exports
+# -------------------------------------------------------------------------------
+export DOTFILE_DIR=$(dirname "$(readlink -f ~/.tomasrc)")
+export PATH=$PATH:$HOME/local/bin:$DOTFILE_DIR/utils
+# -------------------------------------------------------------------------------
+
+# Aliases
+# -------------------------------------------------------------------------------
 alias rm="rm -v"
 alias tmux="tmux -2"
 alias redshiftvno="redshift -l 54.686237:25.285560"
 
-export DOTFILE_DIR=$(dirname "$(readlink -f ~/.tomasrc)")
-export PATH=$PATH:$HOME/local/bin:$DOTFILE_DIR/utils
+alias gs='git status '
+alias ga='git add '
+alias gb='git branch '
+alias gc='git commit'
+alias gd='git diff'
+alias go='git checkout '
+alias gk='gitk --all&'
+alias gx='gitx --all'
+# -------------------------------------------------------------------------------
 
-function mkenv.sh {
-    echo -e "Looking for \e[1mbin/activate\e[0m"
+# FZF config
+export FZF_DEFAULT_OPTS='--color fg:242,bg:233,hl:65,fg+:15,bg+:234,hl+:108
+                         --color info:108,prompt:109,spinner:108,pointer:168,marker:168'
+export FZF_DEFAULT_COMMAND='ag -g ""'
+# --------------------------------------------------------------------------------
 
-    activate_dir=$(find . -maxdepth 3 -wholename '*/bin/activate' | cut -d "/" -f 2-)
-
-    if [ -z "$1" ]
-    then
-        venv_name=venv
-    else
-        venv_name=$1
-    fi
-
-    if [ "$activate_dir" != "" ]
-    then
-        echo -e "Found at \e[1m$activate_dir\e[0m"
-    else
-        echo -e "\e[1m\e[91mNothing found\e[0m"
-        return
-    fi
-
-    cat << EOF > ./env.sh
-DIR="\$( cd "\$( dirname "\${BASH_SOURCE[0]}"  )" && pwd  )"
-pushd \$DIR > /dev/null
-. "$activate_dir"
-popd > /dev/null
-
-export PS1="($venv_name)\${_OLD_VIRTUAL_PS1}"
-EOF
-    echo -e "\e[32m\e[1mDone\e[0m"
-}
+# Sourcing
+# -------------------------------------------------------------------------------
+. $DOTFILE_DIR/z.sh
+. $DOTFILE_DIR/custom_functions.sh
+# -------------------------------------------------------------------------------
