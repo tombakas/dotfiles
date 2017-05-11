@@ -21,9 +21,12 @@ autocmd BufReadPost *
             \ endif |
             \ endif
 
-set t_Co=256
-colo Mustang
 syntax enable
+if (has("termguicolors"))
+    set termguicolors
+endif
+colo onedark
+
 set number
 set foldmethod=indent
 set foldlevel=99
@@ -113,7 +116,8 @@ imap <C-d> <Plug>delimitMateS-BS
 imap <C-l> <Plug>delimitMateJumpMany
 
 "airline
-let g:airline_theme="powerlineish"
+let g:airline_theme='onedark'
+"let g:airline_theme="powerlineish"
 let g:airline_right_sep=''
 
 " emmet
