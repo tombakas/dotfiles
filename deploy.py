@@ -3,7 +3,6 @@
 from __future__ import print_function
 
 import argparse
-import sys
 import os
 
 from datetime import datetime as dt
@@ -21,14 +20,13 @@ def parse_arguments():
     parser.add_argument('-v', '--vim', default=False, action='store_true', help='Set up vim.')
     parser.add_argument('-b', '--bash', default=False, action='store_true', help='Set up bash dotfiles.')
     parser.add_argument('-n', '--nvim', default=False, action='store_true', help='Set up neovim.')
-    parser.add_argument('-m', '--mustang', default=False, action='store_true', help='Set up Mustang colorscheme.')
     parser.add_argument('--vimplug', default=False, action='store_true', help='Set up vimplug.')
     parser.add_argument(
         '-d',
         '--dotfiles',
         nargs="*",
         default=None,
-        help='Set up dotfiles([b]ash, [v]im, [n]eovim, [t]mux, [m]ustang). Defaults to all.')
+        help='Set up dotfiles([b]ash, [v]im, [n]eovim, [t]mux, [c]colors). Defaults to all.')
     parser.add_argument('-y', default=False, action='store_true', help='Yes to all prompts.')
     args = parser.parse_args()
 
@@ -56,6 +54,7 @@ def create_symlink(source, target):
     elif os.path.islink(full_target):
         print("Symlink ", end="")
         sexy_print.red("Symlink ", target, " is broken, unlinking... ")
+        os.unlink(full_target)
     else:
         directory_make(os.path.dirname(full_target))
 
@@ -109,6 +108,17 @@ def setup_bash():
     add_line_to_file(". ~/.git_aliases", "~/.bashrc")
 
 
+def setup_colors():
+    sexy_print.header("Setting up colors")
+    for root, dirs, files in os.walk(os.path.join(BASE_DIR, "vimrc_files", "colors")):
+        if len(files):
+            for file in files:
+                if "colors/vim" in root:
+                    setup_dotfile(os.path.join(root, file), os.path.join("~/.vim/colors/", file))
+                elif "colors/airline" in root:
+                    setup_dotfile(os.path.join(root, file), os.path.join("~/.vim/plugged/vim-airline-themes/autoload/airline/themes/", file))
+
+
 def directory_make(target):
     if not os.path.isdir(os.path.expanduser(target)):
         sexy_print.yellow("Directory ", target, " does not exist, creating...")
@@ -123,7 +133,6 @@ if __name__ == "__main__":
     NVIM = arguments.nvim
     BASH = arguments.bash
     VIMPLUG = arguments.vimplug
-    MUSTANG = arguments.mustang
     DOTFILES = arguments.dotfiles
 
     if DOTFILES is not None:
@@ -135,8 +144,8 @@ if __name__ == "__main__":
             setup_dotfile(os.path.join(BASE_DIR, "vimrc_files/htmldjango.vim"), "~/.vim/indent/htmldjango.vim")
         if "n" in DOTFILES:
             setup_dotfile(os.path.join(BASE_DIR, "vimrc_files/init.vim"), "~/.config/nvim/init.vim")
-        if "m" in DOTFILES:
-            setup_dotfile(os.path.join(BASE_DIR, "vimrc_files/Mustang.vim"), "~/.vim/colors/Mustang.vim")
+        if "c" in DOTFILES:
+            setup_colors()
         if "b" in DOTFILES:
             setup_bash()
 
