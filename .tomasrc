@@ -9,7 +9,7 @@ fi
 # Exports
 # -------------------------------------------------------------------------------
 export DOTFILE_DIR=$(dirname "$(readlink -f ~/.tomasrc)")
-export PATH=$PATH:$HOME/local/bin:$DOTFILE_DIR/utils
+export PATH=$HOME/local/bin:$DOTFILE_DIR/utils:$PATH
 # -------------------------------------------------------------------------------
 
 # Aliases
