@@ -285,3 +285,18 @@ let g:ale_python_flake8_options = '-m flake8 --ignore=E501'
 let g:ale_linters = {
 \   'cpp': [''],
 \}
+
+" toggle colors
+function! Toggle_scheme()
+    if g:colors_name == "onedark"
+        set background=light
+        colo PaperColor
+        AirlineTheme papercolor
+    else
+        set background=dark
+        colo onedark
+        AirlineTheme onedark
+    endif
+endfunction
+
+nmap <leader><leader>\ :call Toggle_scheme()<CR>
