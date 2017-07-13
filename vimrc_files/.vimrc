@@ -174,6 +174,7 @@ au BufRead,BufNewFile *.fountain setfiletype fountain
 
 " All html is djangohtml
 au BufNewFile,BufRead *.html set filetype=htmldjango
+au BufNewFile,BufRead *.html set shiftwidth=2
 
 " Ultisnips
 "let g:UltiSnipsExpandTrigger = "<nop>"
@@ -300,3 +301,4 @@ function! Toggle_scheme()
 endfunction
 
 nmap <leader><leader>\ :call Toggle_scheme()<CR>
+let g:airline#extensions#tabline#enabled = 1
