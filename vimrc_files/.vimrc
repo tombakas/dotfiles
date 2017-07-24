@@ -121,6 +121,7 @@ let g:jedi#smart_auto_mappings = 0
 "autopairs
 let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
+let g:AutoPairsMapCh = 0
 autocmd FileType html,htmldjango let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
 
 "airline
