@@ -44,6 +44,10 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2
+autocmd FileType json setlocal shiftwidth=2 tabstop=2
+
 set encoding=utf-8 fileencodings=.
 set scrolloff=3
 set autoindent
@@ -114,17 +118,16 @@ let g:jedi#popup_select_first = 0
 let g:jedi#show_call_signatures = 1
 let g:jedi#smart_auto_mappings = 0
 
-"delimitMate
-let delimitMate_expand_cr = 1
-let delimitMate_expand_space = 1
-imap <C-d> <Plug>delimitMateS-BS
-imap <C-l> <Plug>delimitMateJumpMany
+"autopairs
+let g:AutoPairsFlyMode = 0
+let g:AutoPairsShortcutBackInsert = '<M-b>'
+autocmd FileType html,htmldjango let g:AutoPairs = {'(':')', '[':']', '{':'}',"'":"'",'"':'"', '`':'`', '<':'>'}
 
 "airline
 let g:airline_theme='onedark'
-"let g:airline_theme="powerlineish"
 let g:airline_right_sep=''
 let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
 
 " emmet
 autocmd FileType html,htmldjango imap <C-h> <plug>(emmet-expand-abbr)
@@ -132,9 +135,8 @@ autocmd FileType html,htmldjango imap <C-j> <plug>(emmet-move-next)
 autocmd FileType html,htmldjango imap <C-k> <plug>(emmet-move-prev)
 
 " indent guide
-let g:indent_guides_auto_colors = 0
-hi IndentGuidesOdd ctermbg=black
-hi IndentGuidesEven ctermbg=darkgrey
+let g:indent_guides_auto_colors = 1
+let g:indent_guides_tab_guides = 1
 
 " argument suggestions
 set completeopt+=preview
@@ -174,7 +176,6 @@ au BufRead,BufNewFile *.fountain setfiletype fountain
 
 " All html is djangohtml
 au BufNewFile,BufRead *.html set filetype=htmldjango
-au BufNewFile,BufRead *.html set shiftwidth=2
 
 " Ultisnips
 "let g:UltiSnipsExpandTrigger = "<nop>"
@@ -262,19 +263,21 @@ let g:ycm_rust_src_path = '/home/tomas/.rustup/toolchains/stable-x86_64-unknown-
 function! Setup_flake8()
     let g:pversion=strpart(split(system("python --version 2>&1"))[1], 0, 1)
     if g:pversion == 2
-        let g:ale_python_flake8_executable = 'python'
+        let g:ale_python_flake8_executable = '/usr/bin/python'
     elseif g:pversion == 3
-        let g:ale_python_flake8_executable = 'python3'
+        let g:ale_python_flake8_executable = '/usr/bin/python3'
     endif
 endfunction
 
 function! Toggle_flake8_python_executable()
-    if g:ale_python_flake8_executable == 'python3'
+    if g:ale_python_flake8_executable == '/usr/bin/python3'
         echom "Setting flake 8 executable to python"
-        let g:ale_python_flake8_executable = 'python'
-    elseif g:ale_python_flake8_executable == 'python'
+        let g:ale_python_flake8_executable = '/usr/bin/python'
+        let g:python_host_prog = '/usr/bin/python'
+    elseif g:ale_python_flake8_executable == '/usr/bin/python'
         echom "Setting flake 8 executable to python3"
-        let g:ale_python_flake8_executable = 'python3'
+        let g:ale_python_flake8_executable = '/usr/bin/python3'
+        let g:python_host_prog = '/usr/bin/python3'
     endif
     ALELint
 endfunction
@@ -287,7 +290,9 @@ let g:ale_linters = {
 \   'cpp': [''],
 \}
 
-" toggle colors
+let g:ycm_server_python_interpreter = '/usr/bin/python2'
+
+"toggle colors
 function! Toggle_scheme()
     if g:colors_name == "onedark"
         set background=light
@@ -301,4 +306,3 @@ function! Toggle_scheme()
 endfunction
 
 nmap <leader><leader>\ :call Toggle_scheme()<CR>
-let g:airline#extensions#tabline#enabled = 1

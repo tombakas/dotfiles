@@ -2,7 +2,7 @@ Plug 'tpope/vim-fugitive' " Git wrapper for vim
 Plug 'Lokaltog/vim-easymotion' " Fast way to get places; trigger with <leader><leader>w
 Plug 'mattn/emmet-vim'
 Plug 'jeetsukumaran/vim-filebeagle' " Simple wrapper for netrw
-Plug 'Raimondi/delimitMate' " Auto add brackets
+Plug 'jiangmiao/auto-pairs' " Auto add brackets
 Plug 'w0rp/ale' " Syntax
 Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --racer-completer'} " YouCompleteMe
 Plug 'simnalamburt/vim-mundo' " Undo history
@@ -24,6 +24,7 @@ Plug 'tmhedberg/SimpylFold' " Python folding
 Plug 'wellle/targets.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'mkitt/tabline.vim'
 
 " Colors
 Plug 'NLKNguyen/papercolor-theme'
