@@ -306,3 +306,6 @@ function! Toggle_scheme()
 endfunction
 
 nmap <leader><leader>\ :call Toggle_scheme()<CR>
+
+let g:airline#extensions#tabline#enabled = 1
+let g:python_host_prog  = '/home/tomas/local/neovim_env/bin/python2'
