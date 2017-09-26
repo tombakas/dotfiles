@@ -133,9 +133,12 @@ if __name__ == "__main__":
     NVIM = arguments.nvim
     BASH = arguments.bash
     VIMPLUG = arguments.vimplug
-    DOTFILES = arguments.dotfiles
+    DOTFILES = "".join(arguments.dotfiles)
 
     if DOTFILES is not None:
+        # If no dotfiles specified, setup all dotfiles
+        if DOTFILES == "":
+            DOTFILES = "bcntv"
         if "t" in DOTFILES:
             setup_dotfile(os.path.join(BASE_DIR, ".tmux.conf"), "~/.tmux.conf")
         if "v" in DOTFILES:
