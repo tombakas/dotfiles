@@ -20,7 +20,7 @@ def parse_arguments():
     parser.add_argument('-v', '--vim', default=False, action='store_true', help='Set up vim.')
     parser.add_argument('-b', '--bash', default=False, action='store_true', help='Set up bash dotfiles.')
     parser.add_argument('-n', '--nvim', default=False, action='store_true', help='Set up neovim.')
-    parser.add_argument('--vimplug', default=False, action='store_true', help='Set up vimplug.')
+    parser.add_argument('--vimplug', help='Set up vimplug for vim/neovim provided as argument.')
     parser.add_argument(
         '-d',
         '--dotfiles',
@@ -33,12 +33,34 @@ def parse_arguments():
     return args
 
 
-def set_up_vimplug():
-    call(["curl", "-fLo", os.path.expanduser("~/.vim/autoload/plug.vim"), "--create-dirs", "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"])
+def clone_vimplug(target, source):
+    sexy_print.header("Setting up VimPlug")
+    sexy_print.green("Cloning VimPlug to {}\n".format(target))
+    call(["curl", "-fLo", os.path.expanduser(target), "--create-dirs", source])
+    sexy_print.green("\nDone")
+
+
+def set_up_vimplug(vim_type):
+    if vim_type == "vim":
+        clone_vimplug(
+            "~/.vim/autoload/plug.vim",
+            "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+        )
+
+    elif vim_type == "nvim" or vim_type == "neovim":
+        clone_vimplug(
+            "~/.local/share/nvim/site/autoload/plug.vim",
+            "https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+        )
+
+    else:
+        sexy_print.red("Unknown vim type supplied for vim_plug")
 
 
 def create_symlink(source, target):
     full_target = os.path.expanduser(target)
+    full_source = os.path.expanduser(source)
+
     now = dt.now().strftime("%Y%m%d_%H%M")
     new_name = full_target + "." + now + ".bak"
 
@@ -60,7 +82,7 @@ def create_symlink(source, target):
 
     print("Creating symlink to ", end="")
     sexy_print.green(full_target)
-    os.symlink(os.path.join(BASE_DIR, source), full_target)
+    os.symlink(full_source, full_target)
     print()
 
 
@@ -133,9 +155,11 @@ if __name__ == "__main__":
     NVIM = arguments.nvim
     BASH = arguments.bash
     VIMPLUG = arguments.vimplug
-    DOTFILES = "".join(arguments.dotfiles)
+    DOTFILES = arguments.dotfiles
 
     if DOTFILES is not None:
+        DOTFILES = "".join(DOTFILES)
+
         # If no dotfiles specified, setup all dotfiles
         if DOTFILES == "":
             DOTFILES = "bcntv"
@@ -147,10 +171,13 @@ if __name__ == "__main__":
             setup_dotfile(os.path.join(BASE_DIR, "vimrc_files/htmldjango.vim"), "~/.vim/indent/htmldjango.vim")
         if "n" in DOTFILES:
             setup_dotfile(os.path.join(BASE_DIR, "vimrc_files/init.vim"), "~/.config/nvim/init.vim")
+            setup_dotfile("~/.vim/colors", "~/.config/nvim/colors")
+            setup_dotfile("~/.vim/plugged", "~/.config/nvim/plugged")
+            setup_dotfile("~/.vim/indent", "~/.config/nvim/indent")
         if "c" in DOTFILES:
             setup_colors()
         if "b" in DOTFILES:
             setup_bash()
 
     if VIMPLUG:
-        set_up_vimplug()
+        set_up_vimplug(VIMPLUG)
