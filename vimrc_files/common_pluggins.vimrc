@@ -4,7 +4,6 @@ Plug 'mattn/emmet-vim'
 Plug 'jeetsukumaran/vim-filebeagle' " Simple wrapper for netrw
 Plug 'jiangmiao/auto-pairs' " Auto add brackets
 Plug 'w0rp/ale' " Syntax
-Plug 'Valloric/YouCompleteMe', {'do': './install.py --clang-completer --racer-completer'} " YouCompleteMe
 Plug 'simnalamburt/vim-mundo' " Undo history
 Plug 'scrooloose/nerdcommenter' " Comment wrapper
 Plug 'tpope/vim-repeat' " Use . to repeat more complicated commands
@@ -12,6 +11,8 @@ Plug 'SirVer/ultisnips' " Snippets for code completion
 Plug 'honza/vim-snippets' " Snippet library
 Plug 'majutsushi/tagbar' " Tag browser
 Plug 'tpope/vim-surround' " Wrapper for surrounding objects with quotes, tags, etc.
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-jedi'
 
 " Vim utility functions
 Plug 'vim-scripts/tlib'

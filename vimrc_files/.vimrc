@@ -194,15 +194,6 @@ let g:UltiSnipsExpandTrigger='<C-]>' "Trigger snippet
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
-" YouCompleteMe settings
-let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
-let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
-let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
-let g:ycm_complete_in_comments = 1 " Completion in comments
-let g:ycm_complete_in_strings = 1 " Completion in string
-let g:ycm_global_ycm_extra_conf = './.vim/plugged/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
-let g:ycm_confirm_extra_conf = 0
-
 " Filebeagle
 let g:filebeagle_suppress_keymaps=1
 map <silent> -  <Plug>FileBeagleOpenCurrentWorkingDir
@@ -261,37 +252,8 @@ nnoremap <leader>f :FZFLines<CR>
 let g:rustc_path = '/home/tomas/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc'
 let g:ycm_rust_src_path = '/home/tomas/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 
-function! Setup_flake8()
-    let g:pversion=strpart(split(system("python --version 2>&1"))[1], 0, 1)
-    if g:pversion == 2
-        let g:ale_python_flake8_executable = '/usr/bin/python'
-    elseif g:pversion == 3
-        let g:ale_python_flake8_executable = '/usr/bin/python3'
-    endif
-endfunction
-
-function! Toggle_flake8_python_executable()
-    if g:ale_python_flake8_executable == '/usr/bin/python3'
-        echom "Setting flake 8 executable to python"
-        let g:ale_python_flake8_executable = '/usr/bin/python'
-        let g:python_host_prog = '/usr/bin/python'
-    elseif g:ale_python_flake8_executable == '/usr/bin/python'
-        echom "Setting flake 8 executable to python3"
-        let g:ale_python_flake8_executable = '/usr/bin/python3'
-        let g:python_host_prog = '/usr/bin/python3'
-    endif
-    ALELint
-endfunction
-
-autocmd FileType python nmap <leader><leader>p :call Toggle_flake8_python_executable()<CR>
-
-call Setup_flake8()
-let g:ale_python_flake8_options = '-m flake8 --ignore=E501'
-let g:ale_linters = {
-\   'cpp': [''],
-\}
-
-let g:ycm_server_python_interpreter = '/usr/bin/python2'
+let g:python_host_prog  = '/home/tomas/local/neovim_envs/neovim2/bin/python'
+let g:python3_host_prog  = '/home/tomas/local/neovim_envs/neovim3/bin/python'
 
 "toggle colors
 function! Toggle_scheme()
@@ -309,4 +271,9 @@ endfunction
 nmap <leader><leader>\ :call Toggle_scheme()<CR>
 
 let g:airline#extensions#tabline#enabled = 1
-let g:python_host_prog  = '/home/tomas/local/neovim_env/bin/python2'
+
+" Deoplete
+call deoplete#enable()
+call deoplete#custom#set('ultisnips', 'matchers', ['matcher_full_fuzzy'])
+inoremap <expr><tab> pumvisible() ? "\<c-p>" : "\<S-tab>"
+inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
