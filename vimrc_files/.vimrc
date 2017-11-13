@@ -255,6 +255,22 @@ let g:ycm_rust_src_path = '/home/tomas/.rustup/toolchains/stable-x86_64-unknown-
 let g:python_host_prog  = '/home/tomas/local/neovim_envs/neovim2/bin/python'
 let g:python3_host_prog  = '/home/tomas/local/neovim_envs/neovim3/bin/python'
 
+let g:ale_python_flake8_executable = g:python3_host_prog
+let g:ale_python_flake8_options = "-m flake8 --ignore=E501"
+
+function! Toggle_flake8_python_executable()
+    if g:ale_python_flake8_executable == g:python3_host_prog
+        echom "Setting flake 8 executable to python"
+        let g:ale_python_flake8_executable = g:python_host_prog
+    elseif g:ale_python_flake8_executable == g:python_host_prog
+        echom "Setting flake 8 executable to python3"
+        let g:ale_python_flake8_executable = g:python3_host_prog
+    endif
+    ALELint
+endfunction
+
+autocmd FileType python nmap <leader><leader>p :call Toggle_flake8_python_executable()<CR>
+
 "toggle colors
 function! Toggle_scheme()
     if g:colors_name == "onedark"
@@ -273,7 +289,7 @@ nmap <leader><leader>\ :call Toggle_scheme()<CR>
 let g:airline#extensions#tabline#enabled = 1
 
 " Deoplete
-call deoplete#enable()
+let g:deoplete#enable_at_startup = 1
 call deoplete#custom#set('ultisnips', 'matchers', ['matcher_full_fuzzy'])
 inoremap <expr><tab> pumvisible() ? "\<c-p>" : "\<S-tab>"
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
