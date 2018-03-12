@@ -39,3 +39,4 @@ Plug 'hynek/vim-python-pep8-indent' " pep8 indentation
 Plug 'vim-scripts/fountain.vim' " Fountain syntax highlighting
 Plug 'Valloric/MatchTagAlways' " Highlighting matching XML tags
 Plug 'rust-lang/rust.vim'
+Plug 'leafgarland/typescript-vim' " Typescript syntax
