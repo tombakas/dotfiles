@@ -48,3 +48,18 @@ transfer() {
     echo
     'rm' -f $tmpfile
 }
+
+rst_permissions() {
+    find . -type f -print0 | xargs -0 chmod -v 644
+    find . -type d -print0 | xargs -0 chmod -v 755
+}
+
+night_light() {
+    LIGHT_STATUS=$(gsettings get org.gnome.settings-daemon.plugins.color night-light-enabled)
+
+    if [[ $LIGHT_STATUS == "true" ]]; then
+        gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled false
+    else
+        gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+    fi
+}
