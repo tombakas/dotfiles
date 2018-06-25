@@ -184,6 +184,16 @@ map <leader>. :bn<CR>
 au BufRead *.html set filetype=html.javascript
 
 " fzf
+command! FZFLines call fzf#run({
+            \   'source':  <sid>buffer_lines(),
+            \   'sink':    function('<sid>line_handler'),
+            \   'options': '--extended --nth=3..',
+            \   'down':    '60%'
+            \})
+
+nnoremap <leader>f :FZFLines<CR>
+nnoremap <leader>l :BLines<CR>
+nnoremap <leader>a :Ag
 nmap <leader>t :FZF<CR>
 nmap <leader>be :Buffers<CR>
 nmap <Up> :History<CR>
