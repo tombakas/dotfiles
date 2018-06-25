@@ -40,3 +40,4 @@ Plug 'vim-scripts/fountain.vim' " Fountain syntax highlighting
 Plug 'Valloric/MatchTagAlways' " Highlighting matching XML tags
 Plug 'rust-lang/rust.vim'
 Plug 'leafgarland/typescript-vim' " Typescript syntax
+Plug 'carlitux/deoplete-ternjs' " Javascript completion

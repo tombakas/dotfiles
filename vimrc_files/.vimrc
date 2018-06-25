@@ -266,20 +266,13 @@ function! s:buffer_lines()
     return res
 endfunction
 
-command! FZFLines call fzf#run({
-            \   'source':  <sid>buffer_lines(),
-            \   'sink':    function('<sid>line_handler'),
-            \   'options': '--extended --nth=3..',
-            \   'down':    '60%'
-            \})
-
-nnoremap <leader>f :FZFLines<CR>
-
 let g:rustc_path = '/home/tomas/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc'
 let g:ycm_rust_src_path = '/home/tomas/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 
 let g:python_host_prog  = '/home/tomas/local/neovim_envs/neovim2/bin/python'
 let g:python3_host_prog  = '/home/tomas/local/neovim_envs/neovim3/bin/python'
+
+let g:ale_linters = {'typescript': ['tslint', 'tsserver', 'typecheck']}
 
 let g:ale_python_flake8_executable = g:python3_host_prog
 let g:ale_python_flake8_options = "-m flake8 --ignore=E501"
