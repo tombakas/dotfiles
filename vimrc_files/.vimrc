@@ -101,6 +101,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Remove buffer, but keep split/window
+nnoremap <C-b>bd :bp\|bd #<CR>
+
 set noerrorbells " don't beep
 set novb
 set pastetoggle=<F2>
