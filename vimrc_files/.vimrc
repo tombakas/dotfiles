@@ -193,7 +193,7 @@ command! FZFLines call fzf#run({
 
 nnoremap <leader>f :FZFLines<CR>
 nnoremap <leader>l :BLines<CR>
-nnoremap <leader>a :Ag
+nnoremap <leader>a :Ag 
 nmap <leader>t :FZF<CR>
 nmap <leader>be :Buffers<CR>
 nmap <Up> :History<CR>
