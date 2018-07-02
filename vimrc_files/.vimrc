@@ -309,6 +309,6 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
-call deoplete#custom#set('ultisnips', 'matchers', ['matcher_full_fuzzy'])
+call deoplete#custom#source('ultisnips', 'matchers', ['matcher_full_fuzzy'])
 inoremap <expr><tab> pumvisible() ? "\<c-p>" : "\<S-tab>"
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
