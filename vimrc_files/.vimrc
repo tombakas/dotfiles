@@ -204,6 +204,11 @@ au BufRead,BufNewFile *.fountain setfiletype fountain
 " All html is djangohtml
 au BufNewFile,BufRead *.html set filetype=htmldjango
 
+" NERDCommenter
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDTrimTrailingWhitespace = 1
+
 " Ultisnips
 "let g:UltiSnipsExpandTrigger = "<nop>"
 let g:ulti_expand_or_jump_res = 0
