@@ -197,6 +197,7 @@ nnoremap <leader>a :Ag
 nmap <leader>t :FZF<CR>
 nmap <leader>be :Buffers<CR>
 nmap <Up> :History<CR>
+nmap <leader>g :GFiles?<CR>
 
 " Fountain
 au BufRead,BufNewFile *.fountain setfiletype fountain
