@@ -57,7 +57,6 @@ set showmode
 set showcmd
 set hidden
 set wildmenu
-set wildmode=list:longest
 set visualbell
 set ttyfast
 set ruler
