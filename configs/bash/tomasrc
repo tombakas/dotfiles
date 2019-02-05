@@ -21,14 +21,7 @@ alias rm="rm -v"
 alias tmux="tmux -2"
 alias redshiftvno="redshift -l 54.686237:25.285560"
 
-alias gs='git status '
-alias ga='git add '
-alias gb='git branch '
-alias gc='git commit'
-alias gd='git diff'
-alias go='git checkout '
-alias gk='gitk --all&'
-alias gx='gitx --all'
+. $DOTFILE_DIR/configs/bash/aliases.sh
 # -------------------------------------------------------------------------------
 
 # FZF config
