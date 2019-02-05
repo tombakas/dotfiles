@@ -284,11 +284,11 @@ function! s:buffer_lines()
     return res
 endfunction
 
-let g:rustc_path = '/home/tomas/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc'
-let g:ycm_rust_src_path = '/home/tomas/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+let g:rustc_path = $HOME . '/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc'
+let g:ycm_rust_src_path = $HOME . '/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 
-let g:python_host_prog  = '/home/tomas/local/neovim_envs/neovim2/bin/python'
-let g:python3_host_prog  = '/home/tomas/local/neovim_envs/neovim3/bin/python'
+let g:python_host_prog  = $HOME . '/local/neovim_envs/neovim2/bin/python'
+let g:python3_host_prog  = $HOME . '/local/neovim_envs/neovim3/bin/python'
 
 let g:ale_linters = {'typescript': ['tslint', 'tsserver', 'typecheck']}
 
@@ -333,7 +333,7 @@ inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><C-y> deoplete#close_popup()."\<ESC>"
 
 " Black
-let g:black_virtualenv = '/home/tomas/local/environments/black'
+let g:black_virtualenv = $HOME . '/local/environments/black'
 nmap <leader>b :Black<CR>
 
 autocmd BufWritePost * silent !/home/tomas/Documents/dotfiles/jw/reload.py %:p
