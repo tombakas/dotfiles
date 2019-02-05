@@ -3,7 +3,7 @@ if !1 | finish | endif
 
 call plug#begin("~/.vim/plugged")
 
-source $DOTFILE_DIR/vimrc_files/common_pluggins.vimrc
+source $DOTFILE_DIR/configs/vim/common_pluggins.vimrc
 
 call plug#end()
 

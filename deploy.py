@@ -132,7 +132,7 @@ def setup_bash():
 
 def setup_colors():
     sexy_print.header("Setting up colors")
-    for root, dirs, files in os.walk(os.path.join(BASE_DIR, "vimrc_files", "colors")):
+    for root, dirs, files in os.walk(os.path.join(BASE_DIR, "configs/vim", "colors")):
         if len(files):
             for file in files:
                 if "colors/vim" in root:
@@ -164,13 +164,13 @@ if __name__ == "__main__":
         if DOTFILES == "":
             DOTFILES = "bcntv"
         if "t" in DOTFILES:
-            setup_dotfile(os.path.join(BASE_DIR, ".tmux.conf"), "~/.tmux.conf")
+            setup_dotfile(os.path.join(BASE_DIR, "configs/tmux/tmux.conf"), "~/.tmux.conf")
         if "v" in DOTFILES:
-            setup_dotfile(os.path.join(BASE_DIR, "vimrc_files/.vimrc"), "~/.vimrc")
+            setup_dotfile(os.path.join(BASE_DIR, "configs/vim/vimrc"), "~/.vimrc")
             directory_make("~/.vim/indent")
-            setup_dotfile(os.path.join(BASE_DIR, "vimrc_files/htmldjango.vim"), "~/.vim/indent/htmldjango.vim")
+            setup_dotfile(os.path.join(BASE_DIR, "configs/vim/htmldjango.vim"), "~/.vim/indent/htmldjango.vim")
         if "n" in DOTFILES:
-            setup_dotfile(os.path.join(BASE_DIR, "vimrc_files/init.vim"), "~/.config/nvim/init.vim")
+            setup_dotfile(os.path.join(BASE_DIR, "configs/vim/init.vim"), "~/.config/nvim/init.vim")
             setup_dotfile("~/.vim/colors", "~/.config/nvim/colors")
             setup_dotfile("~/.vim/plugged", "~/.config/nvim/plugged")
             setup_dotfile("~/.vim/indent", "~/.config/nvim/indent")
