@@ -122,9 +122,9 @@ def add_line_to_file(line, file):
 
 
 def setup_bash():
-    setup_dotfile(os.path.join(BASE_DIR, ".git-prompt.sh"), "~/.git-prompt.sh")
-    setup_dotfile(os.path.join(BASE_DIR, ".git_aliases"), "~/.git_aliases")
-    setup_dotfile(os.path.join(BASE_DIR, ".tomasrc"), "~/.tomasrc")
+    setup_dotfile(os.path.join(BASE_DIR, "configs/git/git-prompt.sh"), "~/.git-prompt.sh")
+    setup_dotfile(os.path.join(BASE_DIR, "configs/git/git_aliases"), "~/.git_aliases")
+    setup_dotfile(os.path.join(BASE_DIR, "configs/bash/tomasrc"), "~/.tomasrc")
     add_line_to_file(". ~/.tomasrc", "~/.bashrc")
     add_line_to_file(". ~/.git-prompt.sh", "~/.bashrc")
     add_line_to_file(". ~/.git_aliases", "~/.bashrc")
