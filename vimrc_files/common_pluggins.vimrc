@@ -42,3 +42,4 @@ Plug 'rust-lang/rust.vim'
 Plug 'leafgarland/typescript-vim' " Typescript syntax
 Plug 'Quramy/tsuquyomi' " Typescript syntax
 Plug 'carlitux/deoplete-ternjs' " Javascript completion
+Plug 'ambv/black' " Opinionated Python formatting

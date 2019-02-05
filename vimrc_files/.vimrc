@@ -318,3 +318,9 @@ call deoplete#custom#source('ultisnips', 'matchers', ['matcher_full_fuzzy'])
 inoremap <expr><tab> pumvisible() ? "\<c-p>" : "\<S-tab>"
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><C-y> deoplete#close_popup()."\<ESC>"
+
+" Black
+let g:black_virtualenv = '/home/tomas/local/environments/black'
+nmap <leader>b :Black<CR>
+
+autocmd BufWritePost * silent !/home/tomas/Documents/dotfiles/jw/reload.py %:p
