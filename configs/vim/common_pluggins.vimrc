@@ -1,5 +1,4 @@
 Plug 'tpope/vim-fugitive' " Git wrapper for vim
-Plug 'Lokaltog/vim-easymotion' " Fast way to get places; trigger with <leader><leader>w
 Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango', 'css', 'xml']}
 Plug 'jeetsukumaran/vim-filebeagle' " Simple wrapper for netrw
 Plug 'jiangmiao/auto-pairs' " Auto add brackets
