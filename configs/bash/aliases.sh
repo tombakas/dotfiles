@@ -5,3 +5,7 @@ alias gc='git commit'
 alias gd='git diff'
 alias go='git checkout'
 alias gl='git log'
+
+alias dc='docker-compose'
+alias ds='docker ps'
+alias dss='docker ps --format "table {{.Names}}\t{{.Ports}}"'
