@@ -43,3 +43,4 @@ Plug 'Quramy/tsuquyomi' " Typescript syntax
 Plug 'carlitux/deoplete-ternjs' " Javascript completion
 Plug 'ambv/black' " Opinionated Python formatting
 Plug 'rhysd/vim-clang-format' " C style languages
+Plug 'sheerun/vim-polyglot' " Universal syntax coloring scheme management

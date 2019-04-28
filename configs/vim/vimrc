@@ -339,6 +339,8 @@ inoremap <expr><C-y> deoplete#close_popup()."\<ESC>"
 let g:black_virtualenv = $HOME . '/local/environments/black'
 nmap <leader>b :Black<CR>
 
+" Polyglot
+let g:python_highlight_file_headers_as_comments=1
 autocmd BufWritePost * silent !/home/tomas/Documents/dotfiles/jw/reload.py %:p
 
 let g:clang_format#style_options = {
