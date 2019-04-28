@@ -43,3 +43,4 @@ Plug 'leafgarland/typescript-vim' " Typescript syntax
 Plug 'Quramy/tsuquyomi' " Typescript syntax
 Plug 'carlitux/deoplete-ternjs' " Javascript completion
 Plug 'ambv/black' " Opinionated Python formatting
+Plug 'rhysd/vim-clang-format' " C style languages
