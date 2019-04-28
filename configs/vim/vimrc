@@ -100,6 +100,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Search for visually selected text
+vnoremap // y/<C-R>"<CR>
+
 " Remove buffer, but keep split/window
 nnoremap <C-b>bd :bp\|bd #<CR>
 
@@ -111,7 +114,7 @@ cmap w!! %!sudo tee > /dev/null %
 
 setlocal omnifunc=syntaxcomplete#Complete
 
-map <leader>gg :MundoToggle<CR>
+map <leader>bb :MundoToggle<CR>
 
 "taglist
 nnoremap <F3> :TagbarToggle<CR>
@@ -205,7 +208,7 @@ command! FZFLines call fzf#run({
 
 nnoremap <leader>f :FZFLines<CR>
 nnoremap <leader>l :BLines<CR>
-nnoremap <leader>a :Ag 
+nnoremap <leader>a :Ag
 nmap <leader>t :FZF<CR>
 nmap <leader>be :Buffers<CR>
 nmap <Up> :History<CR>
