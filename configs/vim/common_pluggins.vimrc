@@ -28,6 +28,8 @@ Plug 'mkitt/tabline.vim'
 
 " Colors
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'joshdick/onedark.vim'
+Plug 'mhartington/oceanic-next'
 
 " Language specific plugins
 Plug 'davidhalter/jedi-vim' " Wrapper for python syntax/autocompletion library Jedi
