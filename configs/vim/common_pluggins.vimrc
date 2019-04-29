@@ -27,9 +27,9 @@ Plug 'junegunn/fzf.vim'
 Plug 'mkitt/tabline.vim'
 
 " Colors
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'joshdick/onedark.vim'
 Plug 'mhartington/oceanic-next'
+Plug 'morhetz/gruvbox'
 
 " Language specific plugins
 Plug 'davidhalter/jedi-vim' " Wrapper for python syntax/autocompletion library Jedi
