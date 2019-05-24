@@ -25,7 +25,7 @@ syntax enable
 if (has("termguicolors"))
     set termguicolors
 endif
-colo onedark
+colo OceanicNext
 
 if &term =~# '^screen'
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -208,7 +208,7 @@ command! FZFLines call fzf#run({
 
 nnoremap <leader>f :FZFLines<CR>
 nnoremap <leader>l :BLines<CR>
-nnoremap <leader>a :Ag
+nnoremap <leader>a :Ag 
 nmap <leader>t :FZF<CR>
 nmap <leader>be :Buffers<CR>
 nmap <Up> :History<CR>
@@ -219,11 +219,6 @@ au BufRead,BufNewFile *.fountain setfiletype fountain
 
 " All html is djangohtml
 au BufNewFile,BufRead *.html set filetype=htmldjango
-
-" NERDCommenter
-let g:NERDSpaceDelims = 1
-let g:NERDCompactSexyComs = 1
-let g:NERDTrimTrailingWhitespace = 1
 
 " Ultisnips
 "let g:UltiSnipsExpandTrigger = "<nop>"
@@ -293,7 +288,14 @@ let g:ycm_rust_src_path = $HOME . '/.rustup/toolchains/stable-x86_64-unknown-lin
 let g:python_host_prog  = $HOME . '/local/neovim_envs/neovim2/bin/python'
 let g:python3_host_prog  = $HOME . '/local/neovim_envs/neovim3/bin/python'
 
-let g:ale_linters = {'typescript': ['tslint', 'tsserver', 'typecheck']}
+let g:ale_linters = {
+            \   'typescript': ['tslint', 'tsserver', 'typecheck'],
+            \   'python': ['pyflakes', 'pylint']
+            \}
+
+
+let g:ale_python_pyflakes_executable = "/home/tomas/local/neovim_envs/neovim3/bin/pyflakes"
+let g:ale_python_pylint_executable = "/home/tomas/local/neovim_envs/neovim3/bin/pylint"
 
 let g:ale_python_flake8_executable = g:python3_host_prog
 let g:ale_python_flake8_options = "-m flake8 --ignore=E501"
@@ -341,6 +343,8 @@ nmap <leader>b :Black<CR>
 
 " Polyglot
 let g:python_highlight_file_headers_as_comments=1
+
+" JW reload
 autocmd BufWritePost * silent !/home/tomas/Documents/dotfiles/jw/reload.py %:p
 
 let g:clang_format#style_options = {
