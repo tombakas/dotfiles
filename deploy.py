@@ -137,8 +137,6 @@ def setup_colors():
             for file in files:
                 if "colors/vim" in root:
                     setup_dotfile(os.path.join(root, file), os.path.join("~/.vim/colors/", file))
-                elif "colors/airline" in root:
-                    setup_dotfile(os.path.join(root, file), os.path.join("~/.vim/plugged/vim-airline-themes/autoload/airline/themes/", file))
 
 
 def directory_make(target):
