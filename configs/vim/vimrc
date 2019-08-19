@@ -1,48 +1,15 @@
 " Note: Skip initialization for vim-tiny or vim-small.
 if !1 | finish | endif
 
+let mapleader = ","
+
 call plug#begin("~/.vim/plugged")
-
 source $DOTFILE_DIR/configs/vim/common_pluggins.vimrc
-
 call plug#end()
 
-filetype plugin indent on
-
-set ai " auto indentingGc
-set history=100 " keep 100 lines of history
-set hlsearch " highlight the last searched term
-
-" When editing a file, always jump to the last cursor position
-autocmd BufReadPost *
-            \ if ! exists("g:leave_my_cursor_position_alone") |
-            \ if line("'\"") > 0 && line ("'\"") <= line("$") |
-            \ exe "normal g'\"" |
-            \ endif |
-            \ endif
-
-syntax enable
-if (has("termguicolors"))
-    set termguicolors
-endif
-colo OceanicNext
-
-if &term =~# '^screen'
-    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
-
-set number
-set foldmethod=indent
-set foldlevel=99
-" remap folding
-nnoremap <space> za
-vnoremap <space> zf
-
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
-set expandtab
+source $DOTFILE_DIR/configs/vim/plug_configs/utility_functions.vim
+source $DOTFILE_DIR/configs/vim/plug_configs/common_config.vim
+source $DOTFILE_DIR/configs/vim/plug_configs/common_mappings.vim
 
 autocmd FileType html setlocal shiftwidth=2 tabstop=2
 autocmd FileType htmldjango setlocal shiftwidth=2 tabstop=2
@@ -50,70 +17,13 @@ autocmd FileType json,yaml setlocal shiftwidth=2 tabstop=2
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
 autocmd FileType css,scss,less,typescript,cpp,hpp setlocal shiftwidth=2 tabstop=2
 
-set encoding=utf-8 fileencodings=.
-set scrolloff=3
-set autoindent
-set showmode
-set showcmd
-set hidden
-set wildmenu
-set visualbell
-set ttyfast
-set ruler
-set backspace=indent,eol,start
-set backspace=2
-set laststatus=2
-set undofile " Save undo's after file closes
-set undodir=$HOME/.vim/undo " where to save undo histories
-set undolevels=1000 " How many undos
-set undoreload=10000 " number of lines to save for undo
-set wildignorecase
+" Indentation for yaml
+au BufRead *.yml call setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
-nnoremap / /\v
-vnoremap / /\v
-let mapleader = ","
-set ignorecase
-set smartcase
-set incsearch
-set showmatch
-set hlsearch
-nnoremap <leader><space> :noh<cr>
-nnoremap <tab> %
-vnoremap <tab> %
-set wrap
-set textwidth=79
-set formatoptions=qrn1
+" All html is djangohtml
+au BufNewFile,BufRead *.html set filetype=htmldjango
 
-nnoremap j gj
-nnoremap k gk
-
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
-
-imap jj <ESC>
-
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-nnoremap <leader>w <C-w>v<C-w>l
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
-
-" Search for visually selected text
-vnoremap // y/<C-R>"<CR>
-
-" Remove buffer, but keep split/window
-nnoremap <C-b>bd :bp\|bd #<CR>
-
-set noerrorbells " don't beep
-set novb
-set pastetoggle=<F2>
-
-cmap w!! %!sudo tee > /dev/null %
-
-setlocal omnifunc=syntaxcomplete#Complete
-
+" mundo
 map <leader>bb :MundoToggle<CR>
 
 "taglist
@@ -131,6 +41,12 @@ let g:tagbar_type_yaml = {
                 \ 'd:definition:1:0',
             \ ],
             \ }
+let g:tagbar_type_javascript = {
+      \ 'ctagstype': 'javascript',
+      \ 'kinds': [
+          \ 'f:functions',
+          \ 'c:constants',
+      \ ]}
 
 "jedi
 let g:jedi#popup_on_dot = 0
@@ -179,18 +95,6 @@ set completeopt+=preview
 " simply fold
 let g:SimpylFold_docstring_preview = 1
 
-" Show syntax highlighting groups for word under cursor
-nmap <C-S-P> :call <SID>SynStack()<CR>
-function! <SID>SynStack()
-    if !exists("*synstack")
-        return
-    endif
-    echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-
-" Shorten lines above 80 characters sensibly
-nmap <C-S-x> 80<S-\|>2<S-B>Eldwi<CR><ESC>
-
 " Next and previous buffer mappigns
 nmap <leader>m :bp<CR>
 map <leader>. :bn<CR>
@@ -217,9 +121,6 @@ nmap <leader>g :GFiles?<CR>
 " Fountain
 au BufRead,BufNewFile *.fountain setfiletype fountain
 
-" All html is djangohtml
-au BufNewFile,BufRead *.html set filetype=htmldjango
-
 " Ultisnips
 "let g:UltiSnipsExpandTrigger = "<nop>"
 let g:ulti_expand_or_jump_res = 0
@@ -236,35 +137,8 @@ let g:UltiSnipsExpandTrigger='<C-]>' "Trigger snippet
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
-" Filebeagle
-let g:filebeagle_suppress_keymaps=1
-map <silent> -  <Plug>FileBeagleOpenCurrentWorkingDir
-
-" Zoom / Restore window.
-function! s:ZoomToggle() abort
-    if exists('t:zoomed') && t:zoomed
-        execute t:zoom_winrestcmd
-        let t:zoomed = 0
-    else
-        let t:zoom_winrestcmd = winrestcmd()
-        resize
-        vertical resize
-        let t:zoomed = 1
-    endif
-endfunction
-command! ZoomToggle call s:ZoomToggle()
-nnoremap <leader><leader>z :ZoomToggle<CR>
-
 " Python fold method
 au FileType python set foldmethod=expr
-
-" Indentation for yaml
-au BufRead *.yml call SetRubyOptions()
-function SetRubyOptions()
-    set shiftwidth=2
-    set tabstop=2
-    set softtabstop=2
-endfunction
 
 " FZF buffer search function
 function! s:line_handler(l)
@@ -289,8 +163,8 @@ let g:python_host_prog  = $HOME . '/local/neovim_envs/neovim2/bin/python'
 let g:python3_host_prog  = $HOME . '/local/neovim_envs/neovim3/bin/python'
 
 let g:ale_linters = {
-            \   'typescript': ['tslint', 'tsserver', 'typecheck'],
-            \   'python': ['pyflakes', 'pylint']
+            \   'typescript': ['tslint', 'tsserver', 'eslint'],
+            \   'python': ['flake8']
             \}
 
 
@@ -299,6 +173,9 @@ let g:ale_python_pylint_executable = "/home/tomas/local/neovim_envs/neovim3/bin/
 
 let g:ale_python_flake8_executable = g:python3_host_prog
 let g:ale_python_flake8_options = "-m flake8 --ignore=E501"
+
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 1
 
 function! Toggle_flake8_python_executable()
     if g:ale_python_flake8_executable == g:python3_host_prog
@@ -313,29 +190,15 @@ endfunction
 
 autocmd FileType python nmap <leader><leader>p :call Toggle_flake8_python_executable()<CR>
 
-"toggle colors
-function! Toggle_scheme()
-    if g:colors_name == "onedark"
-        set background=light
-        colo PaperColor
-        AirlineTheme papercolor
-    else
-        set background=dark
-        colo onedark
-        AirlineTheme onedark
-    endif
-endfunction
-
-nmap <leader><leader>\ :call Toggle_scheme()<CR>
-
 let g:airline#extensions#tabline#enabled = 1
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
-call deoplete#custom#source('ultisnips', 'matchers', ['matcher_full_fuzzy'])
 inoremap <expr><tab> pumvisible() ? "\<c-p>" : "\<S-tab>"
 inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 inoremap <expr><C-y> deoplete#close_popup()."\<ESC>"
+
+call deoplete#custom#source('ultisnips', 'matchers', ['matcher_full_fuzzy'])
 
 " Black
 let g:black_virtualenv = $HOME . '/local/environments/black'
@@ -347,6 +210,7 @@ let g:python_highlight_file_headers_as_comments=1
 " JW reload
 autocmd BufWritePost * silent !/home/tomas/Documents/dotfiles/jw/reload.py %:p
 
+" clang
 let g:clang_format#style_options = {
             \ "AccessModifierOffset" : -1,
             \ "AllowShortIfStatementsOnASingleLine" : "true",
@@ -362,3 +226,10 @@ autocmd FileType c,cpp,objc map <buffer><Leader>x <Plug>(operator-clang-format)
 nmap <Leader>C :ClangFormatAutoToggle<CR>
 
 let g:python_highlight_file_headers_as_comments=1
+
+" vimtex
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
