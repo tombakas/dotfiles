@@ -30,15 +30,13 @@ Plug 'joshdick/onedark.vim'
 " Language specific plugins
 Plug 'davidhalter/jedi-vim' " Wrapper for python syntax/autocompletion library Jedi
 Plug 'othree/html5.vim' " HTML5 syntax highliting and indentation
-Plug 'cakebaker/scss-syntax.vim' " SCSS syntax highliting
-Plug 'pangloss/vim-javascript' " Javascript syntax
 Plug 'hynek/vim-python-pep8-indent' " pep8 indentation
 Plug 'vim-scripts/fountain.vim' " Fountain syntax highlighting
 Plug 'Valloric/MatchTagAlways' " Highlighting matching XML tags
 Plug 'rust-lang/rust.vim'
 Plug 'leafgarland/typescript-vim' " Typescript syntax
-Plug 'Quramy/tsuquyomi' " Typescript syntax
 Plug 'carlitux/deoplete-ternjs' " Javascript completion
 Plug 'ambv/black' " Opinionated Python formatting
 Plug 'rhysd/vim-clang-format' " C style languages
 Plug 'sheerun/vim-polyglot' " Universal syntax coloring scheme management
+Plug 'lervag/vimtex'
