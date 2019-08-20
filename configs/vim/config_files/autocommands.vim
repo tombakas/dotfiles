@@ -13,5 +13,5 @@ au BufNewFile,BufRead *.html set filetype=htmldjango
 " Fountain
 au BufRead,BufNewFile *.fountain setfiletype fountain
 
-" Python fold method
+" Python
 au FileType python set foldmethod=expr
