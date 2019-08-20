@@ -7,8 +7,6 @@ call plug#begin("~/.vim/plugged")
 source $DOTFILE_DIR/configs/vim/common_pluggins.vimrc
 call plug#end()
 
-let vim_config_dir = "plug_configs"
-
 source $VIM_CONFIG_DIR/utility_functions.vim
 source $VIM_CONFIG_DIR/common_config.vim
 source $VIM_CONFIG_DIR/mappings.vim

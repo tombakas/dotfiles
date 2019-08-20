@@ -3,8 +3,8 @@ let g:ale_linters = {
             \   'python': ['flake8']
             \}
 
-let g:ale_python_pyflakes_executable = "/home/tomas/local/neovim_envs/neovim3/bin/pyflakes"
-let g:ale_python_pylint_executable = "/home/tomas/local/neovim_envs/neovim3/bin/pylint"
+let g:ale_python_pyflakes_executable = $HOME . "/local/neovim_envs/neovim3/bin/pyflakes"
+let g:ale_python_pylint_executable = $HOME . "/local/neovim_envs/neovim3/bin/pylint"
 
 let g:ale_python_flake8_executable = g:python3_host_prog
 let g:ale_python_flake8_options = "-m flake8 --ignore=E501"
