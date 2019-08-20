@@ -1,4 +1,3 @@
-" remap folding
 nnoremap <space> za
 vnoremap <space> zf
 
@@ -36,3 +35,7 @@ nmap <C-S-x> 80<S-\|>2<S-B>Eldwi<CR><ESC>
 
 " Save files requiring elevated permissions
 cmap w!! %!sudo tee > /dev/null %
+
+" Next and previous buffer mappigns
+nmap <leader>m :bp<CR>
+map <leader>. :bn<CR>

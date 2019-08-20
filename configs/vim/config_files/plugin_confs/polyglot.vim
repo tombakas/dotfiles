@@ -1,0 +1,1 @@
+let g:python_highlight_file_headers_as_comments=1

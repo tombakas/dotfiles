@@ -13,6 +13,7 @@ fi
 # -------------------------------------------------------------------------------
 export DOTFILE_DIR="$(readlink -f ~/.tomasrc | cut -d / -f 1-5)"
 export PATH=$HOME/local/bin:$DOTFILE_DIR/utils:${NPM_BIN_DIR}:$PATH
+export VIM_CONFIG_DIR=$DOTFILE_DIR/configs/vim/config_files
 # -------------------------------------------------------------------------------
 
 # Aliases
