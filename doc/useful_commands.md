@@ -6,7 +6,7 @@
 ---
 
 **Disable screenshot sound in Gnome**
-The proper way to do this is via a custom sound theme that disables the ```gnome-screenshot``` sound that corresponds to the `screen-capture` event in Gnome.
+The proper way to do this is via a custom sound theme that disables the `gnome-screenshot` sound that corresponds to the `screen-capture` event in Gnome.
 
 Create the custom theme directory:
 `mkdir -p ~/.local/share/sounds/__custom`
@@ -31,3 +31,7 @@ set  `__custom`  as default theme name:
 gsettings set org.gnome.desktop.sound theme-name '__custom'
 ```
 [Reference](https://unix.stackexchange.com/questions/93368/how-can-i-disable-the-shutter-sound-of-gnome-screenshot)
+
+**Disable screenshot sound in Gnome**
+
+`dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause`
