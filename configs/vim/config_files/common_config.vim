@@ -24,7 +24,6 @@ if &term =~# '^screen'
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
-let g:python_host_prog  = $HOME . '/local/neovim_envs/neovim2/bin/python'
 let g:python3_host_prog  = $HOME . '/local/neovim_envs/neovim3/bin/python'
 
 set number
