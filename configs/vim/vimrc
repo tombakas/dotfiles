@@ -12,6 +12,20 @@ source $VIM_CONFIG_DIR/common_config.vim
 source $VIM_CONFIG_DIR/mappings.vim
 source $VIM_CONFIG_DIR/autocommands.vim
 
+" source extra config
+for f in split(glob("$VIM_CONFIG_DIR/extra_confs/*vim"), "\n")
+exe "source" f
+endfor
+
+" populate plugin name list
+let names = []
+for [name, spec] in items(g:plugs)
+  call add(names, substitute(name, "\.n\\?vim", "", ""))
+endfor
+
+"source plugin conf
 for f in split(glob("$VIM_CONFIG_DIR/plugin_confs/*.vim"), "\n")
-    exe "source" f
+    if (index(names, substitute(f, ".*/\\([^/]\\+\\)\.vim$","\\1", ""), "\\1", "") >= 0)
+        exe "source" f
+    endif
 endfor
