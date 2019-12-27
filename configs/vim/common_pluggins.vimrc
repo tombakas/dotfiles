@@ -11,7 +11,7 @@ Plug 'SirVer/ultisnips' " Snippets for code completion
 Plug 'honza/vim-snippets' " Snippet library
 Plug 'majutsushi/tagbar' " Tag browser
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-jedi'
+Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-startify'
 
@@ -21,7 +21,6 @@ Plug 'vim-airline/vim-airline' " Statusline
 Plug 'vim-airline/vim-airline-themes' " Statusline
 Plug 'nathanaelkane/vim-indent-guides' " Highlight levels of indentation
 Plug 'tmhedberg/SimpylFold' " Python folding
-Plug '/usr/bin/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
 
