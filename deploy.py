@@ -5,14 +5,13 @@ from __future__ import print_function
 import argparse
 import os
 
+import sexy_print
+
 from datetime import datetime as dt
 from subprocess import call
 
-from sexy_print import sexy_print
-
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-sexy_print = sexy_print()
 
 
 def parse_arguments():
@@ -66,12 +65,12 @@ def create_symlink(source, target):
 
     if os.path.isfile(full_target):
         if os.path.islink(full_target):
-            sexy_print.yellow("Symlink to ", target, " already exists")
+            sexy_print.yellow("Symlink to ", target, " already exists\n")
             return
         else:
             sexy_print.yellow("", target, " already exists")
 
-            sexy_print.yellow("Creating backup at ", new_name)
+            sexy_print.yellow("Creating backup at ", new_name, "\n")
             os.rename(full_target, new_name)
     elif os.path.islink(full_target):
         print("Symlink ", end="")
