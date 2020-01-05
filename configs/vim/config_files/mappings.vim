@@ -24,6 +24,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Ag for highlighted
+nnoremap <F6> :Ag <C-r>=expand("<cword>")<CR>
+
 " Search for visually selected text
 vnoremap // y/<C-R>"<CR>
 
