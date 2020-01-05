@@ -23,6 +23,7 @@ Plug 'nathanaelkane/vim-indent-guides' " Highlight levels of indentation
 Plug 'tmhedberg/SimpylFold' " Python folding
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
+Plug 'romainl/vim-cool'
 
 " Colors
 Plug 'mhartington/oceanic-next'
