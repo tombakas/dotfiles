@@ -13,7 +13,7 @@ ctrl_c() {
     echo -e "\n\033c\e[1mPomodoro timer paused at \e[92m$min:$sec \e[0m\n"
     echo "[c]ontinue or [q]uit?"
 
-    read answer
+    read -s -n1 answer
 
     if [ "${answer:0:1}" == "c" ]; then
         pom_stop=0

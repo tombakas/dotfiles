@@ -42,3 +42,9 @@ cmap w!! %!sudo tee > /dev/null %
 " Next and previous buffer mappigns
 nmap <leader>m :bp<CR>
 map <leader>. :bn<CR>
+
+" Filter filetypes
+nmap <leader>ft :Filetypes<CR>
+
+" Navigate jump list forward
+nnoremap <M-o> <C-i>
