@@ -40,5 +40,6 @@ Plug 'leafgarland/typescript-vim' " Typescript syntax
 Plug 'carlitux/deoplete-ternjs' " Javascript completion
 Plug 'ambv/black', { 'for': 'python' } " Opinionated Python formatting
 Plug 'rhysd/vim-clang-format' " C style languages
+Plug 'Shougo/deoplete-clangx'
 Plug 'sheerun/vim-polyglot' " Universal syntax coloring scheme management
 Plug 'lervag/vimtex'

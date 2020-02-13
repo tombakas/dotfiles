@@ -1,6 +1,7 @@
 let g:ale_linters = {
             \   'typescript': ['tslint', 'tsserver', 'eslint'],
-            \   'python': ['flake8']
+            \   'python': ['flake8'],
+            \   'cpp': ['ccls']
             \}
 
 let g:ale_python_pyflakes_executable = $HOME . "/local/neovim_envs/neovim3/bin/pyflakes"

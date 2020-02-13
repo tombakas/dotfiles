@@ -15,3 +15,6 @@ au BufRead,BufNewFile *.fountain setfiletype fountain
 
 " Python
 au FileType python set foldmethod=expr
+
+" C++
+nmap gf :ALEGoToDefinition<CR>
