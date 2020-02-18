@@ -1,6 +1,6 @@
 let g:ale_linters = {
             \   'typescript': ['tslint', 'tsserver', 'eslint'],
-            \   'python': ['flake8'],
+            \   'python': ['pyls'],
             \   'cpp': ['ccls']
             \}
 
@@ -13,13 +13,21 @@ let g:ale_python_flake8_options = "-m flake8 --ignore=E501"
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 1
 
-function! Toggle_flake8_python_executable()
-    if g:ale_python_flake8_executable == g:python3_host_prog
-        echom "Setting flake 8 executable to python"
-        let g:ale_python_flake8_executable = g:python_host_prog
-    elseif g:ale_python_flake8_executable == g:python_host_prog
-        echom "Setting flake 8 executable to python3"
-        let g:ale_python_flake8_executable = g:python3_host_prog
-    endif
-    ALELint
-endfunction
+let g:ale_python_pyls_executable = fnamemodify(g:python3_host_prog, ":p:h") . "/pyls"
+
+let g:ale_python_pyls_config = {
+      \   'pyls': {
+      \     'plugins': {
+      \       'flake8': {
+      \         'enabled': v:true
+      \       },
+      \       'yapf': {
+      \         'enabled': v:true
+      \       },
+      \       'pycodestyle': {
+      \         'enabled': v:true,
+      \         'ignore': "E501"
+      \       },
+      \     }
+      \   },
+      \ }

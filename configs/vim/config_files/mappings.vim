@@ -16,6 +16,8 @@ nnoremap <F1> <ESC>
 vnoremap <F1> <ESC>
 
 imap jj <ESC>
+imap <C-e> <C-o>$
+imap <C-a> <C-o>^
 
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 nnoremap <leader>w <C-w>v<C-w>l
