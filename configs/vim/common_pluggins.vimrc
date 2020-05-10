@@ -4,7 +4,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary' " Comment wrapper
 Plug 'tpope/vim-repeat' " Use . to repeat more complicated commands
 Plug 'jeetsukumaran/vim-filebeagle' " Use . to repeat more complicated commands
-Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango', 'css', 'xml']}
+Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango', 'css', 'xml', 'vue']}
 Plug 'jiangmiao/auto-pairs' " Auto add brackets
 Plug 'dense-analysis/ale' " Syntax
 Plug 'simnalamburt/vim-mundo' " Undo history
@@ -24,7 +24,7 @@ Plug 'nathanaelkane/vim-indent-guides' " Highlight levels of indentation
 Plug 'tmhedberg/SimpylFold' " Python folding
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
-Plug 'romainl/vim-cool'
+" Plug 'romainl/vim-cool'
 
 " Colors
 Plug 'mhartington/oceanic-next'

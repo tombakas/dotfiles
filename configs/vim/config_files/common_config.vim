@@ -25,6 +25,7 @@ if &term =~# '^screen'
 endif
 
 let g:python3_host_prog  = $HOME . '/local/neovim_envs/neovim3/bin/python'
+let g:python_host_prog  = $HOME . '/local/neovim_envs/neovim3/bin/python'
 
 set number
 set foldmethod=indent
