@@ -1,0 +1,5 @@
+pynvim
+flake8
+jedi
+python-language-server[all]
+black

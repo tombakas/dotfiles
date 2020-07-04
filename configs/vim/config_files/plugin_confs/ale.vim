@@ -1,5 +1,6 @@
 let g:ale_linters = {
             \   'typescript': ['tslint', 'tsserver', 'eslint'],
+            \   'javascript': ['eslint', 'prettier'],
             \   'python': ['pyls'],
             \   'cpp': ['ccls']
             \}
