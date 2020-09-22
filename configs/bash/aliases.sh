@@ -9,6 +9,7 @@ alias gl='git log'
 alias dc='docker-compose'
 alias ds='docker ps'
 alias dss='docker ps --format "table {{.Names}}\t{{.Ports}}"'
+alias dli='docker images --format "table {{.Repository}}\t{{.Tag}}"'
 
 alias zb='z -b'
 alias zi='z -I'
