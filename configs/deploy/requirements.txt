@@ -1,5 +1,5 @@
 pynvim
-flake8
 jedi
-python-language-server[all]
+python-language-server[pycodestyle]
 black
+flake8
