@@ -24,7 +24,6 @@ Plug 'nathanaelkane/vim-indent-guides' " Highlight levels of indentation
 Plug 'tmhedberg/SimpylFold' " Python folding
 Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
-" Plug 'romainl/vim-cool'
 
 " Colors
 Plug 'mhartington/oceanic-next'
@@ -33,7 +32,6 @@ Plug 'joshdick/onedark.vim'
 " Language specific plugins
 Plug 'davidhalter/jedi-vim' " Wrapper for python syntax/autocompletion library Jedi
 Plug 'hynek/vim-python-pep8-indent' " pep8 indentation
-" Plug 'Valloric/MatchTagAlways' " Highlighting matching XML tags
 Plug 'vim-scripts/fountain.vim' " Fountain syntax highlighting
 Plug 'rust-lang/rust.vim'
 Plug 'leafgarland/typescript-vim' " Typescript syntax

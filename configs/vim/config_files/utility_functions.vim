@@ -42,3 +42,14 @@ endfunction
 
 command! LighDarkToggle call g:LighDarkToggle()
 nnoremap <leader>ld :LighDarkToggle<CR>
+
+function! OpenTerminal()
+    " start terminal in insert mode
+    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
+    set splitright
+    set splitbelow
+
+    split term://bash
+    resize 10
+endfunction
