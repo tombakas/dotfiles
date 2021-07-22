@@ -35,9 +35,10 @@ Plug 'hynek/vim-python-pep8-indent' " pep8 indentation
 Plug 'vim-scripts/fountain.vim' " Fountain syntax highlighting
 Plug 'rust-lang/rust.vim'
 Plug 'leafgarland/typescript-vim' " Typescript syntax
-Plug 'carlitux/deoplete-ternjs' " Javascript completion
-Plug 'psf/black', { 'for': 'python', 'tag': '19.10b0' } " Opinionated Python formatting
+Plug 'psf/black', { 'for': 'python' } " Opinionated Python formatting
 Plug 'rhysd/vim-clang-format' " C style languages
 Plug 'Shougo/deoplete-clangx'
 Plug 'sheerun/vim-polyglot' " Universal syntax coloring scheme management
 Plug 'lervag/vimtex'
+Plug 'ap/vim-css-color'
+Plug 'neovim/nvim-lspconfig'

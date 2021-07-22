@@ -1,5 +1,5 @@
 pynvim
 jedi
-python-language-server[pycodestyle]
+python-lsp-server[all]
 black
 flake8
