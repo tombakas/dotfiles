@@ -74,4 +74,4 @@ set clipboard+=unnamedplus " Use unnamed register as system clipboard
 setlocal omnifunc=syntaxcomplete#Complete
 
 " argument suggestions
-set completeopt+=preview
+set completeopt=menuone,noselect

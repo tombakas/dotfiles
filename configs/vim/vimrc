@@ -20,7 +20,7 @@ endfor
 " populate plugin name list
 let names = []
 for [name, spec] in items(g:plugs)
-  call add(names, substitute(name, "\.n\\?vim", "", ""))
+  call add(names, substitute(name, "-\\?\.\\?n\\?vim-\\?", "", "g"))
 endfor
 
 "source plugin conf
@@ -29,3 +29,7 @@ for f in split(glob("$VIM_CONFIG_DIR/plugin_confs/*.vim"), "\n")
         exe "source" f
     endif
 endfor
+
+lua << EOF
+require'lspconfig'.tsserver.setup{}
+EOF

@@ -11,8 +11,8 @@ Plug 'simnalamburt/vim-mundo' " Undo history
 Plug 'SirVer/ultisnips' " Snippets for code completion
 Plug 'honza/vim-snippets' " Snippet library
 Plug 'majutsushi/tagbar' " Tag browser
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-jedi'
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'wellle/targets.vim'
 Plug 'mhinz/vim-startify'
 
@@ -37,8 +37,9 @@ Plug 'rust-lang/rust.vim'
 Plug 'leafgarland/typescript-vim' " Typescript syntax
 Plug 'psf/black', { 'for': 'python' } " Opinionated Python formatting
 Plug 'rhysd/vim-clang-format' " C style languages
-Plug 'Shougo/deoplete-clangx'
+" Plug 'Shougo/deoplete-clangx'
 Plug 'sheerun/vim-polyglot' " Universal syntax coloring scheme management
 Plug 'lervag/vimtex'
 Plug 'ap/vim-css-color'
 Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
