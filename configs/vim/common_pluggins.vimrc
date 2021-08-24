@@ -6,7 +6,7 @@ Plug 'tpope/vim-repeat' " Use . to repeat more complicated commands
 Plug 'jeetsukumaran/vim-filebeagle' " Use . to repeat more complicated commands
 Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango', 'css', 'xml', 'vue']}
 Plug 'jiangmiao/auto-pairs' " Auto add brackets
-Plug 'dense-analysis/ale' " Syntax
+" Plug 'dense-analysis/ale' " Syntax
 Plug 'simnalamburt/vim-mundo' " Undo history
 Plug 'SirVer/ultisnips' " Snippets for code completion
 Plug 'honza/vim-snippets' " Snippet library

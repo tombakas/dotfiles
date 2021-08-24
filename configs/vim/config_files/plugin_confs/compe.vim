@@ -1,7 +1,6 @@
 set completeopt=menuone,noselect
 
 lua << EOF
-require'lspconfig'.tsserver.setup{}
 require'compe'.setup {
   enabled = true;
   autocomplete = true;
