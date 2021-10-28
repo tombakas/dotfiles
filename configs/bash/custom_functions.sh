@@ -31,25 +31,15 @@ EOF
 
 transfer() {
     if [ $# -eq 0  ]; then
-        echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md";
+        echo -e "No arguments specified. Usage:\n\tcat /tmp/test.md | transfer test.md";
         return 1;
     fi
 
-    tmpfile=$( mktemp -t transferXXX  )
-
-    if tty -s; then
-        basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g')
-        curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile
-    else
-        curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile
-    fi
-
-    cat $tmpfile
-    echo
-    'rm' -f $tmpfile
+    filename=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g')
+    curl --progress-bar -w "\n" --upload-file "$1" "https://transfer.sh/$filename" | tee
 }
 
-rst_permissions() {
+reset_permissions() {
     find . -type f -print0 | xargs -0 chmod -v 644
     find . -type d -print0 | xargs -0 chmod -v 755
 }
