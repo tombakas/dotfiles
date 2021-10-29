@@ -35,6 +35,7 @@ Plug 'ap/vim-css-color'
 Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango', 'css', 'xml', 'vue', 'scss', 'less']}
 
 " Completion config
+Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'

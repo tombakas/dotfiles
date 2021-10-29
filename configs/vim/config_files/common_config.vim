@@ -69,7 +69,6 @@ set formatoptions=qrn1
 set noerrorbells " don't beep
 set novb
 set pastetoggle=<F2>
-set clipboard+=unnamedplus " Use unnamed register as system clipboard
 
 setlocal omnifunc=syntaxcomplete#Complete
 
