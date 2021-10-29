@@ -9,6 +9,7 @@ NORMAL=$(tput sgr0)
 GREEN=$(tput setaf 118)
 CYAN=$(tput setaf 87)
 
+notification_id=0
 break_count=0
 long_break=4
 min=0
@@ -21,10 +22,30 @@ get_work_interval() {
 }
 
 get_break_interval() {
-    if [ break_count -lt $((long_break)) ]; then
+    if [ $break_count -lt $long_break ]; then
         echo $((BREAK_INTERVAL * 60))
-    elif [ $break_count -eq $((long_break)) ]; then
+    elif [ $break_count -eq $long_break ]; then
         echo $((LONG_BREAK_INTERVAL * 60))
+    fi
+}
+
+send_notification() {
+    if [ $1 = "Work!" ]; then
+        face=face-glasses
+    fi
+
+    if [ $1 = "Break!" ]; then
+        face=face-smile
+    fi
+
+    if which notify-desktop; then
+        if [ $notification_id -eq 0 ]; then
+            notification_id=$(notify-desktop --icon=$face $1)
+        else
+            notify-desktop --icon=$face -r $notification_id $1
+        fi
+    else
+        notify-send $1
     fi
 }
 
@@ -43,7 +64,8 @@ run_break_timer() {
     done
 
     break_count=$((break_count % long_break))
-    notify-send "Work!"
+
+    send_notification "Work!"
 }
 
 run_work_timer() {
@@ -52,13 +74,13 @@ run_work_timer() {
         sec=$(( ($(get_work_interval) - $s) % 60 ))
 
         clear
-        printf "${BOLD}Pomodoro timer${NORMAL}\n\n"
+        printf "${BOLD}Work timer${NORMAL}\n\n"
         printf "Time till break: ${BOLD}${CYAN}%02d:%02d${NORMAL}\n" $min $sec
 
         sleep 1
     done
 
-    notify-send "Break!"
+    send_notification "Break!"
 }
 
 ctrl_c() {
