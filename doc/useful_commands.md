@@ -35,3 +35,10 @@ gsettings set org.gnome.desktop.sound theme-name '__custom'
 **Disable screenshot sound in Gnome**
 
 `dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause`
+
+
+---
+
+**Better control of Gnome notifications**
+
+Use this script: [Notify desktop](https://github.com/nowrep/notify-desktop)
