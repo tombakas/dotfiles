@@ -26,6 +26,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+imap <C-l> <DEL>
+
 " Ag for highlighted
 nnoremap <F6> :Ag <C-r>=expand("<cword>")<CR>
 
