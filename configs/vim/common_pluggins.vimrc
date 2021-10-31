@@ -4,7 +4,7 @@ Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary' " Comment wrapper
 Plug 'tpope/vim-repeat' " Use . to repeat more complicated commands
 Plug 'jeetsukumaran/vim-filebeagle'
-Plug 'jiangmiao/auto-pairs' " Auto add brackets
+Plug 'windwp/nvim-autopairs' " Auto add brackets
 Plug 'simnalamburt/vim-mundo' " Undo history
 Plug 'SirVer/ultisnips' " Snippets for code completion
 Plug 'honza/vim-snippets' " Snippet library
@@ -16,8 +16,10 @@ Plug 'vim-airline/vim-airline-themes' " Statusline
 Plug 'nathanaelkane/vim-indent-guides' " Highlight levels of indentation
 Plug 'hynek/vim-python-pep8-indent' " pep8 indentation
 Plug 'tmhedberg/SimpylFold' " Python folding
-Plug 'junegunn/fzf.vim'
 Plug 'justinmk/vim-sneak'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 
 " Colors
 Plug 'mhartington/oceanic-next'
