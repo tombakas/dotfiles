@@ -5,6 +5,7 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>ft <cmd>lua require('telescope.builtin').filetypes()<cr>
 nnoremap <leader>fk <cmd>lua require('telescope.builtin').keymaps()<cr>
+nnoremap <leader>g <cmd>lua require('telescope.builtin').git_status()<cr>
 nnoremap <Up> <cmd>lua require('telescope.builtin').oldfiles()<cr>
 
 lua << EOF
