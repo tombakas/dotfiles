@@ -29,6 +29,7 @@ npairs.add_rules {
       :with_move(function(opts)
           return opts.prev_char:match('.%]') ~= nil
       end)
-      :use_key(']')
+      :use_key(']'),
+  Rule("``", "`", "rst")
 }
 EOF
