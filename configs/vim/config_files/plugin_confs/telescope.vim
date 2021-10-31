@@ -5,7 +5,9 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>ft <cmd>lua require('telescope.builtin').filetypes()<cr>
 nnoremap <leader>fk <cmd>lua require('telescope.builtin').keymaps()<cr>
+nnoremap <leader>fc <cmd>lua require('telescope.builtin').colorscheme()<cr>
 nnoremap <leader>g <cmd>lua require('telescope.builtin').git_status()<cr>
+nnoremap - <cmd>lua require('telescope.builtin').file_browser()<cr>
 nnoremap <Up> <cmd>lua require('telescope.builtin').oldfiles()<cr>
 
 lua << EOF
@@ -18,7 +20,7 @@ require('telescope').setup {
         -- map actions.which_key to <C-h> (default: <C-/>)
         -- actions.which_key shows the mappings for your picker,
         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-        ["<C-h>"] = "which_key",
+        ["<C-S-u>"] = require('telescope.actions').preview_scrolling_up,
         ["<C-u>"] = false
       }
     }

@@ -3,7 +3,6 @@ Plug 'tpope/vim-surround' " Wrapper for surrounding objects with quotes, tags, e
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary' " Comment wrapper
 Plug 'tpope/vim-repeat' " Use . to repeat more complicated commands
-Plug 'jeetsukumaran/vim-filebeagle'
 Plug 'windwp/nvim-autopairs' " Auto add brackets
 Plug 'simnalamburt/vim-mundo' " Undo history
 Plug 'SirVer/ultisnips' " Snippets for code completion
@@ -20,6 +19,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+Plug 'PsychoLlama/teleport.vim'
 
 " Colors
 Plug 'mhartington/oceanic-next'
