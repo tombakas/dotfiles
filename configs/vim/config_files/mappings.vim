@@ -29,7 +29,7 @@ nnoremap <C-l> <C-w>l
 imap <C-l> <DEL>
 
 " Ag for highlighted
-nnoremap <F6> :Ag <C-r>=expand("<cword>")<CR>
+nnoremap <F6> :Telescope grep_string<CR>
 
 " Search for visually selected text
 vnoremap // y/<C-R>"<CR>
