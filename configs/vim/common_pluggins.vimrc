@@ -24,6 +24,7 @@ Plug 'PsychoLlama/teleport.vim'
 " Colors
 Plug 'mhartington/oceanic-next'
 Plug 'joshdick/onedark.vim'
+Plug 'folke/tokyonight.nvim'
 Plug 'sheerun/vim-polyglot' " Universal syntax coloring scheme management
 
 " Language specific plugins
