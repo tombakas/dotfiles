@@ -53,4 +53,5 @@ nmap <leader>ft :Filetypes<CR>
 " Navigate jump list forward
 nnoremap <M-o> <C-i>
 
-nnoremap ]s i<space><esc>
+nnoremap [s i<space><esc>
+nnoremap ]s a<space><esc>
