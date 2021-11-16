@@ -1,10 +1,11 @@
 lua << EOF
-require('nvim-autopairs').setup {
-  map_cr = true
-}
-
 local npairs = require'nvim-autopairs'
 local Rule   = require'nvim-autopairs.rule'
+
+npairs.setup {
+  map_cr = true,
+  ignored_next_char = "" --string.gsub([[ [%w%%%'%[%"%.] ]],"%s+", "")
+}
 
 npairs.add_rules {
   Rule(' ', ' ')

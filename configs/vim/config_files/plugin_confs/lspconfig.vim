@@ -15,5 +15,6 @@ require'lspconfig'.pylsp.setup{
 }
 
 vim.api.nvim_set_keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<leader>fr', '<cmd>lua vim.lsp.buf.references()<CR>', {noremap = true})
 vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', {noremap = true})
 EOF

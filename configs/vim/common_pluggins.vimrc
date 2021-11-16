@@ -13,8 +13,6 @@ Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline' " Statusline
 Plug 'vim-airline/vim-airline-themes' " Statusline
 Plug 'nathanaelkane/vim-indent-guides' " Highlight levels of indentation
-Plug 'hynek/vim-python-pep8-indent' " pep8 indentation
-Plug 'tmhedberg/SimpylFold' " Python folding
 Plug 'justinmk/vim-sneak'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -33,13 +31,14 @@ Plug 'vim-scripts/fountain.vim' " Fountain syntax highlighting
 Plug 'rust-lang/rust.vim'
 Plug 'leafgarland/typescript-vim' " Typescript syntax
 Plug 'psf/black', { 'for': 'python' } " Opinionated Python formatting
+Plug 'hynek/vim-python-pep8-indent' " pep8 indentation
 Plug 'rhysd/vim-clang-format' " C style languages
+Plug 'tmhedberg/SimpylFold' " Python folding
 Plug 'lervag/vimtex'
 Plug 'ap/vim-css-color'
 Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango', 'css', 'xml', 'vue', 'scss', 'less']}
 
 " Completion config
-Plug 'tversteeg/registers.nvim', { 'branch': 'main' }
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'

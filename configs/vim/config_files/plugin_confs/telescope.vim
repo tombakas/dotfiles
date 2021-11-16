@@ -1,13 +1,16 @@
 nnoremap <leader>t <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>a <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>be <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>ft <cmd>lua require('telescope.builtin').filetypes()<cr>
 nnoremap <leader>fk <cmd>lua require('telescope.builtin').keymaps()<cr>
 nnoremap <leader>fc <cmd>lua require('telescope.builtin').colorscheme()<cr>
 nnoremap <leader>fs <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
 nnoremap <leader>g <cmd>lua require('telescope.builtin').git_status()<cr>
+nnoremap "" <cmd>lua require('telescope.builtin').registers()<cr>
+inoremap <C-r> <cmd>lua require('telescope.builtin').registers()<cr>
 nnoremap - <cmd>lua require('telescope.builtin').file_browser({dir_icon='🖿'})<cr>
 nnoremap <Up> <cmd>lua require('telescope.builtin').oldfiles()<cr>
 
