@@ -39,6 +39,7 @@ Plug 'ap/vim-css-color'
 Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango', 'css', 'xml', 'vue', 'scss', 'less']}
 
 " Completion config
+Plug 'fhill2/telescope-ultisnips.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
