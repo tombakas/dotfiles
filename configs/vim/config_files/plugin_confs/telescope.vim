@@ -8,11 +8,11 @@ nnoremap <leader>ft <cmd>lua require('telescope.builtin').filetypes()<cr>
 nnoremap <leader>fk <cmd>lua require('telescope.builtin').keymaps()<cr>
 nnoremap <leader>fc <cmd>lua require('telescope.builtin').colorscheme()<cr>
 nnoremap <leader>fs <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
-inoremap uu <cmd>Telescope ultisnips<cr>
+inoremap <M-u> <cmd>Telescope ultisnips<cr>
 nnoremap <leader>g <cmd>lua require('telescope.builtin').git_status()<cr>
 nnoremap "" <cmd>lua require('telescope.builtin').registers()<cr>
 inoremap <C-r> <cmd>lua require('telescope.builtin').registers()<cr>
-nnoremap - <cmd>lua require('telescope.builtin').file_browser({dir_icon='🖿'})<cr>
+" nnoremap - <cmd>lua require('telescope.builtin').file_browser({dir_icon='🖿'})<cr>
 nnoremap <Up> <cmd>lua require('telescope.builtin').oldfiles()<cr>
 
 lua << EOF
