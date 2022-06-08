@@ -1,6 +1,9 @@
 # Variables
 NPM_BIN_DIR=${HOME}/.npm-packages/bin/
 
+# Theme
+export GTK_THEME=Dracula
+
 # Set nvim or vim as default editor
 if which nvim >/dev/null 2>&1
 then
@@ -14,6 +17,7 @@ fi
 export DOTFILE_DIR="$(readlink -f ~/.tomasrc | cut -d / -f 1-5)"
 export PATH=$HOME/local/bin:$DOTFILE_DIR/utils:${NPM_BIN_DIR}:$PATH
 export VIM_CONFIG_DIR=$DOTFILE_DIR/configs/vim/config_files
+export GOPATH=$HOME/.go
 # -------------------------------------------------------------------------------
 
 # Aliases
@@ -21,6 +25,7 @@ export VIM_CONFIG_DIR=$DOTFILE_DIR/configs/vim/config_files
 alias rm="rm -v"
 alias tmux="tmux -2"
 alias redshiftvno="redshift -l 54.686237:25.285560"
+alias emacs="emacs -nw"
 
 . $DOTFILE_DIR/configs/bash/aliases.sh
 # -------------------------------------------------------------------------------

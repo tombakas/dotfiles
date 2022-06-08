@@ -37,6 +37,7 @@ Plug 'tmhedberg/SimpylFold' " Python folding
 Plug 'lervag/vimtex'
 Plug 'ap/vim-css-color'
 Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango', 'css', 'xml', 'vue', 'scss', 'less']}
+Plug 'sbdchd/neoformat'
 
 " Completion config
 Plug 'fhill2/telescope-ultisnips.nvim'
