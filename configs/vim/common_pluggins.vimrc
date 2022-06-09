@@ -22,8 +22,8 @@ Plug 'mhinz/vim-sayonara'
 
 " Colors
 Plug 'mhartington/oceanic-next'
-Plug 'joshdick/onedark.vim'
 Plug 'folke/tokyonight.nvim'
+Plug 'navarasu/onedark.nvim'
 Plug 'sheerun/vim-polyglot' " Universal syntax coloring scheme management
 
 " Language specific plugins
@@ -38,6 +38,8 @@ Plug 'lervag/vimtex'
 Plug 'ap/vim-css-color'
 Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango', 'css', 'xml', 'vue', 'scss', 'less']}
 Plug 'sbdchd/neoformat'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
 
 " Completion config
 Plug 'fhill2/telescope-ultisnips.nvim'

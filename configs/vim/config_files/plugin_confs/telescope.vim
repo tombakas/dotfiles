@@ -17,6 +17,8 @@ inoremap <C-r> <cmd>lua require('telescope.builtin').registers()<cr>
 " nnoremap - <cmd>lua require('telescope.builtin').file_browser({dir_icon='🖿'})<cr>
 nnoremap <Up> <cmd>lua require('telescope.builtin').oldfiles()<cr>
 
+nunmap ,ts
+
 lua << EOF
 require('telescope').setup {
   defaults = {
