@@ -19,11 +19,12 @@ Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'PsychoLlama/teleport.vim'
 Plug 'mhinz/vim-sayonara'
+Plug 'andymass/vim-matchup'
 
 " Colors
-Plug 'mhartington/oceanic-next'
 Plug 'folke/tokyonight.nvim'
 Plug 'navarasu/onedark.nvim'
+Plug 'ellisonleao/gruvbox.nvim'
 Plug 'sheerun/vim-polyglot' " Universal syntax coloring scheme management
 
 " Language specific plugins
@@ -40,6 +41,7 @@ Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango', 'css', 'xml', 'vue', 'scs
 Plug 'sbdchd/neoformat'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-context'
+Plug 'nvim-treesitter/playground'
 
 " Completion config
 Plug 'fhill2/telescope-ultisnips.nvim'

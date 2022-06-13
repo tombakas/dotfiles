@@ -20,5 +20,15 @@ require'nvim-treesitter.configs'.setup {
     -- Instead of true it can also be a list of languages
     additional_vim_regex_highlighting = false,
   },
+
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "<C-k>",
+      scope_incremental = "grc",
+      node_decremental = "<C-j>",
+    },
+  },
 }
 EOF

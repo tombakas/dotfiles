@@ -10,6 +10,7 @@ nnoremap <leader>fc <cmd>lua require('telescope.builtin').colorscheme()<cr>
 nnoremap <leader>fs <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
 nnoremap <leader>rs <cmd>lua require('telescope.builtin').resume()<cr>
 nnoremap <leader>fq <cmd>lua require('telescope.builtin').quickfix()<cr>
+nnoremap <leader>f: <cmd>lua require('telescope.builtin').commands()<cr>
 inoremap <M-u> <cmd>Telescope ultisnips<cr>
 nnoremap <leader>g <cmd>lua require('telescope.builtin').git_status()<cr>
 nnoremap "" <cmd>lua require('telescope.builtin').registers()<cr>

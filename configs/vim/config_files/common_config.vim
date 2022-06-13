@@ -1,8 +1,6 @@
 filetype plugin indent on
 
-set ai " auto indentingGc
 set history=100 " keep 100 lines of history
-set hlsearch " highlight the last searched term
 
 " When editing a file, always jump to the last cursor position
 autocmd BufReadPost *
@@ -44,10 +42,7 @@ set autoindent
 set showmode
 set showcmd
 set hidden
-set wildmenu
 set visualbell
-set ttyfast
-set ruler
 set backspace=indent,eol,start
 set backspace=2
 set laststatus=2
@@ -62,11 +57,8 @@ set smartcase
 set incsearch
 set showmatch
 set hlsearch
-set wrap
 set textwidth=79
 set formatoptions=qrn1
-set noerrorbells " don't beep
-set novb
 set pastetoggle=<F2>
 
 setlocal omnifunc=syntaxcomplete#Complete
