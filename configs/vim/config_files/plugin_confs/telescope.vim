@@ -1,4 +1,4 @@
-nnoremap <leader>t <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>t <cmd>lua require('telescope.builtin').find_files({hidden=true,find_command={"fd", "--type", "f", "--exclude", ".git"}})<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>a <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>be <cmd>lua require('telescope.builtin').buffers()<cr>
