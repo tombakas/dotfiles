@@ -36,7 +36,7 @@ Plug 'hynek/vim-python-pep8-indent' " pep8 indentation
 Plug 'rhysd/vim-clang-format' " C style languages
 Plug 'tmhedberg/SimpylFold' " Python folding
 Plug 'lervag/vimtex'
-Plug 'ap/vim-css-color'
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango', 'css', 'xml', 'vue', 'scss', 'less']}
 Plug 'sbdchd/neoformat'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
