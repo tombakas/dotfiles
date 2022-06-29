@@ -1,30 +1,21 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-LANG1="us"
-LANG1_variant=""
+LANG_VARIANT_ARR=(us, lt, ru,phonetic)
 
-LANG2="lt"
-LANG2_variant=""
+OPTIONS=""
 
-LANG3="ru"
-LANG3_variant="phonetic"
+for i in ${!LANG_VARIANT_ARR[@]}; do
+    if [ $i -gt 0 ]; then
+        OPTIONS="${OPTIONS}\n"
+    fi
+    OPTIONS="${OPTIONS}$(echo ${LANG_VARIANT_ARR[i]} | sed 's/,[a-z]*//')"
+done
 
-CURRENT_LANG=$(setxkbmap -query | awk '/layout/{print $2}')
-echo $CURRENT_LANG
+CHOICE=$(echo -e $OPTIONS | rofi -dmenu -format i)
 
-case $CURRENT_LANG in
-    $LANG1)
-        setxkbmap $LANG2 -variant "$LANG2_variant"
-        ;;
-    $LANG2)
-        setxkbmap $LANG3 -variant "$LANG3_variant"
-        ;;
-    $LANG3)
-        setxkbmap $LANG1 -variant "$LANG1_variant"
-        ;;
-    *)
-        setxkbmap $LANG1 -variant "$LANG1_variant"
-        ;;
-esac
+LANG=$(echo ${LANG_VARIANT_ARR[CHOICE]} | cut -d , -f 1)
+VARIANT=$(echo ${LANG_VARIANT_ARR[CHOICE]} | cut -d , -f 2)
+
+setxkbmap $LANG -variant "$VARIANT"
 
 killall -USR1 i3status
