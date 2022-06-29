@@ -1,0 +1,28 @@
+#
+# wm independent hotkeys
+#
+
+# program launcher
+super + @space
+	rofi -show run
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
+
+# toggle tiling / floating
+super + shift + space
+    i3-msg floating toggle
+
+# change focus between tiling / floating windows
+super + space
+    i3-msg focus mode_toggle
+
+super + Tab
+    rofi -show window
+
+super + control + l
+    bash -lc '$DOTFILE_DIR/utils/lockscreen.sh'
+
+alt + @space
+    bash -lc '$DOTFILE_DIR/utils/switch_keyboard.sh'

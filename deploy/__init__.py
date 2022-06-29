@@ -82,7 +82,7 @@ def create_symlink(source, target):
 def directory_make(target):
     target = Path(target).expanduser()
     if not target.exists():
-        sexy_print.yellow("Directory ", target, " does not exist, creating...")
+        sexy_print.yellow("Directory ", target.as_posix(), " does not exist, creating...")
         target.mkdir(parents=True)
 
 
@@ -125,6 +125,7 @@ def setup_bash():
     )
     setup_dotfile(Path(BASE_DIR, "configs/git/git_aliases"), "~/.git_aliases")
     setup_dotfile(Path(BASE_DIR, "configs/bash/tomasrc"), "~/.tomasrc")
+    setup_dotfile(Path(BASE_DIR, "configs/sxhkd/sxhkdrc"), "~/.config/sxhkd/sxhkdrc")
     add_line_to_file(". ~/.tomasrc", "~/.bashrc")
     add_line_to_file(". ~/.git-prompt.sh", "~/.bashrc")
     add_line_to_file(". ~/.git_aliases", "~/.bashrc")
