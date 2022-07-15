@@ -15,7 +15,6 @@ inoremap <M-u> <cmd>Telescope ultisnips<cr>
 nnoremap <leader>g <cmd>lua require('telescope.builtin').git_status()<cr>
 nnoremap "" <cmd>lua require('telescope.builtin').registers()<cr>
 inoremap <C-r> <cmd>lua require('telescope.builtin').registers()<cr>
-" nnoremap - <cmd>lua require('telescope.builtin').file_browser({dir_icon='🖿'})<cr>
 nnoremap <Up> <cmd>lua require('telescope.builtin').oldfiles()<cr>
 
 nunmap ,ts
@@ -50,8 +49,19 @@ require('telescope').setup {
     --   extension_config_key = value,
     -- }
     -- please take a look at the readme of the extension you want to configure
+    file_browser = {
+      dir_icon = '🖿',
+    }
   }
 }
 require('telescope').load_extension('fzf')
 require('telescope').load_extension('ultisnips')
+require("telescope").load_extension("file_browser")
+
+vim.api.nvim_set_keymap(
+  "n",
+  "-",
+  ":Telescope file_browser<cr>",
+  { noremap = true }
+)
 EOF
