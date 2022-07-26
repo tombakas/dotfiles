@@ -22,6 +22,7 @@ font pango:monospace 8
 # Start XDG autostart .desktop files using dex. See also
 # https://wiki.archlinux.org/index.php/XDG_Autostart
 exec --no-startup-id dex-autostart --autostart --environment i3
+exec --no-startup-id picom -b
 
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
@@ -33,6 +34,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
+exec_always --no-startup-id if ! pgrep redshift > /dev/null; then redshift -l 51.44:5.47; fi
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -184,7 +186,7 @@ bindsym $mod+r mode "resize"
 
 mode "exit: [l]ogout, [s]uspend, [r]eboot, [p]oweroff" {
   bindsym l exec i3-msg exit
-  bindsym s exec systemctl suspend
+  bindsym s exec systemctl suspend; mode "default"
   bindsym r exec systemctl reboot
   bindsym p exec systemctl poweroff
   bindsym Escape mode "default"

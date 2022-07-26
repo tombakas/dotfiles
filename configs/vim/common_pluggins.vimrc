@@ -1,4 +1,5 @@
 Plug 'tpope/vim-fugitive' " Git wrapper for vim
+Plug 'shumphrey/fugitive-gitlab.vim'
 Plug 'tpope/vim-surround' " Wrapper for surrounding objects with quotes, tags, etc.
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-commentary' " Comment wrapper
