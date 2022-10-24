@@ -14,7 +14,8 @@ Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline' " Statusline
 Plug 'vim-airline/vim-airline-themes' " Statusline
 Plug 'nathanaelkane/vim-indent-guides' " Highlight levels of indentation
-Plug 'justinmk/vim-sneak'
+Plug 'ggandor/leap.nvim'
+Plug 'ggandor/flit.nvim', {'as': 'leap-flit'}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
