@@ -8,8 +8,16 @@ require'lspconfig'.pylsp.setup{
         pycodestyle = {
           maxLineLength = 120;
           ignore = { 'E203', 'W503' };
+          enabled = true;
+        };
+        pyflakes = {
+          enabled = false;
+        },
+        flake8 = {
+          enabled = true
         };
         jedi = {
+          enabled = true;
           extra_paths = {
             os.getenv("HOME") .. "/projects/sendcloud/api-wrappers",
             os.getenv("HOME") .. "/projects/sendcloud/infra",

@@ -7,7 +7,7 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').current_buffer_fuzzy_f
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>ft <cmd>lua require('telescope.builtin').filetypes()<cr>
 nnoremap <leader>fk <cmd>lua require('telescope.builtin').keymaps()<cr>
-nnoremap <leader>fc <cmd>lua require('telescope.builtin').colorscheme()<cr>
+nnoremap <leader>fc <cmd>lua require('telescope.builtin').colorscheme({enable_preview=true})<cr>
 nnoremap <leader>fs <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
 nnoremap <leader>rs <cmd>lua require('telescope.builtin').resume()<cr>
 nnoremap <leader>fq <cmd>lua require('telescope.builtin').quickfix()<cr>

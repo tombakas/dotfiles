@@ -17,7 +17,7 @@ Plug 'nathanaelkane/vim-indent-guides' " Highlight levels of indentation
 Plug 'ggandor/leap.nvim'
 Plug 'ggandor/flit.nvim', {'as': 'leap-flit'}
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
 Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'PsychoLlama/teleport.vim'
@@ -25,9 +25,12 @@ Plug 'mhinz/vim-sayonara'
 Plug 'andymass/vim-matchup'
 
 " Colors
-Plug 'folke/tokyonight.nvim'
-Plug 'navarasu/onedark.nvim'
 Plug 'ellisonleao/gruvbox.nvim'
+Plug 'folke/tokyonight.nvim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'navarasu/onedark.nvim'
+Plug 'rebelot/kanagawa.nvim'
+Plug 'sainnhe/everforest'
 Plug 'sheerun/vim-polyglot' " Universal syntax coloring scheme management
 
 " Language specific plugins
@@ -36,10 +39,9 @@ Plug 'rust-lang/rust.vim'
 Plug 'leafgarland/typescript-vim' " Typescript syntax
 Plug 'psf/black', { 'for': 'python' } " Opinionated Python formatting
 Plug 'hynek/vim-python-pep8-indent' " pep8 indentation
-Plug 'rhysd/vim-clang-format' " C style languages
-Plug 'tmhedberg/SimpylFold' " Python folding
-Plug 'lervag/vimtex'
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+Plug 'rhysd/vim-clang-format', {'for': ['c, cpp']} " C style languages
+Plug 'lervag/vimtex', {'for': ['tex']}
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase', 'for': ['css', 'scss', 'less'] }
 Plug 'mattn/emmet-vim', {'for': ['html', 'htmldjango', 'css', 'xml', 'vue', 'scss', 'less']}
 Plug 'sbdchd/neoformat'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}

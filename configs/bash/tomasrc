@@ -43,3 +43,4 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 eval "$(lua $HOME/builds/z.lua/z.lua --init bash)"
 . $DOTFILE_DIR/configs/bash/custom_functions.sh
 # -------------------------------------------------------------------------------
+#

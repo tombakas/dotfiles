@@ -15,3 +15,4 @@ au BufRead,BufNewFile *.fountain setfiletype fountain
 
 " Python
 au FileType python set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
