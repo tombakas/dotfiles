@@ -4,43 +4,20 @@ NPM_BIN_DIR=${HOME}/.npm-packages/bin/
 # Theme
 export GTK_THEME=Dracula
 
-# Set nvim or vim as default editor
-if which nvim >/dev/null 2>&1
-then
-    export EDITOR=nvim
-else
-    export EDITOR=vim
-fi
-
 # Exports
 # -------------------------------------------------------------------------------
 export DOTFILE_DIR="$(readlink -f ~/.tomasrc | cut -d / -f 1-5)"
 export PATH=$HOME/local/bin:$DOTFILE_DIR/utils:${NPM_BIN_DIR}:$PATH
-export VIM_CONFIG_DIR=$DOTFILE_DIR/configs/vim/config_files
 export GOPATH=$HOME/.go
+export NEOVIM_ENV=$(awk -F "=" '/VIRTUALENV_DIR/ {print $2}' $DOTFILE_DIR/configs/deploy/config.ini | tr -d " ")
+export GIT_EDITOR=nvim
 # -------------------------------------------------------------------------------
 
 # Aliases
 # -------------------------------------------------------------------------------
 alias rm="rm -v"
 alias tmux="tmux -2"
-alias redshiftvno="redshift -l 54.686237:25.285560"
 alias emacs="emacs -nw"
 
 . $DOTFILE_DIR/configs/bash/aliases.sh
 # -------------------------------------------------------------------------------
-
-# FZF config
-export FZF_DEFAULT_OPTS='--color fg:242,bg:233,hl:65,fg+:15,bg+:234,hl+:108
-                         --color info:108,prompt:109,spinner:108,pointer:168,marker:168'
-export FZF_DEFAULT_COMMAND='ag -g ""'
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-# --------------------------------------------------------------------------------
-
-# Sourcing
-# -------------------------------------------------------------------------------
-# . $DOTFILE_DIR/z.sh
-eval "$(lua $HOME/builds/z.lua/z.lua --init bash)"
-. $DOTFILE_DIR/configs/bash/custom_functions.sh
-# -------------------------------------------------------------------------------
-#

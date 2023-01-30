@@ -20,7 +20,8 @@ stashed = '(📂 $count )'
 disabled = true
 
 [python]
-disabled = true
+disabled = false
+format = '[(\($virtualenv\)) ](bold yellow)'
 
 [package]
 disabled = true
