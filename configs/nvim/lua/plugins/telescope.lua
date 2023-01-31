@@ -10,6 +10,7 @@ return {
       { "<leader>fc", "<cmd>Telescope colorscheme enable_preview=true<cr>" },
       { "<leader>g", "<cmd>Telescope git_status<cr>" },
       { "<leader>rs", "<cmd>Telescope resume<cr>" },
+      { "<leader>p", "<cmd>Telescope projects<cr>" },
       { "<F6>", "<cmd>Telescope grep_string<cr>" },
       { "\"\"", "<cmd>Telescope registers<cr>" },
       { "-", "<cmd>Telescope file_browser<cr>"},
@@ -18,11 +19,13 @@ return {
     dependencies = {
       { "nvim-lua/plenary.nvim", lazy = true },
       { "nvim-telescope/telescope-file-browser.nvim" },
-      { "nvim-telescope/telescope-fzf-native.nvim"  }
+      { "nvim-telescope/telescope-fzf-native.nvim"  },
+      { "ahmedkhalf/project.nvim" }
     },
     config = function()
       require("telescope").load_extension('file_browser')
       require("telescope").load_extension('fzf')
+      require('telescope').load_extension('projects')
 
       require("telescope").setup({
         defaults = {
