@@ -15,6 +15,3 @@ alias zb='z -b'
 alias zi='z -I'
 
 alias kssh="kitty +kitten ssh"
-
-
-alias jeton="aws-sso exec -a arn:aws:iam::189735301515:role/backend-developers -- jeton"

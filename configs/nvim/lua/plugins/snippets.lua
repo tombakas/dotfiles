@@ -1,0 +1,22 @@
+return {
+  "L3MON4D3/LuaSnip",
+
+  dependencies = {
+    "rafamadriz/friendly-snippets",
+    config = function()
+      require("luasnip.loaders.from_vscode").lazy_load()
+    end,
+  },
+
+  build = "make install_jsregexp",
+  opts = {
+    history = true,
+    delete_check_events = "TextChanged",
+  },
+
+  -- stylua: ignore
+  keys = {
+    { "<c-j>", function() require("luasnip").jump(1) end, mode = "s" },
+    { "<c-k>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
+  }
+}
