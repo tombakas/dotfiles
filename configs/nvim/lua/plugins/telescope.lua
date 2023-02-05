@@ -7,6 +7,7 @@ return {
       { "<leader>a", "<cmd>Telescope live_grep<cr>" },
       { "<leader>ft", "<cmd>Telescope filetypes<cr>" },
       { "<leader>fk", "<cmd>Telescope keymaps<cr>" },
+      { "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>" },
       { "<leader>fc", "<cmd>Telescope colorscheme enable_preview=true<cr>" },
       { "<leader>g", "<cmd>Telescope git_status<cr>" },
       { "<leader>rs", "<cmd>Telescope resume<cr>" },

@@ -49,6 +49,8 @@ keymap("v", "<tab>", "%")
 keymap("n", "<c-m>", "<plug>(matchup-%)")
 keymap("n", "<c-i>", "<c-i>")
 
+keymap("i", "<s-tab>", "<c-d>")
+
 -- Zoom in/out of a window
 keymap("n", "<leader>z", "<cmd>lua ZoomToggle()<cr>")
 
