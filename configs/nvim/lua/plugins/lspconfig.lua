@@ -15,11 +15,19 @@ return {
       ensure_installed = { "flake8", "black" }
     })
     require("mason-lspconfig").setup({
-      ensure_installed = { "sumneko_lua", "pyright", "tsserver" }
+      ensure_installed = { "sumneko_lua", "pyright", "tsserver", "yamlls" }
     })
 
     require 'lspconfig'.tsserver.setup {}
-    require 'lspconfig'.pyright.setup {}
+    require 'lspconfig'.pyright.setup {
+      settings = {
+        python = {
+          analysis = { typeCheckingMode = "off" }
+        }
+      }
+    }
+
+    require 'lspconfig'.yamlls.setup {}
     require 'lspconfig'.sumneko_lua.setup {
       settings = {
         Lua = {
