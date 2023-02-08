@@ -2,7 +2,7 @@ from configparser import ConfigParser
 from datetime import datetime as dt
 from pathlib import Path
 
-from deploy import sexy_print
+from . import sexy_print
 
 
 BASE_DIR = Path(__file__).absolute().parents[1]
