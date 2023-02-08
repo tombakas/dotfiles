@@ -1,37 +1,30 @@
 return {
   'neovim/nvim-lspconfig',
 
+  dependencies = {
+    "williamboman/mason.nvim",
+    {
+      'jay-babu/mason-null-ls.nvim',
+      'williamboman/mason-lspconfig.nvim'
+    }
+  },
+
   config = function()
     local keymap = vim.keymap.set
 
+    require("mason").setup()
+    require("mason-null-ls").setup({
+      ensure_installed = { "flake8" }
+    })
+    require("mason-lspconfig").setup({
+      ensure_installed = { "sumneko_lua", "pyright", "tsserver" },
+    })
+
     require'lspconfig'.tsserver.setup{}
-    require'lspconfig'.pylsp.setup{
-      cmd = { vim.g.neovim_env .. "/bin/pylsp" };
-      settings = {
-        pylsp = {
-          plugins = {
-            pycodestyle = {
-              maxLineLength = 120;
-              ignore = { 'E203', 'W503' };
-              enabled = true;
-            };
-            pyflakes = {
-              enabled = false;
-            },
-            flake8 = {
-              maxLineLength = 120;
-              enabled = true
-            };
-            jedi = {
-              enabled = true;
-            }
-          };
-        };
-      };
-    }
+    require'lspconfig'.pyright.setup{}
+    require'lspconfig'.sumneko_lua.setup{}
 
     keymap('n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
-    keymap('n', '<leader>fr', '<cmd>lua vim.lsp.buf.references()<CR>')
     keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
   end
 }

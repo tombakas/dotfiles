@@ -12,6 +12,7 @@ return {
         callback = function()
           vim.api.nvim_set_hl(0, 'illuminatedWord', { underline = true })
           vim.api.nvim_set_hl(0, 'illuminatedWordRead', { underline = true })
+          vim.api.nvim_set_hl(0, 'illuminatedWordText', { underline = true })
           vim.api.nvim_set_hl(0, 'illuminatedWordWrite', { underline = true })
         end,
       })

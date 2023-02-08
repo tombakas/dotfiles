@@ -16,7 +16,14 @@ return {
 
   -- stylua: ignore
   keys = {
-    { "<c-j>", function() require("luasnip").jump(1) end, mode = "s" },
+    { "<c-j>",
+      function()
+        if require("luasnip").expand_or_jumpable() then
+          require("luasnip").jump(1)
+        end
+      end,
+      mode = {"i", "s"}
+    },
     { "<c-k>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
   }
 }
