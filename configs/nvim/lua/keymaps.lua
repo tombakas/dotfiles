@@ -67,3 +67,6 @@ keymap('t', '<c-l>', '<c-\\><c-n><c-w>l')
 keymap('n', '<c-t>', '<cmd>terminal<cr>i', {noremap = true, silent = true})
 
 keymap('i', '<m-l>', '<cmd>lua EscapePair()<CR>')
+
+-- formatting
+keymap('n', '<leader><leader>f', function() vim.lsp.buf.format({ timeout_ms = 2000 }) end) -- 2 seconds

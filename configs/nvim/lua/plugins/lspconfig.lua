@@ -14,7 +14,8 @@ return {
 
     require("mason").setup()
     require("mason-null-ls").setup({
-      ensure_installed = { "flake8" }
+      ensure_installed = { "flake8" },
+      ensure_installed = { "black" }
     })
     require("mason-lspconfig").setup({
       ensure_installed = { "sumneko_lua", "pyright", "tsserver" },
