@@ -3,6 +3,7 @@ return {
 
   opts = {
     -- optionally use on_attach to set keymaps when aerial has attached to a buffer
+    disable_max_lines = 20000,
     on_attach = function(bufnr)
       -- Jump forwards/backwards with '{' and '}'
       vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', {buffer = bufnr})

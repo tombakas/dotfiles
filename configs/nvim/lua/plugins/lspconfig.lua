@@ -1,22 +1,8 @@
 return {
   'neovim/nvim-lspconfig',
-  dependencies = {
-    "williamboman/mason.nvim",
-    {
-      'jay-babu/mason-null-ls.nvim',
-      'williamboman/mason-lspconfig.nvim'
-    }
-  },
+
   config = function()
     local keymap = vim.keymap.set
-
-    require("mason").setup()
-    require("mason-null-ls").setup({
-      ensure_installed = { "flake8", "black" }
-    })
-    require("mason-lspconfig").setup({
-      ensure_installed = { "sumneko_lua", "pyright", "tsserver", "yamlls" }
-    })
 
     require 'lspconfig'.tsserver.setup {}
     require 'lspconfig'.pyright.setup {
