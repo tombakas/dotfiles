@@ -25,6 +25,9 @@ return {
               tab_width = "2",
               continuation_indent = "2",
             }
+          },
+          diagnostics = {
+            globals = { "vim" }
           }
         }
       }
