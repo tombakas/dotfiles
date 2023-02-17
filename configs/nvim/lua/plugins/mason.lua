@@ -11,11 +11,11 @@ return {
     require("mason").setup()
 
     require("mason-null-ls").setup({
-      ensure_installed = { "flake8", "black" }
+      ensure_installed = { "flake8", "black", "shellcheck" }
     })
 
     require("mason-lspconfig").setup({
-      ensure_installed = { "sumneko_lua", "pyright", "tsserver", "yamlls" }
+      ensure_installed = { "lua_ls", "pyright", "tsserver", "yamlls", "bashls" }
     })
 
     require("mason-nvim-dap").setup({

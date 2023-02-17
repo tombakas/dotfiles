@@ -14,7 +14,7 @@ return {
       { "<leader>rs", "<cmd>Telescope resume<cr>" },
       { "<leader>p", "<cmd>Telescope projects<cr>" },
       { "<leader>fr", "<cmd>Telescope lsp_references<CR>" },
-      -- { "<leader>fw", "<cmd>Telescope grep_string<cr>" },
+      { "<leader>fw", "<cmd>Telescope grep_string<cr>" },
       { "\"\"", "<cmd>Telescope registers<cr>" },
       { "-", "<cmd>Telescope file_browser<cr>"},
       { "<up>", "<cmd>Telescope oldfiles<cr>"},

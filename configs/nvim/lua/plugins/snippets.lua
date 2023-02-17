@@ -8,7 +8,9 @@ return {
     end,
   },
 
+  event = "BufAdd",
   build = "make install_jsregexp",
+
   opts = {
     history = true,
     delete_check_events = "TextChanged",

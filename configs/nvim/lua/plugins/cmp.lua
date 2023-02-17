@@ -1,15 +1,15 @@
 return {
   "hrsh7th/nvim-cmp",
   version = false, -- last release is way too old
-  event = "InsertEnter",
+  event = { "InsertEnter", "BufAdd", "CmdlineEnter" },
   dependencies = {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
+    "rcarriga/cmp-dap",
     "saadparwaiz1/cmp_luasnip",
   },
-  keys = { ":" },
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
@@ -71,6 +71,12 @@ return {
           { name = "cmdline" },
         }),
       }),
+    })
+
+    require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
+      sources = {
+        { name = "dap" },
+      },
     })
 
     vim.api.nvim_set_keymap("c", "<C-y>", "", {

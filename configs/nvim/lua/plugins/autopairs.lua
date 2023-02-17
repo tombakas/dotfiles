@@ -51,8 +51,8 @@ return {
         :use_key("]"),
       Rule("``", "`", "rst"),
       Rule("<", ">", { "html", "htmldjango" })
-        :with_move(function()
-          return true
+        :with_move(function(opts)
+          return opts.char == ">"
         end)
     })
   end,

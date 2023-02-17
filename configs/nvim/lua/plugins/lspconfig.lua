@@ -14,7 +14,8 @@ return {
     }
 
     require 'lspconfig'.yamlls.setup {}
-    require 'lspconfig'.sumneko_lua.setup {
+    require 'lspconfig'.bashls.setup {}
+    require 'lspconfig'.lua_ls.setup {
       settings = {
         Lua = {
           format = {
