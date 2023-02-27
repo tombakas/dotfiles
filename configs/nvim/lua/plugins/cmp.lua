@@ -7,6 +7,7 @@ return {
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
+    "hrsh7th/cmp-nvim-lsp-signature-help",
     "rcarriga/cmp-dap",
     "saadparwaiz1/cmp_luasnip",
   },
@@ -52,6 +53,7 @@ return {
         { name = "luasnip" },
         { name = "buffer" },
         { name = "path" },
+        { name = 'nvim_lsp_signature_help' },
       }),
 
       -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).

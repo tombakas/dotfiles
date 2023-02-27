@@ -16,13 +16,13 @@ return {
       { "<leader>fr", "<cmd>Telescope lsp_references<CR>" },
       { "<leader>fw", "<cmd>Telescope grep_string<cr>" },
       { "\"\"", "<cmd>Telescope registers<cr>" },
-      { "-", "<cmd>Telescope file_browser<cr>"},
-      { "<up>", "<cmd>Telescope oldfiles<cr>"},
+      { "-", "<cmd>Telescope file_browser<cr>" },
+      { "<up>", "<cmd>Telescope oldfiles<cr>" },
     },
     dependencies = {
       { "nvim-lua/plenary.nvim", lazy = true },
       { "nvim-telescope/telescope-file-browser.nvim" },
-      { "nvim-telescope/telescope-fzf-native.nvim"  },
+      { "nvim-telescope/telescope-fzf-native.nvim" },
       { "ahmedkhalf/project.nvim" }
     },
     config = function()
@@ -34,7 +34,8 @@ return {
         defaults = {
           mappings = {
             i = {
-              ["<C-u>"] = false
+              ["<C-u>"] = false,
+              ["<C-S-u>"] = require('telescope.actions').preview_scrolling_up,
             }
           }
         }

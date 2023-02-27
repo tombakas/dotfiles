@@ -31,16 +31,16 @@ do
 
   esac    # --- end of case ---
 done
-shift $(($OPTIND-1))
+shift $((OPTIND-1))
 
 if command -v import &>/dev/null; then
     TARGET=$TARGET_DIR/$FILENAME
     if [ $REGION -eq 1 ]; then
         echo "Select region to capture"
-        import $TARGET_DIR/$FILENAME
+        import "$TARGET_DIR"/"$FILENAME"
         echo "Saving region to ${TARGET}"
     else
         echo "Saving entire screen to ${TARGET}"
-        import -window root $TARGET_DIR/$FILENAME
+        import -window root "$TARGET_DIR"/"$FILENAME"
     fi
 fi
