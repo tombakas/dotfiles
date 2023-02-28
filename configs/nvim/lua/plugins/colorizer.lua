@@ -3,8 +3,11 @@ return {
 
   config = function()
     require("colorizer").setup {
-      filetypes = { "css", "sass", "scss" },
-      sass = { enable = true },
+      user_default_options = {
+        mode = "background",
+        css = true,
+        sass = { enable = true, parsers = { "css" } },
+      }
     }
   end,
 

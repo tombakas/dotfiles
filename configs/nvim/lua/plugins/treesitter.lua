@@ -8,7 +8,7 @@ return {
     },
     config = function()
       require("nvim-treesitter.configs").setup({
-        ensure_installed = { "python", "javascript", "css", "scss", "html", "lua" },
+        ensure_installed = { "python", "javascript", "css", "scss", "html", "lua", "bash" },
 
         matchup = {
           enable = true,

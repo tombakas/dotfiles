@@ -4,8 +4,18 @@ return {
   config = function()
     local keymap = vim.keymap.set
 
-    require 'lspconfig'.tsserver.setup {}
+    local on_attach = function(client, bufnr)
+      if client.server_capabilities.documentSymbolProvider then
+        require("nvim-navic").attach(client, bufnr)
+      end
+    end
+
+
+    require 'lspconfig'.tsserver.setup {
+      on_attach = on_attach,
+    }
     require 'lspconfig'.pyright.setup {
+      on_attach = on_attach,
       settings = {
         python = {
           analysis = { typeCheckingMode = "off" }
