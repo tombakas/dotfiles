@@ -4,5 +4,7 @@ return {
       "tommcdo/vim-fubitive",
     }
   },
-  "tpope/vim-fugitive"
+  "tpope/vim-fugitive",
+  event = "BufAdd",
+  cmd = "G"
 }

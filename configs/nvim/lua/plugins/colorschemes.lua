@@ -1,10 +1,10 @@
 return {
-  'ellisonleao/gruvbox.nvim',
-  'folke/tokyonight.nvim',
-  'catppuccin/nvim',
-  'navarasu/onedark.nvim',
-  'rebelot/kanagawa.nvim',
-  'sainnhe/everforest',
+  { 'ellisonleao/gruvbox.nvim', event = "BufLeave" },
+  { 'folke/tokyonight.nvim', event = "BufLeave" },
+  { 'catppuccin/nvim', event = "BufLeave" },
+  { 'navarasu/onedark.nvim', event = "BufLeave" },
+  { 'rebelot/kanagawa.nvim', event = "BufLeave" },
+  { 'sainnhe/everforest', event = "BufLeave" },
 
   {
     'sheerun/vim-polyglot',
