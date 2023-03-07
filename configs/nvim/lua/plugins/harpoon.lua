@@ -11,7 +11,7 @@ return {
       end
     },
     {
-      "<leader>fh",
+      "<leader>.",
       function()
         require("harpoon.ui").toggle_quick_menu()
       end
