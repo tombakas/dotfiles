@@ -43,7 +43,9 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
       require('treesitter-context').disable()
     elseif not vim.tbl_contains(no_change_filetypes, vim.bo.filetype) then
       vim.o.winbar = nil
-      pcall(require('treesitter-context').enable)
+      if not vim.o.diff then
+        pcall(require('treesitter-context').enable)
+      end
     elseif vim.tbl_contains(disable_filetypes, vim.bo.filetype) then
       vim.o.winbar = nil
     end

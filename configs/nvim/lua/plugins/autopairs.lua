@@ -50,7 +50,7 @@ return {
         end)
         :use_key("]"),
       Rule("``", "`", "rst"),
-      Rule("<", ">", { "html", "htmldjango" })
+      Rule("<", ">", { "html", "htmldjango", "c", "cpp" })
         :with_move(function(opts)
           return opts.char == ">"
         end)

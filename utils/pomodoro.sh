@@ -30,35 +30,37 @@ get_break_interval() {
 }
 
 send_notification() {
-    if [ $1 = "Work!" ]; then
-        face=face-glasses
+    if [ "$1" = "Work!" ]; then
+        face="face-glasses"
     fi
 
-    if [ $1 = "Break!" ]; then
-        face=face-smile
+    if [ "$2" = "Break!" ]; then
+        face="face-smile"
     fi
 
     if which notify-desktop; then
-        if [ $notification_id -eq 0 ]; then
-            notification_id=$(notify-desktop --icon=$face $1)
+        if [ "$notification_id" -eq 0 ]; then
+            notification_id=$(notify-desktop --icon="$face" "$1")
         else
-            notify-desktop --icon=$face -r $notification_id $1
+            notify-desktop --icon="$face" -r "$notification_id" "$1"
         fi
+    elif which osascript; then
+        osascript -e "display notification \"$1\""
     else
-        notify-send $1
+        notify-send "$1"
     fi
 }
 
 run_break_timer() {
     break_count=$((break_count + 1))
 
-    for s in $(eval echo {1..$(get_break_interval)}); do
+    for s in $(eval echo "{1..$(get_break_interval)}"); do
         min=$(( ($(get_break_interval) - $s) / 60 ))
         sec=$(( ($(get_break_interval) - $s) % 60 ))
 
         clear
-        printf "${BOLD}Break timer${NORMAL}\n\n"
-        printf "Time till work: %02d:%02d\n" $min $sec
+        printf '%sBreak timer%s\n\n' "$BOLD" "$NORMAL"
+        printf 'Time till work: %02d:%02d\n' $min $sec
 
         sleep 1
     done
@@ -74,7 +76,7 @@ run_work_timer() {
         sec=$(( ($(get_work_interval) - $s) % 60 ))
 
         clear
-        printf "${BOLD}Work timer${NORMAL}\n\n"
+        printf '%sWork timer%s\n\n' "$BOLD" "$NORMAL"
         printf "Time till break: ${BOLD}${CYAN}%02d:%02d${NORMAL}\n" $min $sec
 
         sleep 1
@@ -89,7 +91,7 @@ ctrl_c() {
     echo "[c]ontinue or [q]uit?"
 
     while [[ "$answer" != "c"  &&  "$answer" != "q" ]]; do
-        read -s -n1 answer
+        read -rs -n1 answer
     done
 
     if [ "$answer" == "q" ]; then
