@@ -26,7 +26,7 @@ keymap("n", "k", "gk")
 keymap("n", "gb", "<cmd>Git blame<cr>")
 
 -- Clear highlights
-keymap("n", "<leader><space>", "<cmd>nohlsearch<CR>", opts)
+keymap("n", "<leader><space>", "<cmd>nohlsearch<cr>", opts)
 
 -- Search for highlighted string
 keymap("v", "//", "y/<c-r>\"<cr>")
@@ -66,7 +66,14 @@ keymap('t', '<c-l>', '<c-\\><c-n><c-w>l')
 -- open terminal on ctrl+t
 keymap('n', '<c-t>', '<cmd>terminal<cr>i', {noremap = true, silent = true})
 
-keymap('i', '<m-l>', '<cmd>lua EscapePair()<CR>')
+keymap('i', '<m-l>', '<cmd>lua EscapePair()<cr>')
+
+-- delete all buffers except current one
+keymap('n', '<leader>bo', '<cmd>%bd|e#|bd#<cr>')
 
 -- formatting
 keymap('n', '<leader><leader>f', function() vim.lsp.buf.format({ timeout_ms = 2000 }) end) -- 2 seconds
+
+keymap('n', ',l', '<cmd>Lazy<cr>')
+keymap('n', ',m', '<cmd>Mason<cr>')
+keymap('n', ',f', '<cmd>G<cr>')

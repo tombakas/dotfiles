@@ -46,4 +46,5 @@ opt.undodir = os.getenv("HOME") .. "/.local/share/nvim/undodir"
 opt.undofile = true
 opt.undolevels = 10000
 
-vim.cmd.colorscheme("everforest")
+vim.o.background="dark"
+vim.cmd.colorscheme("onedark")

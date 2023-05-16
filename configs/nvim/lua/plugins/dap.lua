@@ -1,13 +1,14 @@
 return {
   "mfussenegger/nvim-dap",
 
+  lazy = true,
+
   dependencies = {
     "rcarriga/nvim-dap-ui",
     "mfussenegger/nvim-dap-python",
   },
 
   config = function()
-
     require("dap-python").setup("python", {})
     require("dapui").setup()
   end,
