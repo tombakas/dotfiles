@@ -11,17 +11,23 @@ return {
       { "<leader>be", "<cmd>Telescope buffers<cr>" },
       { "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>" },
       { "<leader>fc", "<cmd>Telescope colorscheme enable_preview=true<cr>" },
-      { "<leader>g",  "<cmd>Telescope git_status<cr>" },
+      { "<leader>g", function()
+        local status, _  =  pcall(require("telescope.builtin").git_status)
+        if (status ~= 0) then
+          print("Not a git directory")
+        end
+      end
+      },
       { "<leader>rs", "<cmd>Telescope resume<cr>" },
       { "<leader>p",  "<cmd>Telescope projects<cr>" },
       { "<leader>fr", "<cmd>Telescope lsp_references<CR>" },
       { "<leader>fw", "<cmd>Telescope grep_string<cr>" },
-      { "\"?",       "<cmd>Telescope registers<cr>" },
+      { "\"?",        "<cmd>Telescope registers<cr>" },
       { "-",          "<cmd>Telescope file_browser<cr>" },
       { "<up>",       "<cmd>Telescope oldfiles<cr>" },
     },
     dependencies = {
-      { "nvim-lua/plenary.nvim", lazy = true },
+      { "nvim-lua/plenary.nvim",                     lazy = true },
       { "nvim-telescope/telescope-file-browser.nvim" },
       { "nvim-telescope/telescope-fzf-native.nvim" },
       { "ahmedkhalf/project.nvim" }
