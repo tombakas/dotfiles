@@ -13,7 +13,7 @@ return {
       { "<leader>fc", "<cmd>Telescope colorscheme enable_preview=true<cr>" },
       { "<leader>g", function()
         local status, _  =  pcall(require("telescope.builtin").git_status)
-        if (status ~= 0) then
+        if (status ~= true) then
           print("Not a git directory")
         end
       end

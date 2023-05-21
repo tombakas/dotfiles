@@ -76,4 +76,3 @@ keymap('n', '<leader><leader>f', function() vim.lsp.buf.format({ timeout_ms = 20
 
 keymap('n', ',l', '<cmd>Lazy<cr>')
 keymap('n', ',m', '<cmd>Mason<cr>')
-keymap('n', ',f', '<cmd>G<cr>')
