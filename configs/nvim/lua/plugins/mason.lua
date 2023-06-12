@@ -1,15 +1,17 @@
 return {
   "williamboman/mason.nvim",
+
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
     "jay-babu/mason-null-ls.nvim",
     "jay-babu/mason-nvim-dap.nvim"
   },
+
   config = function()
     require("mason").setup()
 
     require("mason-null-ls").setup({
-      ensure_installed = { "flake8", "black", "shellcheck", "isort" }
+      ensure_installed = { "flake8", "black", "shellcheck", "isort", "autopep8" }
     })
 
     require("mason-lspconfig").setup({

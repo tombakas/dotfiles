@@ -64,7 +64,7 @@ keymap('t', '<c-k>', '<c-\\><c-n><c-w>k')
 keymap('t', '<c-l>', '<c-\\><c-n><c-w>l')
 
 -- open terminal on ctrl+t
-keymap('n', '<c-t>', '<cmd>terminal<cr>i', {noremap = true, silent = true})
+keymap('n', '<c-t>', '<cmd>terminal<cr>i', { noremap = true, silent = true })
 
 keymap('i', '<m-l>', '<cmd>lua EscapePair()<cr>')
 
@@ -72,7 +72,24 @@ keymap('i', '<m-l>', '<cmd>lua EscapePair()<cr>')
 keymap('n', '<leader>bo', '<cmd>%bd|e#|bd#<cr>')
 
 -- formatting
-keymap('n', '<leader><leader>f', function() vim.lsp.buf.format({ timeout_ms = 2000 }) end) -- 2 seconds
+keymap(
+  { 'n', 'v' }, '<leader><leader>f',
+  function()
+    vim.lsp.buf.format({
+      timeout_ms = 2000,
+      filter = function(client)
+        local mode = vim.api.nvim_get_mode()
+
+        if mode.mode == "n" then
+          return client.name ~= "autopep8"
+        elseif mode.mode == "v" then
+          return client.name ~= "black"
+        else
+          return true
+        end
+      end,
+    })
+  end)
 
 keymap('n', ',l', '<cmd>Lazy<cr>')
 keymap('n', ',m', '<cmd>Mason<cr>')
