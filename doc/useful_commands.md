@@ -1,5 +1,5 @@
 **Redirect traffic from port 80 to 8080**
-`iptables -t nat -A OUTPUT -o lo -p tcp --dport 80 -j REDIRECT --to-port 8080` 
+`iptables -t nat -A OUTPUT -o lo -p tcp --dport 80 -j REDIRECT --to-port 8080`
 
 [Reference](https://askubuntu.com/questions/444729/redirect-port-80-to-8080-and-make-it-work-on-local-machine)
 
@@ -42,3 +42,11 @@ gsettings set org.gnome.desktop.sound theme-name '__custom'
 **Better control of Gnome notifications**
 
 Use this script: [Notify desktop](https://github.com/nowrep/notify-desktop)
+
+---
+
+**PDF operations**
+
+* **splt**: ``pdfseparate <filename>``
+* **rotate**: `pdftk  <input file> cat 1south output <output file>`
+* **unite**: `pdfunite <file1> <file2> <output>`
