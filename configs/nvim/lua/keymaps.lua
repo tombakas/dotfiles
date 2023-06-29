@@ -93,3 +93,7 @@ keymap(
 
 keymap('n', ',l', '<cmd>Lazy<cr>')
 keymap('n', ',m', '<cmd>Mason<cr>')
+
+-- Switch to insert mode after deleting a charecter in select mode
+keymap('s', '<c-l>', '<bs>i')
+keymap('s', '<bs>', '<bs>i')

@@ -33,7 +33,7 @@ def create_symlink(source, target, name=None):
             full_target.rename(new_name)
     elif full_target.is_symlink():
         print("Symlink ", end="")
-        sexy_print.red("Symlink ", full_target, " is broken, unlinking... ")
+        sexy_print.red("Symlink ", full_target.as_posix(), " is broken, unlinking... ")
         full_target.unlink()
     else:
         create_directory(full_target.parent)

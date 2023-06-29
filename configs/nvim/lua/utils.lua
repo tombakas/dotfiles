@@ -1,3 +1,4 @@
+
 local utils = {
   -- Enable lsp servers to draw the nvim-navic winbar
   ["on_attach"] = function(client, bufnr)

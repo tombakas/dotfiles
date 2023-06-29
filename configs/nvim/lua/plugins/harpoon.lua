@@ -5,7 +5,7 @@ return {
   },
   keys = {
     {
-      "<leader>h",
+      "<leader>/",
       function()
         require("harpoon.mark").add_file()
       end

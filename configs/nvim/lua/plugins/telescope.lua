@@ -12,8 +12,8 @@ return {
       { "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>" },
       { "<leader>fc", "<cmd>Telescope colorscheme enable_preview=true<cr>" },
       { "<leader>g", function()
-        local status, _  =  pcall(require("telescope.builtin").git_status)
-        if (status ~= true) then
+        local status, _ = pcall(require("telescope.builtin").git_status)
+        if (not status) then
           print("Not a git directory")
         end
       end
@@ -24,7 +24,7 @@ return {
       { "<leader>fw", "<cmd>Telescope grep_string<cr>" },
       { "\"?",        "<cmd>Telescope registers<cr>" },
       { "-",          "<cmd>Telescope file_browser<cr>" },
-      { "<up>",       "<cmd>Telescope oldfiles<cr>" },
+      { "<leader>h",      "<cmd>Telescope oldfiles<cr>" },
     },
     dependencies = {
       { "nvim-lua/plenary.nvim",                     lazy = true },
