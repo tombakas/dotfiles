@@ -5,7 +5,7 @@ return {
   opts = {
     modes = {
       char = {
-        keys = { "s", "f", "F", "t", "T", ";" },
+        keys = { "s", "f", "F", "t", "T", ";", "," },
       },
     },
   },

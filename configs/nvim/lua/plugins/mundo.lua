@@ -5,7 +5,7 @@ return {
     config = function()
       local keymap = vim.keymap.set
 
-      keymap("n", "<leader>mt", "<cmd>MundoToggle<cr>")
+      keymap("n", "<leader>u", "<cmd>MundoToggle<cr>")
     end
   }
 }

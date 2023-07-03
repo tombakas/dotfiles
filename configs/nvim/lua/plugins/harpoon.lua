@@ -5,13 +5,13 @@ return {
   },
   keys = {
     {
-      "<leader>/",
+      "<leader>H",
       function()
         require("harpoon.mark").add_file()
       end
     },
     {
-      "<leader>.",
+      "<leader>J",
       function()
         require("harpoon.ui").toggle_quick_menu()
       end

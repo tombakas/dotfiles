@@ -11,7 +11,7 @@ return {
     require("mason").setup()
 
     require("mason-null-ls").setup({
-      ensure_installed = { "flake8", "black", "shellcheck", "isort", "autopep8" }
+      ensure_installed = { "flake8", "black", "shellcheck", "isort", "autopep8", "prettier" }
     })
 
     require("mason-lspconfig").setup({
