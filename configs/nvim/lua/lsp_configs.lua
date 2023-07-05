@@ -1,7 +1,7 @@
 local on_attach = require("utils").on_attach
 
 local configs = {
-  ["pyright"] = function()
+  pyright = function()
     require 'lspconfig'.pyright.setup {
       on_attach = on_attach,
       settings = {
@@ -12,7 +12,7 @@ local configs = {
     }
   end,
 
-  ["lua_ls"] = function()
+  lua_ls = function()
     require 'lspconfig'.lua_ls.setup {
       on_attach = on_attach,
       settings = {

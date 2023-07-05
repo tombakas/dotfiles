@@ -20,12 +20,12 @@ return {
       desc = "Flash",
     },
     {
-      "r",
-      mode = "o",
+      "S",
+      mode = { "n", "o", "x" },
       function()
-        require("flash").remote()
+        require("flash").treesitter()
       end,
-      desc = "Remote Flash",
+      desc = "Flash Treesitter",
     },
   }
 }

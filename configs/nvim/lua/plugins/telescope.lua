@@ -2,7 +2,7 @@ return {
   {
     'nvim-telescope/telescope.nvim',
     keys = {
-      { "<leader>t",  '<cmd>Telescope find_files find_command=fd,--exclude,.git,--type,f<cr>' },
+      { "<leader>t",  '<cmd>Telescope find_files find_command=fd,--exclude,.git,--type,f,-H<cr>' },
       { "<leader>y",  '<cmd>Telescope find_files no_ignore=true find_command=fd,--exclude,.git,--type,f<cr>' },
       { "<leader>a",  "<cmd>Telescope live_grep<cr>" },
       { "<leader>ft", "<cmd>Telescope filetypes<cr>" },
@@ -42,7 +42,7 @@ return {
           mappings = {
             i = {
               ["<C-u>"] = false,
-              ["<C-S-u>"] = require('telescope.actions').preview_scrolling_up,
+              ["<C-S-u>"] = "preview_scrolling_up",
             }
           }
         }

@@ -26,7 +26,7 @@ keymap("n", "k", "gk")
 keymap("n", "gb", "<cmd>Git blame<cr>")
 
 -- Clear highlights
-keymap("n", "<leader><space>", "<cmd>nohlsearch<cr>", opts)
+keymap("n", "<leader>,", "<cmd>nohlsearch<cr>", opts)
 
 -- Search for highlighted string
 keymap("v", "//", "y/<c-r>\"<cr>")
