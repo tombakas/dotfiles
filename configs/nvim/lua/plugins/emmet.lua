@@ -1,24 +1,14 @@
-filetypes = { "html", "htmldjango", "vue", "scss", "less", "css" }
-
 return {
   "mattn/emmet-vim",
 
-  ft = filetypes,
-  config = function()
-    vim.g.user_emmet_leader_key = '<c-h>'
+  ft = { "html", "htmldjango", "vue", "scss", "less", "css" },
+  init = function()
     vim.g.user_emmet_install_global = 0
-    vim.g.user_emmet_leader_key = "<c-e>"
+  end,
 
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = filetypes,
-
-      callback = function()
-        local keymap = vim.keymap.set
-
-        keymap("i", "<c-h>", "<plug>(emmet-expand-abbr)")
-        keymap("i", "<c-j>", "<plug>(emmet-move-next)")
-        keymap("i", "<c-k>", "<plug>(emmet-move-prev)")
-      end,
-    })
+  config = function ()
+    vim.keymap.set("i", "<c-h>", "<c-r>=emmet#util#closePopup()<cr><c-r>=emmet#expandAbbr(0,'')<cr>", {desc="Expand emmet abbreviation"})
+    vim.keymap.set({ "i", "n" }, "<m-j>", "<esc>:call emmet#moveNextPrev(0)<cr>", {desc="Emmet go to next edit point"})
+    vim.keymap.set({ "i", "n" }, "<m-k>", "<esc>:call emmet#moveNextPrev(1)<cr>", {desc="Emmet go to previous edit point"})
   end
 }
