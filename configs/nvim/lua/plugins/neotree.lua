@@ -9,5 +9,18 @@ return {
 
   config = function()
     vim.g.neo_tree_remove_legacy_commands = true
+
+    require("neo-tree").setup(
+      {
+        filesystem = {
+          window = {
+            mappings = {
+              ["<F5>"] = "refresh",
+              ["o"] = "open",
+            }
+          }
+        }
+      }
+    )
   end,
 }

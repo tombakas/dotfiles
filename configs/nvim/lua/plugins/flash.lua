@@ -12,6 +12,15 @@ return {
 
   keys = {
     {
+      "<c-_>",
+      mode = { "n" },
+      function()
+        local resp = require("flash").toggle()
+        print("Flash is " .. (resp and "on" or "off"))
+      end,
+      desc = "Toggle flash.nvim",
+    },
+    {
       "s",
       mode = { "n", "x", "o" },
       function()
