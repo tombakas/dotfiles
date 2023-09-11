@@ -23,7 +23,7 @@ keymap("n", "j", "gj")
 keymap("n", "k", "gk")
 
 --- Git blame
-keymap("n", "gb", "<cmd>Git blame<cr>")
+keymap("n", "gb", "<cmd>G blame<cr>")
 
 -- Clear highlights
 keymap("n", "<leader>,", "<cmd>nohlsearch<cr>", opts)
@@ -97,3 +97,6 @@ keymap('n', '<leader>m', '<cmd>Mason<cr>')
 -- Switch to insert mode after deleting a charecter in select mode
 keymap('s', '<c-l>', '<bs>i')
 keymap('s', '<bs>', '<bs>i')
+
+keymap('n', ']d', function () vim.diagnostic.goto_next() end)
+keymap('n', '[d', function () vim.diagnostic.goto_prev() end)

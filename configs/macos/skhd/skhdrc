@@ -1,0 +1,116 @@
+# Changing Window Focus
+# =====================
+
+# Change window focus within space
+alt - h : if [ "$(yabai -m query --spaces --space | jq '.type' | tr -d '\"')" = "bsp" ]; then yabai -m window --focus west; else yabai -m window --focus stack.first; fi
+alt - j : if [ "$(yabai -m query --spaces --space | jq '.type' | tr -d '\"')" = "bsp" ]; then yabai -m window --focus south; else yabai -m window --focus stack.next || yabai -m window --focus stack.first; fi
+alt - k : if [ "$(yabai -m query --spaces --space | jq '.type' | tr -d '\"')" = "bsp" ]; then yabai -m window --focus north; else yabai -m window --focus stack.prev || yabai -m window --focus stack.last; fi
+alt - l : if [ "$(yabai -m query --spaces --space | jq '.type' | tr -d '\"')" = "bsp" ]; then yabai -m window --focus east; else yabai -m window --focus stack.last; fi
+
+# Change focus between external displays (left and right)
+cmd - j: yabai -m display --focus west
+cmd - k: yabai -m display --focus east
+
+# change focus to window #
+alt - 1 : yabai -m space --focus 1;
+alt - 2 : yabai -m space --focus 2;
+alt - 3 : yabai -m space --focus 3;
+alt - 4 : yabai -m space --focus 4;
+alt - 5 : yabai -m space --focus 5;
+alt - 6 : yabai -m space --focus 6;
+alt - 7 : yabai -m space --focus 7;
+
+alt - o : yabai -m space --focus next
+alt - i : yabai -m space --focus prev
+
+alt - tab : yabai -m query --windows | jq '.[] | "\(.id);\(.app)"' | tr -d '"' | column -s ";" -t | choose | awk '{print $1}' | xargs yabai -m window --focus
+
+alt -r : yabai -m window --focus recent
+
+
+# Modifying the Layout
+# ====================
+
+# Rotate layout clockwise
+shift + alt - r : yabai -m space --rotate 270
+
+# Flip along y-axis
+shift + alt - y : yabai -m space --mirror y-axis
+
+# Flip along x-axis
+shift + alt - x : yabai -m space --mirror x-axis
+
+# Toggle window float
+shift + alt - space : yabai -m window --toggle float --grid 4:4:1:1:2:2
+
+shift + alt - w : if [ "$(yabai -m query --spaces --space | jq '.type' | tr -d '\"')" = "bsp" ]; then yabai -m space --layout stack; else yabai -m space --layout bsp; fi
+
+
+# Modifying Windows
+# =================
+
+# Maximize a window
+shift + alt - m : yabai -m window --toggle zoom-fullscreen
+
+# Balance out tree of windows (resize to occupy same area)
+shift + alt - e : yabai -m space --balance
+
+# Close window
+shift + alt - q : yabai -m window --close
+
+# Increase window size
+shift + cmd - h : yabai -m window --resize left:-20:0
+shift + cmd - j : yabai -m window --resize bottom:0:20
+shift + cmd - k : yabai -m window --resize top:0:-20
+shift + cmd - l : yabai -m window --resize right:20:0
+
+# Reduce window size
+ctrl + cmd - h : yabai -m window --resize right:-20:0
+ctrl + cmd - j : yabai -m window --resize top:0:20
+ctrl + cmd - k : yabai -m window --resize bottom:0:-20
+ctrl + cmd - l : yabai -m window --resize left:20:0
+
+
+# Moving Windows Around
+# =====================
+
+# Swap windows
+shift + alt - j : yabai -m window --swap south
+shift + alt - k : yabai -m window --swap north
+shift + alt - h : yabai -m window --swap west
+shift + alt - l : yabai -m window --swap east
+
+# Move window to display left and right
+shift + cmd - j : yabai -m window --display west; yabai -m display --focus south;
+shift + alt - k : yabai -m window --display east; yabai -m display --focus north;
+
+# Move window to prev and next space
+shift + alt - p : yabai -m window --space prev;
+shift + alt - n : yabai -m window --space next;
+
+# Move window to space #
+shift + alt - 1 : yabai -m window --space 1;
+shift + alt - 2 : yabai -m window --space 2;
+shift + alt - 3 : yabai -m window --space 3;
+shift + alt - 4 : yabai -m window --space 4;
+shift + alt - 5 : yabai -m window --space 5;
+shift + alt - 6 : yabai -m window --space 6;
+shift + alt - 7 : yabai -m window --space 7;
+
+shift + alt - c : yabai -m space --create;
+
+
+# Starting/Stopping/Restarting Yabai
+# ==================================
+
+# Stop/start/restart yabai
+ctrl + alt - q : yabai --service-stop
+ctrl + alt - s : yabai --service-start
+ctrl + alt - r : yabai --service-restart
+
+
+# Misc
+# ----
+# Prevent Macos from annoyingly hiding windows
+cmd - h : true
+shift + ctrl - p : toggle_spotify.sh
