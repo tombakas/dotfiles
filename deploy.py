@@ -32,6 +32,10 @@ def setup_neovim():
         Path(BASE_DIR, "configs/fish/neovim_env.fish"),
         "~/.config/fish/conf.d/neovim_env.fish",
     )
+    create_symlink(
+        Path(BASE_DIR, "configs/editorconfig"),
+        "~/.editorconfig",
+    )
 
     # Set up virtual environment
     virtualenv_dir = Path(CONFIG["Paths"]["VIRTUALENV_DIR"]).expanduser()
