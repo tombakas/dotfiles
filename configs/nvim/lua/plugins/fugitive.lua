@@ -18,6 +18,6 @@ return {
       end
     }
   },
-  event = "BufAdd",
+  event = "BufNew",
   cmd = "G"
 }

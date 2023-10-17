@@ -1,11 +1,11 @@
 return {
   "lukas-reineke/indent-blankline.nvim",
+  main = "ibl",
 
-  init = function ()
-    vim.g.indent_blankline_filetype_exclude = { "html", "htmldjango", "help", "txt"}
+  config = function()
+    require("ibl").setup({
+      exclude = { filetypes = { "html", "htmldjango", "help", "txt" } },
+      scope = { enabled = true }
+    })
   end,
-
-  opts = {
-    show_current_context = true
-  }
 }

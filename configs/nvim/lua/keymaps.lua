@@ -42,6 +42,7 @@ keymap("i", "<C-e>", "<C-o>$")
 keymap("i", "<c-l>", "<del>")
 
 keymap("n", "<leader>jq", ":%!jq \".\"<cr>")
+keymap("v", "<leader>jq", ":'<,'>!jq<cr>")
 
 -- Map % to Tab
 keymap("n", "<tab>", "%")
@@ -71,26 +72,7 @@ keymap('i', '<m-l>', '<cmd>lua EscapePair()<cr>')
 -- delete all buffers except current one
 keymap('n', '<leader>bo', '<cmd>%bd|e#|bd#<cr>')
 
--- formatting
-keymap(
-  { 'n', 'v' }, '<leader><leader>f',
-  function()
-    vim.lsp.buf.format({
-      timeout_ms = 2000,
-      filter = function(client)
-        local mode = vim.api.nvim_get_mode()
-
-        if mode.mode == "n" then
-          return client.name ~= "autopep8"
-        elseif mode.mode == "v" then
-          return client.name ~= "black"
-        else
-          return true
-        end
-      end,
-    })
-  end)
-
+-- Launching plugins
 keymap('n', '<leader>l', '<cmd>Lazy<cr>')
 keymap('n', '<leader>m', '<cmd>Mason<cr>')
 

@@ -3,36 +3,29 @@ return {
 
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
-    "jay-babu/mason-null-ls.nvim",
     "jay-babu/mason-nvim-dap.nvim",
-
-    "jose-elias-alvarez/null-ls.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim"
   },
 
   config = function()
-    local null_ls = require("null-ls")
-    local null_ls_packages = { "autopep8", "black", "flake8", "isort", "prettier", "shellcheck" }
-    local lspconfig_packages = { "bashls", "lua_ls", "pyright", "tsserver", "yamlls" }
-
-    null_ls.setup()
     require("mason").setup()
 
-    ----------- null_ls
-    require("mason-null-ls").setup({
-      ensure_installed = null_ls_packages,
-      handlers = {
-        -- Custom null-ls handler configs go here
-        flake8 = function()
-          null_ls.register(null_ls.builtins.diagnostics.flake8.with({
-            extra_args = { "--max-line-length", "120" }
-          }))
-        end,
+    ----------- generic tools
+    require('mason-tool-installer').setup {
+      ensure_installed = {
+        "black",
+        "djlint",
+        "flake8",
+        "isort",
+        "prettier",
+        "shellcheck",
+        "stylua",
       }
-    })
+    }
 
     ----------- lspconfig
     require("mason-lspconfig").setup({
-      ensure_installed = lspconfig_packages
+      ensure_installed = { "bashls", "lua_ls", "pyright", "tsserver", "yamlls" }
     })
     require("mason-lspconfig").setup_handlers(vim.tbl_extend(
       "keep",
