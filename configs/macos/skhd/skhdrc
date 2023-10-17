@@ -8,8 +8,10 @@ alt - k : if [ "$(yabai -m query --spaces --space | jq '.type' | tr -d '\"')" = 
 alt - l : if [ "$(yabai -m query --spaces --space | jq '.type' | tr -d '\"')" = "bsp" ]; then yabai -m window --focus east; else yabai -m window --focus stack.last; fi
 
 # Change focus between external displays (left and right)
-cmd - j: yabai -m display --focus west
-cmd - k: yabai -m display --focus east
+ctrl + cmd - h: yabai -m display --focus west
+ctrl + cmd - j: yabai -m display --focus south
+ctrl + cmd - k: yabai -m display --focus north
+ctrl + cmd - l: yabai -m display --focus east
 
 # change focus to window #
 alt - 1 : yabai -m space --focus 1;
@@ -25,7 +27,7 @@ alt - i : yabai -m space --focus prev
 
 alt - tab : yabai -m query --windows | jq '.[] | "\(.id);\(.app)"' | tr -d '"' | column -s ";" -t | choose | awk '{print $1}' | xargs yabai -m window --focus
 
-alt -r : yabai -m window --focus recent
+alt - r : yabai -m window --focus recent
 
 
 # Modifying the Layout
@@ -80,9 +82,11 @@ shift + alt - k : yabai -m window --swap north
 shift + alt - h : yabai -m window --swap west
 shift + alt - l : yabai -m window --swap east
 
-# Move window to display left and right
-shift + cmd - j : yabai -m window --display west; yabai -m display --focus south;
-shift + alt - k : yabai -m window --display east; yabai -m display --focus north;
+# Move window across displays
+shift + ctrl + cmd - h : yabai -m window --display west; yabai -m display --focus west;
+shift + ctrl + cmd - j : yabai -m window --display south; yabai -m display --focus south;
+shift + ctrl + cmd - k : yabai -m window --display north; yabai -m display --focus north;
+shift + ctrl + cmd - l : yabai -m window --display east; yabai -m display --focus east;
 
 # Move window to prev and next space
 shift + alt - p : yabai -m window --space prev;
