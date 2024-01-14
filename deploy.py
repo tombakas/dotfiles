@@ -42,7 +42,7 @@ def setup_neovim():
     virtualenv_dir.parent.mkdir(parents=True, exist_ok=True)
 
     if not Path(virtualenv_dir).exists():
-        call(["virtualenv", "-p", "python3", virtualenv_dir])
+        call(["python3", "-m", "venv", virtualenv_dir])
         call(
             [
                 Path(virtualenv_dir, "bin", "pip"),

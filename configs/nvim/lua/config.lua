@@ -39,6 +39,7 @@ opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = true -- Wrap long lines
 opt.inccommand = 'split'
+opt.cmdheight = 0
 
 opt.swapfile = false
 opt.backup = false
