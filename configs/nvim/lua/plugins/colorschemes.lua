@@ -10,15 +10,7 @@ local colorschemes = {
   "sainnhe/sonokai",
 }
 
-local plugins = {
-  {
-    "sheerun/vim-polyglot",
-    event = "BufAdd",
-    config = function()
-      vim.g.python_highlight_file_headers_as_comments = 1
-    end
-  },
-}
+local plugins = {}
 
 for _, value in pairs(colorschemes) do
   table.insert(plugins, { value, event = "BufLeave" })

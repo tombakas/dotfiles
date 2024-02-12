@@ -4,8 +4,8 @@ return {
 
   config = function()
     require("ibl").setup({
-      exclude = { filetypes = { "html", "htmldjango", "help", "txt" } },
-      scope = { enabled = true }
+      exclude = { filetypes = { "html", "htmldjango", "help", "txt", "rst" } },
+      scope = { enabled = true },
     })
   end,
 }
