@@ -56,18 +56,10 @@ return {
             sort_lastused = true,
             mappings = {
               i = {
-                ["<C-d>"] = require("telescope.actions").delete_buffer
+                ["<C-x>"] = require("telescope.actions").delete_buffer
               }
             }
           }
-        },
-        defaults = {
-          mappings = {
-            i = {
-              ["<C-u>"] = false,
-              ["<C-S-u>"] = "preview_scrolling_up",
-            },
-          },
         },
       })
     end,
