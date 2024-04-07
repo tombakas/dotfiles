@@ -8,7 +8,6 @@ return {
     "hrsh7th/cmp-path",
     "hrsh7th/cmp-cmdline",
     "hrsh7th/cmp-nvim-lsp-signature-help",
-    "rcarriga/cmp-dap",
     "saadparwaiz1/cmp_luasnip",
   },
   config = function()
@@ -73,12 +72,6 @@ return {
           { name = "cmdline" },
         }),
       }),
-    })
-
-    require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
-      sources = {
-        { name = "dap" },
-      },
     })
 
     vim.api.nvim_set_keymap("c", "<C-y>", "", {
