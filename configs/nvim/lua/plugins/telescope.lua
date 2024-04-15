@@ -37,7 +37,7 @@ return {
       { "<leader>fw", "<cmd>Telescope grep_string<cr>" },
       { '"?', "<cmd>Telescope registers<cr>" },
       { "-", "<cmd>Telescope file_browser<cr>" },
-      { "<leader>h", "<cmd>Telescope oldfiles<cr>" },
+      { "<leader>fh", "<cmd>Telescope oldfiles<cr>" },
     },
     dependencies = {
       { "nvim-lua/plenary.nvim", lazy = true },

@@ -56,7 +56,7 @@ keymap("i", "<s-tab>", "<c-d>")
 keymap("n", "<leader>z", "<cmd>lua ZoomToggle()<cr>")
 
 -- Exit terminal by pressing ESC
-keymap('t', '<esc>', '<c-\\><c-n>')
+keymap('t', '<c-t>', '<c-\\><c-n>')
 
 -- Moving around terminal mode
 keymap('t', '<c-h>', '<c-\\><c-n><c-w>h')
