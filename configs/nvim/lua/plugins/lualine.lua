@@ -16,7 +16,10 @@ return {
     lualine.setup({
       sections = {
         lualine_b = {
-          { "macro-recording", fmt = show_macro_recording },
+          { "macro_recording", fmt = show_macro_recording },
+          "branch",
+          "diff",
+          "diagnostics",
         },
       },
     })
