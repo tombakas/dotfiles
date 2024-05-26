@@ -4,7 +4,17 @@ return {
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup({
-        ensure_installed = { "python", "javascript", "css", "scss", "html", "lua", "bash" },
+        ensure_installed = {
+          "bash",
+          "css",
+          "html",
+          "javascript",
+          "lua",
+          "markdown",
+          "scss",
+          "python",
+          "vimdoc",
+        },
 
         matchup = {
           enable = true,

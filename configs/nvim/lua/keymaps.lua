@@ -29,7 +29,7 @@ keymap("n", "gb", "<cmd>G blame<cr>")
 keymap("n", "<leader>,", "<cmd>nohlsearch<cr>", opts)
 
 -- Search for highlighted string
-keymap("v", "//", "y/<c-r>\"<cr>")
+keymap("v", "//", 'y/<c-r>"<cr>')
 
 -- Exit insert mode by hitting jj
 keymap("i", "jj", "<esc>")
@@ -41,7 +41,7 @@ keymap("i", "<C-e>", "<C-o>$")
 -- control-l deletes right character in insert mode
 keymap("i", "<c-l>", "<del>")
 
-keymap("n", "<leader>jq", ":%!jq \".\"<cr>")
+keymap("n", "<leader>jq", ':%!jq "."<cr>')
 keymap("v", "<leader>jq", ":'<,'>!jq<cr>")
 
 -- Map % to Tab
@@ -56,29 +56,37 @@ keymap("i", "<s-tab>", "<c-d>")
 keymap("n", "<leader>z", "<cmd>lua ZoomToggle()<cr>")
 
 -- Exit terminal by pressing ESC
-keymap('t', '<c-t>', '<c-\\><c-n>')
+keymap("t", "<c-t>", "<c-\\><c-n>")
 
 -- Moving around terminal mode
-keymap('t', '<c-h>', '<c-\\><c-n><c-w>h')
-keymap('t', '<c-j>', '<c-\\><c-n><c-w>j')
-keymap('t', '<c-k>', '<c-\\><c-n><c-w>k')
-keymap('t', '<c-l>', '<c-\\><c-n><c-w>l')
+keymap("t", "<c-h>", "<c-\\><c-n><c-w>h")
+keymap("t", "<c-j>", "<c-\\><c-n><c-w>j")
+keymap("t", "<c-k>", "<c-\\><c-n><c-w>k")
+keymap("t", "<c-l>", "<c-\\><c-n><c-w>l")
 
 -- open terminal on ctrl+t
-keymap('n', '<c-t>', '<cmd>terminal<cr>i', { noremap = true, silent = true })
+keymap("n", "<c-t>", "<cmd>terminal<cr>i", { noremap = true, silent = true })
 
-keymap('i', '<m-l>', '<cmd>lua EscapePair()<cr>')
+keymap("i", "<m-l>", "<cmd>lua EscapePair()<cr>")
 
 -- delete all buffers except current one
-keymap('n', '<leader>bo', '<cmd>%bd|e#|bd#<cr>')
+keymap("n", "<leader>bo", "<cmd>%bd|e#|bd#<cr>")
 
 -- Launching plugins
-keymap('n', '<leader>l', '<cmd>Lazy<cr>')
-keymap('n', '<leader>m', '<cmd>Mason<cr>')
+keymap("n", "<leader>l", "<cmd>Lazy<cr>")
+keymap("n", "<leader>m", "<cmd>Mason<cr>")
 
 -- Switch to insert mode after deleting a charecter in select mode
-keymap('s', '<c-l>', '<bs>i')
-keymap('s', '<bs>', '<bs>i')
+keymap("s", "<c-l>", "<bs>i")
+keymap("s", "<bs>", "<bs>i")
 
-keymap('n', ']d', function () vim.diagnostic.goto_next() end)
-keymap('n', '[d', function () vim.diagnostic.goto_prev() end)
+-- New mapping for opening the manual for keyword under cursor, as Neovim 0.10
+-- replaces the K mapping with the lsp hover function
+keymap("n", "gk", "K")
+
+keymap("n", "]d", function()
+  vim.diagnostic.goto_next()
+end)
+keymap("n", "[d", function()
+  vim.diagnostic.goto_prev()
+end)
