@@ -19,6 +19,7 @@ return {
         "isort",
         "prettier",
         "shellcheck",
+        "sqlfluff",
         "stylua",
       }
     }
