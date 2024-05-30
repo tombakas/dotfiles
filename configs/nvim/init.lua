@@ -1,5 +1,6 @@
 require("initialize")
 require("functions")
 require("autocommands")
+require("user_commands")
 require("keymaps")
 require("config")
