@@ -4,7 +4,7 @@ return {
     require("lint").linters_by_ft = {
       python = { "flake8" },
       html = { "djlint" },
-      htmldjango = { "djlint" }
+      htmldjango = { "djlint" },
     }
 
     local flake8 = require('lint').linters.flake8
