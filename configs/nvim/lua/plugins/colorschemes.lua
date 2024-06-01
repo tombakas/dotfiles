@@ -3,6 +3,7 @@ local colorschemes = {
   "arcticicestudio/nord-vim",
   "catppuccin/nvim",
   "sainnhe/gruvbox-material",
+  "ellisonleao/gruvbox.nvim",
   "folke/tokyonight.nvim",
   "navarasu/onedark.nvim",
   "rebelot/kanagawa.nvim",

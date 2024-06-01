@@ -50,6 +50,7 @@ return {
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("projects")
 
+      local action_layout = require("telescope.actions.layout")
       require("telescope").setup({
         pickers = {
           buffers = {
@@ -61,6 +62,16 @@ return {
             }
           }
         },
+        defaults = {
+          mappings = {
+            n = {
+              ["<M-p>"] = action_layout.toggle_preview
+            },
+            i = {
+              ["<M-p>"] = action_layout.toggle_preview
+            },
+          },
+        }
       })
     end,
   },
