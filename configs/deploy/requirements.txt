@@ -1,5 +1,1 @@
 pynvim
-jedi
-python-lsp-server[all]
-black
-flake8

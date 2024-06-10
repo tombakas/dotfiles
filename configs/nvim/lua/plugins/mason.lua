@@ -3,7 +3,6 @@ return {
 
   dependencies = {
     "williamboman/mason-lspconfig.nvim",
-    "jay-babu/mason-nvim-dap.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim"
   },
 
@@ -44,11 +43,5 @@ return {
       -- Dedicated handlers for specific servers.
       require("lsp_configs"))
     )
-
-    ----------- nvim-dap
-    require("mason-nvim-dap").setup({
-      ensure_installed = { "python" },
-      automatic_setup = true,
-    })
   end
 }
