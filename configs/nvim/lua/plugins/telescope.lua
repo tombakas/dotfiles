@@ -3,7 +3,7 @@ return {
     "nvim-telescope/telescope.nvim",
     keys = {
       { "<leader>t", "<cmd>Telescope find_files find_command=fd,--exclude,.git,--type,f,-H<cr>" },
-      { "<leader>y", "<cmd>Telescope find_files no_ignore=true find_command=fd,--exclude,.git,--type,f<cr>" },
+      { "<leader>y", "<cmd>Telescope find_files no_ignore=true find_command=fd,--exclude,.git,--type,f<cr>", desc = "Find files including the ones in .gitignore" },
       { "<leader>a", "<cmd>Telescope live_grep<cr>" },
       { "<leader>ft", "<cmd>Telescope filetypes<cr>" },
       { "<leader>fk", "<cmd>Telescope keymaps<cr>" },

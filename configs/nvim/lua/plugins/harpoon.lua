@@ -4,7 +4,8 @@ return {
   dependencies = { "nvim-lua/plenary.nvim" },
 
   opts = {
-    save_on_toggle = true,
+    save_on_toggle = false,
+    save_on_menu_quit = false,
   },
 
   config = function()
@@ -16,7 +17,7 @@ return {
       harpoon:list():add()
     end, { desc = "Harpoon add" })
 
-    vim.keymap.set("n", "<leader>hm", function()
+    vim.keymap.set("n", "<leader>hq", function()
       harpoon.ui:toggle_quick_menu(harpoon:list())
     end, { desc = "Harpoon quick menu" })
 

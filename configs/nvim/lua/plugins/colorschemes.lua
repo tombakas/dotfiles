@@ -2,12 +2,13 @@ local colorschemes = {
   "EdenEast/nightfox.nvim",
   "arcticicestudio/nord-vim",
   "catppuccin/nvim",
-  "sainnhe/gruvbox-material",
   "ellisonleao/gruvbox.nvim",
   "folke/tokyonight.nvim",
   "navarasu/onedark.nvim",
+  "projekt0n/github-nvim-theme",
   "rebelot/kanagawa.nvim",
   "sainnhe/everforest",
+  "sainnhe/gruvbox-material",
   "sainnhe/sonokai",
 }
 

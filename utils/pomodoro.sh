@@ -55,8 +55,8 @@ run_break_timer() {
     break_count=$((break_count + 1))
 
     for s in $(eval echo "{1..$(get_break_interval)}"); do
-        min=$(( ($(get_break_interval) - $s) / 60 ))
-        sec=$(( ($(get_break_interval) - $s) % 60 ))
+        min=$(( ($(get_break_interval) - s) / 60 ))
+        sec=$(( ($(get_break_interval) - s) % 60 ))
 
         clear
         printf '%sBreak timer%s\n\n' "$BOLD" "$NORMAL"
@@ -71,9 +71,9 @@ run_break_timer() {
 }
 
 run_work_timer() {
-    for s in $(eval echo {1..$(get_work_interval)}); do
-        min=$(( ($(get_work_interval) - $s) / 60 ))
-        sec=$(( ($(get_work_interval) - $s) % 60 ))
+    for s in $(eval echo "{1..$(get_work_interval)}"); do
+        min=$(( ($(get_work_interval) - s) / 60 ))
+        sec=$(( ($(get_work_interval) - s) % 60 ))
 
         clear
         printf '%sWork timer%s\n\n' "$BOLD" "$NORMAL"
@@ -95,24 +95,13 @@ ctrl_c() {
     done
 
     if [ "$answer" == "q" ]; then
-        if which tmux; then
-            tmux setw automatic-rename
-        fi
-
         exit
     fi
 
     unset answer
 }
 
-rename_pane() {
-    if which tmux; then
-        tmux rename-window pomodoro;
-    fi
-}
-
 while true; do
-    rename_pane
     run_work_timer
     run_break_timer
 done

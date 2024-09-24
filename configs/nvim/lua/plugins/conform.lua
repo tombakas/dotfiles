@@ -5,7 +5,7 @@ return {
       mode = { "n", "v" },
       "<leader><leader>f",
       function()
-        require("conform").format({ lsp_fallback = true })
+        require("conform").format({ lsp_fallback = true, timeout_ms = 3000 })
       end,
     },
   },
@@ -14,13 +14,14 @@ return {
     require("conform").setup({
 
       formatters_by_ft = {
-        html = { "djlint" },
-        htmldjango = { "djlint" },
-        lua = { "stylua" },
-        python = { "isort", "black" },
-        javascript = { "prettier" },
         sql = { "sqlfluff" },
+        python = { "isort", "black" },
         markdown = { "injected" },
+        lua = { "stylua" },
+        less = { "stylelint" },
+        javascript = { "prettier" },
+        htmldjango = { "djlint" },
+        html = { "djlint" },
       },
 
       formatters = {
@@ -61,8 +62,9 @@ return {
           inherit = false,
 
           command = "sqlfluff",
-          args = { "fix", "--dialect=postgres", "--exclude-rules=AM04", "-" },
+          args = { "format", "--dialect=postgres", "--exclude-rules=AM04", "-" },
           stdin = true,
+          timeout_ms = nil,
           require_cwd = false,
         },
       },
