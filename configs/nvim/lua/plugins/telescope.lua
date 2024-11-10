@@ -1,9 +1,32 @@
+local ts_builtin = require("telescope.builtin")
+
+local function get_find_files(arg)
+  local find_command = {
+    "fd", "--exclude", ".git", "--type", "f", "-H",
+  }
+
+  if not arg then
+    arg = {}
+  end
+
+  return function()
+    ts_builtin.find_files({ no_ignore = arg.no_ignore, find_command = find_command })
+  end
+end
+
 return {
   {
     "nvim-telescope/telescope.nvim",
     keys = {
-      { "<leader>t", "<cmd>Telescope find_files find_command=fd,--exclude,.git,--type,f,-H<cr>" },
-      { "<leader>y", "<cmd>Telescope find_files no_ignore=true find_command=fd,--exclude,.git,--type,f<cr>", desc = "Find files including the ones in .gitignore" },
+      {
+        "<leader>t",
+        get_find_files(),
+      },
+      {
+        "<leader>y",
+        get_find_files({ no_ignore = true }),
+        desc = "Find files including the ones in .gitignore",
+      },
       { "<leader>a", "<cmd>Telescope live_grep<cr>" },
       { "<leader>ft", "<cmd>Telescope filetypes<cr>" },
       { "<leader>fk", "<cmd>Telescope keymaps<cr>" },
@@ -36,7 +59,6 @@ return {
       { "<leader>fr", "<cmd>Telescope lsp_references<CR>" },
       { "<leader>fw", "<cmd>Telescope grep_string<cr>" },
       { '"?', "<cmd>Telescope registers<cr>" },
-      { "-", "<cmd>Telescope file_browser<cr>" },
       { "<leader>fh", "<cmd>Telescope oldfiles<cr>" },
     },
     dependencies = {
@@ -51,33 +73,34 @@ return {
       require("telescope").load_extension("projects")
 
       local action_layout = require("telescope.actions.layout")
+
       require("telescope").setup({
         pickers = {
           buffers = {
             sort_lastused = true,
             mappings = {
               i = {
-                ["<C-x>"] = require("telescope.actions").delete_buffer
-              }
-            }
-          }
+                ["<C-x>"] = require("telescope.actions").delete_buffer,
+              },
+            },
+          },
         },
         defaults = {
           mappings = {
             n = {
-              ["<M-p>"] = action_layout.toggle_preview
+              ["<M-p>"] = action_layout.toggle_preview,
             },
             i = {
-              ["<M-p>"] = action_layout.toggle_preview
+              ["<M-p>"] = action_layout.toggle_preview,
             },
           },
-        }
+          path_display = {
+            "shorten_path",
+            "smart",
+          },
+        },
       })
     end,
-  },
-
-  {
-    "nvim-telescope/telescope-file-browser.nvim",
   },
 
   {

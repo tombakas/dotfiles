@@ -31,7 +31,7 @@ return {
 
       -- files
       require("mini.files").setup({
-        vim.keymap.set("n", "<leader>-", function()
+        vim.keymap.set("n", "-", function()
           local file = vim.api.nvim_buf_get_name(0)
           if file then
             require("mini.files").open(file)

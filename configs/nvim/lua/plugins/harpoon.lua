@@ -38,7 +38,7 @@ return {
     vim.keymap.set("n", "<leader>hp", function()
       harpoon:list():prev()
     end, { desc = "Harpoon prev" })
-    vim.keymap.set("n", "<leadeer>hn", function()
+    vim.keymap.set("n", "<leader>hn", function()
       harpoon:list():next()
     end, { desc = "Harpoon next" })
 

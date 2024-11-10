@@ -27,7 +27,7 @@ local configs = {
             }
           },
           diagnostics = {
-            globals = { "vim" }
+            globals = { "vim", "Snacks" }
           }
         }
       }

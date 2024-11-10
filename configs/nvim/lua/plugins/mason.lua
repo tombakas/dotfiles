@@ -25,7 +25,7 @@ return {
 
     ----------- lspconfig
     require("mason-lspconfig").setup({
-      ensure_installed = { "bashls", "lua_ls", "pyright", "tsserver", "yamlls" }
+      ensure_installed = { "bashls", "lua_ls", "pyright", "ts_ls", "yamlls" }
     })
     require("mason-lspconfig").setup_handlers(vim.tbl_extend(
       "keep",
