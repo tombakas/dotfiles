@@ -22,9 +22,6 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("n", "j", "gj")
 keymap("n", "k", "gk")
 
---- Git blame
-keymap("n", "gb", "<cmd>G blame<cr>")
-
 -- Clear highlights
 keymap("n", "<leader>,", "<cmd>nohlsearch<cr>", opts)
 

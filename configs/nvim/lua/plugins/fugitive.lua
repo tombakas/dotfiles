@@ -1,10 +1,4 @@
 return {
-  dependencies = {
-    {
-      "tommcdo/vim-fubitive",
-    }
-  },
-
   "tpope/vim-fugitive",
 
   keys = {
@@ -12,12 +6,18 @@ return {
       "<leader>G",
       function()
         local status, _ = pcall(vim.cmd.G)
-        if (status ~= true) then
+        if status ~= true then
           print("Not a git directory")
         end
-      end
-    }
+      end,
+    },
+    {
+      "<leader>gb",
+      function()
+        vim.cmd.G("blame")
+      end,
+    },
   },
   event = "BufNew",
-  cmd = "G"
+  cmd = "G",
 }

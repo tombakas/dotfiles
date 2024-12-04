@@ -26,6 +26,14 @@ return {
       desc = "Delete Buffer",
     },
     {
+      "<leader>gb",
+      mode = "v",
+      function()
+        require('snacks').gitbrowse()
+      end,
+      desc = "Git browse"
+    },
+    {
       "<leader>gg",
       function()
         Snacks.lazygit()

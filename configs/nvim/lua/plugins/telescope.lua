@@ -2,7 +2,12 @@ local ts_builtin = require("telescope.builtin")
 
 local function get_find_files(arg)
   local find_command = {
-    "fd", "--exclude", ".git", "--type", "f", "-H",
+    "fd",
+    "--exclude",
+    ".git",
+    "--type",
+    "f",
+    "-H",
   }
 
   if not arg then
@@ -19,19 +24,25 @@ return {
     "nvim-telescope/telescope.nvim",
     keys = {
       {
-        "<leader>t",
+        "<leader>ff",
         get_find_files(),
+        desc = "Find files",
       },
       {
-        "<leader>y",
+        "<leader>t",
+        get_find_files(),
+        desc = "Find files",
+      },
+      {
+        "<leader>fi",
         get_find_files({ no_ignore = true }),
         desc = "Find files including the ones in .gitignore",
       },
+      { "<leader>fg", "<cmd>Telescope live_grep<cr>" },
       { "<leader>a", "<cmd>Telescope live_grep<cr>" },
       { "<leader>ft", "<cmd>Telescope filetypes<cr>" },
       { "<leader>fk", "<cmd>Telescope keymaps<cr>" },
-      { "<leader>fb", "<cmd>Telescope current_buffer_fuzzy_find<cr>" },
-      { "<leader>be", "<cmd>Telescope buffers<cr>" },
+      { "<leader>fb", "<cmd>Telescope buffers<cr>" },
       { "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>" },
       { "<leader>fc", "<cmd>Telescope colorscheme enable_preview=true<cr>" },
       {
@@ -55,20 +66,18 @@ return {
         desc = "Git branches",
       },
       { "<leader>rs", "<cmd>Telescope resume<cr>" },
-      { "<leader>p", "<cmd>Telescope projects<cr>" },
-      { "<leader>fr", "<cmd>Telescope lsp_references<CR>" },
+      { "<leader>fp", "<cmd>Telescope projects<cr>" },
+      { "<leader>fl", "<cmd>Telescope lsp_references<CR>" },
       { "<leader>fw", "<cmd>Telescope grep_string<cr>" },
       { '"?', "<cmd>Telescope registers<cr>" },
       { "<leader>fh", "<cmd>Telescope oldfiles<cr>" },
     },
     dependencies = {
       { "nvim-lua/plenary.nvim", lazy = true },
-      { "nvim-telescope/telescope-file-browser.nvim" },
       { "nvim-telescope/telescope-fzf-native.nvim" },
       { "ahmedkhalf/project.nvim" },
     },
     config = function()
-      require("telescope").load_extension("file_browser")
       require("telescope").load_extension("fzf")
       require("telescope").load_extension("projects")
 
@@ -95,8 +104,7 @@ return {
             },
           },
           path_display = {
-            "shorten_path",
-            "smart",
+            "truncate",
           },
         },
       })
