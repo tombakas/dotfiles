@@ -9,7 +9,6 @@ export GTK_THEME=Dracula
 export DOTFILE_DIR="$(readlink -f ~/.tomasrc | cut -d / -f 1-5)"
 export PATH=$HOME/local/bin:$DOTFILE_DIR/utils:${NPM_BIN_DIR}:$PATH
 export GOPATH=$HOME/.go
-export NEOVIM_ENV=$(awk -F "=" '/VIRTUALENV_DIR/ {print $2}' $DOTFILE_DIR/configs/deploy/config.ini | tr -d " ")
 export GIT_EDITOR=nvim
 # -------------------------------------------------------------------------------
 
@@ -18,6 +17,11 @@ export GIT_EDITOR=nvim
 alias rm="rm -v"
 alias tmux="tmux -2"
 alias emacs="emacs -nw"
+alias gs="git status"
+alias gd="git diff"
+alias gl="git git log"
+alias zlj='zellij --layout compact options --no-pane-frames'
+alias zla='zellij --layout compact attach options'
 
 . $DOTFILE_DIR/configs/bash/aliases.sh
 # -------------------------------------------------------------------------------

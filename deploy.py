@@ -13,17 +13,6 @@ def setup_neovim():
     virtualenv_dir = Path(CONFIG["Paths"]["VIRTUALENV_DIR"]).expanduser()
     virtualenv_dir.parent.mkdir(parents=True, exist_ok=True)
 
-    if not Path(virtualenv_dir).exists():
-        call(["python3", "-m", "venv", virtualenv_dir])
-        call(
-            [
-                Path(virtualenv_dir, "bin", "pip"),
-                "install",
-                "-r",
-                "./configs/deploy/requirements.txt",
-            ]
-        )
-
     # Set up nvim related config files
     create_symlink("configs/sqlfluff", "~/.sqlfluff")
     create_symlink("configs/nvim/init.lua", "~/.config/nvim/init.lua")
