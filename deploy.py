@@ -1,26 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from pathlib import Path
-from subprocess import call
-
-from deploy.config import CONFIG
 from deploy.utils import add_line_to_file, create_symlink
 
 
 def setup_neovim():
-    # Set up virtual environment
-    virtualenv_dir = Path(CONFIG["Paths"]["VIRTUALENV_DIR"]).expanduser()
-    virtualenv_dir.parent.mkdir(parents=True, exist_ok=True)
-
     # Set up nvim related config files
     create_symlink("configs/sqlfluff", "~/.sqlfluff")
-    create_symlink("configs/nvim/init.lua", "~/.config/nvim/init.lua")
-    create_symlink("configs/nvim/lua", "~/.config/nvim/lua")
-    create_symlink("configs/nvim/indent", "~/.config/nvim/indent")
-    create_symlink(
-        "configs/fish/neovim_env.fish", "~/.config/fish/conf.d/neovim_env.fish"
-    )
+    create_symlink("configs/nvim/", "~/.config/nvim/")
     create_symlink("configs/editorconfig", "~/.editorconfig")
 
 

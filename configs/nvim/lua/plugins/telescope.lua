@@ -1,23 +1,11 @@
-local ts_builtin = require("telescope.builtin")
-
-local function get_find_files(arg)
-  local find_command = {
-    "fd",
-    "--exclude",
-    ".git",
-    "--type",
-    "f",
-    "-H",
-  }
-
-  if not arg then
-    arg = {}
-  end
-
-  return function()
-    ts_builtin.find_files({ no_ignore = arg.no_ignore, find_command = find_command })
-  end
-end
+local find_command = {
+  "fd",
+  "--exclude",
+  ".git",
+  "--type",
+  "f",
+  "-H",
+}
 
 return {
   {
@@ -25,17 +13,23 @@ return {
     keys = {
       {
         "<leader>ff",
-        get_find_files(),
+        function()
+          require("telescope.builtin").find_files({ find_command = find_command })
+        end,
         desc = "Find files",
       },
       {
         "<leader>t",
-        get_find_files(),
+        function()
+          require("telescope.builtin").find_files({ find_command = find_command })
+        end,
         desc = "Find files",
       },
       {
         "<leader>fi",
-        get_find_files({ no_ignore = true }),
+        function()
+          require("telescope.builtin").find_files({ find_command = find_command, no_ignore = true })
+        end,
         desc = "Find files including the ones in .gitignore",
       },
       { "<leader>fg", "<cmd>Telescope live_grep<cr>" },
