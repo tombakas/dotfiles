@@ -6,6 +6,28 @@ return {
     -- your configuration comes here
     -- or leave it empty to use the default settings
     -- refer to the configuration section below
+    dashboard = {
+      width = 80,
+      formats = {
+        key = function(item)
+          return { { "[", hl = "special" }, { item.key, hl = "key" }, { "]", hl = "special" } }
+        end,
+      },
+      sections = {
+        { section = "header", padding = 4 },
+        { section = "keys", padding = 1 },
+        { title = "MRU ", file = vim.fn.fnamemodify(".", ":~"), padding = 1 },
+        { section = "recent_files", cwd = true, limit = 8, padding = 1 },
+        { title = "MRU", padding = 1 },
+        { section = "recent_files", limit = 8, padding = 1 },
+      },
+      preset = {
+        keys = {
+          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+          { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+        },
+      },
+    },
   },
   keys = {
     {
@@ -29,9 +51,9 @@ return {
       "<leader>gb",
       mode = "v",
       function()
-        require('snacks').gitbrowse()
+        require("snacks").gitbrowse()
       end,
-      desc = "Git browse"
+      desc = "Git browse",
     },
     {
       "<leader>gg",
@@ -39,6 +61,13 @@ return {
         Snacks.lazygit()
       end,
       desc = "Lazygit",
+    },
+    {
+      "<leader>;",
+      function()
+        Snacks.dashboard.open()
+      end,
+      desc = "Open dashboard",
     },
   },
 }

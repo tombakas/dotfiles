@@ -2,7 +2,8 @@ from datetime import datetime as dt
 from pathlib import Path
 
 from deploy.color_print import ColorPrint
-from deploy.config import BASE_DIR
+
+BASE_DIR = Path(__file__).absolute().parents[1]
 
 
 def create_symlink(source, target):
