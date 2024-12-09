@@ -218,3 +218,15 @@ imports: [
         file: skins/white.hjson
     }
 ]
+
+preview_transformers: [
+    {
+        input_extensions: [ "pdf" ]
+        output_extension: pdf
+        mode: text
+        command: [
+        "pdfinfo",
+        "{input-path}"
+        ]
+    }
+]

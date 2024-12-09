@@ -56,10 +56,12 @@ def append_to_file(text, file):
         pre_text="Adding ", color_text=text, post_text=" to {}".format(file)
     )
     with open(Path(file).expanduser(), "a") as f:
-        f.write(text + "\n")
+        f.write("\n" + text + "\n")
 
 
 def add_line_to_file(line, file):
+    if not Path(file).exists():
+        Path(file).expanduser().touch()
     if not text_in_file(line, file):
         append_to_file(line, file)
     else:

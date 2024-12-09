@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+from pathlib import Path
+
 from deploy.utils import add_line_to_file, create_symlink
 
 
 def setup_neovim():
-    # Set up nvim related config files
     create_symlink("configs/sqlfluff", "~/.sqlfluff")
     create_symlink("configs/nvim/", "~/.config/nvim/")
     create_symlink("configs/editorconfig", "~/.editorconfig")
@@ -28,8 +29,11 @@ def setup_sxhkd():
 
 
 def setup_dotfiles():
-    create_symlink("configs/bash/tomasrc", "~/.tomasrc")
-    add_line_to_file(". ~/.tomasrc", "~/.bashrc")
+    path_to_bashrc = Path(__file__).parent / "configs" / "bash" / "bashrc"
+    path_to_fish_config = Path(__file__).parent / "configs" / "fish" / "config.fish"
+
+    add_line_to_file(f"source {path_to_fish_config}", "~/.config/fish/config.fish")
+    add_line_to_file(f". {path_to_bashrc}", "~/.bashrc")
 
 
 if __name__ == "__main__":

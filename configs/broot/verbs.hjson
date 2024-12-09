@@ -33,6 +33,18 @@ verbs: [
         leave_broot: false
     }
 
+    {
+        invocation: open
+        shortcut: e
+        key: ctrl-e
+        extensions: [
+            pdf
+        ]
+        apply_to: binary_file
+        execution: "zathura {file}"
+        leave_broot: true
+    }
+
     # Example 1: launching `tail -n` on the selected file (leaving broot)
     # {
     #     name: tail_lines
