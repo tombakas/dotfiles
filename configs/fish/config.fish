@@ -1,6 +1,3 @@
-set -x DOTFILE_DIR (dirname (dirname (dirname (status -f))))
-source $DOTFILE_DIR/configs/bash/shell_env
-
 function initialize_hooks
   if type -q zoxide
     zoxide init fish | source
@@ -17,6 +14,8 @@ end
 
 if status is-interactive
     set -U fish_greeting
+    set -x DOTFILE_DIR (dirname (dirname (dirname (status -f))))
+    source $DOTFILE_DIR/configs/bash/shell_env
 
     initialize_hooks
 end

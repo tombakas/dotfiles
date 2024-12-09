@@ -4,7 +4,7 @@ export GTK_THEME=Dracula
 # Exports
 # -------------------------------------------------------------------------------
 export NPM_BIN_DIR=$HOME/.npm-packages/bin/
-export PATH=$HOME/local/bin:$DOTFILE_DIR/utils:$NPM_BIN_DIR:$PATH
+export PATH="$HOME/local/bin:$DOTFILE_DIR/utils:$NPM_BIN_DIR:$PATH"
 export GOPATH=$HOME/.go
 export GIT_EDITOR=nvim
 # -------------------------------------------------------------------------------
@@ -28,6 +28,7 @@ alias dss='docker ps --format "table {{.Names}}\t{{.Ports}}"'
 
 alias emacs="emacs -nw"
 alias tmux="tmux -2"
+alias vim="nvim"
 
 alias kssh="kitty +kitten ssh"
 
