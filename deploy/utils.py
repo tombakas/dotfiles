@@ -60,15 +60,23 @@ def append_to_file(text, file):
 
 
 def add_line_to_file(line, file):
-    if not Path(file).exists():
+    if not Path(file).expanduser().exists():
+        ColorPrint.yellow(
+            pre_text="File ",
+            color_text="{}".format(Path(file).expanduser()),
+            post_text=" does not exist. Creating it...",
+        )
         Path(file).expanduser().touch()
     if not text_in_file(line, file):
         append_to_file(line, file)
     else:
+        ColorPrint.bold(
+            color_text="{}".format(line),
+            end="",
+        )
         ColorPrint.yellow(
-            pre_text='"{}"'.format(line),
-            color_text=" already in ",
-            post_text="{}".format(file),
+            pre_text=" already in ",
+            color_text="{}".format(file),
         )
 
 
@@ -78,3 +86,8 @@ def text_in_file(text, file):
             if text in line:
                 return True
     return False
+
+
+def print_title(text):
+    print(f"\n{text}")
+    print("=" * len(text))
