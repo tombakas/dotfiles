@@ -15,6 +15,7 @@ def parse_args():
         nargs="?",
         const=True,
         default=False,
+        metavar="all",
         help="Set up neovim related dotfiles. Pass 'all' as an argument to also set up sqfluff and editorconfig",
     )
     parser.add_argument(
@@ -87,7 +88,7 @@ if __name__ == "__main__":
     args = parse_args()
 
     if args.neovim or args.all:
-        setup_neovim(all=args.neovim == "all")
+        setup_neovim(all=args.neovim == "all" or args.all)
     if args.kitty or args.all:
         setup_kitty()
     if args.tmux or args.all:

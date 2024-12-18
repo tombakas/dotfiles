@@ -28,9 +28,6 @@ keymap("n", "<leader>,", "<cmd>nohlsearch<cr>", opts)
 -- Search for highlighted string
 keymap("v", "//", 'y/<c-r>"<cr>')
 
--- Exit insert mode by hitting jj
-keymap("i", "jj", "<esc>")
-
 -- Go to begginning/end of line in insert mode
 keymap("i", "<C-a>", "<C-o>^")
 keymap("i", "<C-e>", "<C-o>$")
