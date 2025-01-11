@@ -44,6 +44,14 @@ return {
               show_hidden_files_by_default = true,
             },
           },
+
+          -- codeium = {
+          --   name = "codeium",
+          --   module = "blink.compat.source",
+          --
+          --   -- all blink.cmp source config options work as normal:
+          --   score_offset = -3,
+          -- },
         },
       },
     },
