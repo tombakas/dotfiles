@@ -58,3 +58,11 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  callback = function()
+    if vim.bo.buftype == "terminal" then
+      vim.api.nvim_feedkeys("i", "t", true)
+    end
+  end,
+})
