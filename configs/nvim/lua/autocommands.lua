@@ -7,10 +7,10 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
 vim.api.nvim_create_autocmd({ "BufReadPost" }, {
   pattern = { "*" },
   callback = function()
-    if (vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$")) then
+    if vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
       vim.api.nvim_exec("normal! g'\"", false)
     end
-  end
+  end,
 })
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
@@ -21,7 +21,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     vim.bo.filetype = "htmldjango"
   end,
 })
-
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   pattern = {
@@ -49,6 +48,13 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
     elseif vim.tbl_contains(disable_filetypes, vim.bo.filetype) then
       vim.o.winbar = nil
     end
+  end,
+})
 
+vim.api.nvim_create_autocmd({ "BufEnter" }, {
+  callback = function()
+    if vim.bo.buftype == "terminal" and vim.api.nvim_get_mode()["mode"] == "nt" then
+      vim.cmd("startinsert")
+    end
   end,
 })

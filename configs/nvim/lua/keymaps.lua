@@ -59,7 +59,7 @@ keymap("t", "<c-k>", "<c-\\><c-n><c-w>k")
 keymap("t", "<c-l>", "<c-\\><c-n><c-w>l")
 
 -- open terminal on ctrl+t
-keymap("n", "<c-t>", "<cmd>terminal<cr>i", { noremap = true, silent = true })
+keymap("n", "<c-t>", "<cmd>terminal<cr>", { noremap = true, silent = true })
 
 keymap("i", "<m-l>", "<cmd>lua EscapePair()<cr>")
 

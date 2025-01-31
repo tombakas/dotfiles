@@ -12,8 +12,8 @@ return {
     { "<leader>7", '<cmd>BufferLineGoToBuffer 7<cr>' },
     { "<leader>8", '<cmd>BufferLineGoToBuffer 8<cr>' },
     { "<leader>9", '<cmd>BufferLineGoToBuffer 9<cr>' },
-    { '<c-s-l>', '<cmd>BufferLineCycleNext<cr>' },
-    { '<c-s-h>', '<cmd>BufferLineCyclePrev<cr>' }
+    { '<c-s-l>', '<cmd>BufferLineCycleNext<cr>', mode = {"n", "t"} },
+    { '<c-s-h>', '<cmd>BufferLineCyclePrev<cr>', mode = {"n", "t"}}
   },
   opts = {
     options = {
