@@ -1,6 +1,6 @@
 local opt = vim.opt
 
-opt.autowrite = true -- Enable auto write
+opt.autowrite = true           -- Enable auto write
 opt.completeopt = "menu,menuone,noselect"
 opt.conceallevel = 3           -- Hide * markup for bold and italic
 opt.confirm = true             -- Confirm to save changes before exiting modified buffer
@@ -20,7 +20,7 @@ opt.relativenumber = true          -- Relative line numbers
 opt.scrolloff = 4                  -- Lines of context
 opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 opt.shiftround = true              -- Round indent
-opt.shortmess:append { W = true, I = true, c = true }
+opt.shortmess:append({ W = true, I = true, c = true })
 opt.showmode = false               -- Dont show mode since we have a statusline
 opt.sidescrolloff = 8              -- Columns of context
 opt.signcolumn = "yes"             -- Always show the signcolumn, otherwise it would shift the text each time
@@ -37,7 +37,7 @@ opt.updatetime = 50                -- Save swap file and trigger CursorHold
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5                -- Minimum window width
 opt.wrap = true                    -- Wrap long lines
-opt.inccommand = 'split'
+opt.inccommand = "split"
 opt.cmdheight = 0
 
 opt.swapfile = false

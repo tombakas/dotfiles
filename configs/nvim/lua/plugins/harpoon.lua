@@ -42,28 +42,20 @@ return {
       harpoon:list():next()
     end, { desc = "Harpoon next" })
 
-    -- basic telescope configuration
-    local conf = require("telescope.config").values
-    local function toggle_telescope(harpoon_files)
+    -- picker
+    local function generate_harpoon_picker()
       local file_paths = {}
-      for _, item in ipairs(harpoon_files.items) do
-        table.insert(file_paths, item.value)
-      end
-
-      require("telescope.pickers")
-        .new({}, {
-          prompt_title = "Harpoon",
-          finder = require("telescope.finders").new_table({
-            results = file_paths,
-          }),
-          previewer = conf.file_previewer({}),
-          sorter = conf.generic_sorter({}),
+      for _, item in ipairs(harpoon:list().items) do
+        table.insert(file_paths, {
+          text = item.value, file = item.value
         })
-        :find()
+      end
+      return file_paths
     end
-
     vim.keymap.set("n", "<leader>hl", function()
-      toggle_telescope(harpoon:list())
-    end, { desc = "Harpoon list" })
+      Snacks.picker({
+        finder = generate_harpoon_picker,
+      })
+    end)
   end,
 }

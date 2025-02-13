@@ -1,7 +1,12 @@
 local colorschemes = {
   "EdenEast/nightfox.nvim",
   "arcticicestudio/nord-vim",
-  "catppuccin/nvim",
+  {
+    "catppuccin/nvim",
+    config = function()
+      require("catppuccin").setup({ term_colors = true })
+    end,
+  },
   "ellisonleao/gruvbox.nvim",
   "folke/tokyonight.nvim",
   "navarasu/onedark.nvim",
@@ -15,7 +20,11 @@ local colorschemes = {
 local plugins = {}
 
 for _, value in pairs(colorschemes) do
-  table.insert(plugins, { value, event = "BufLeave" })
+  if type(value) == "table" then
+    table.insert(plugins, vim.tbl_extend("force", value, { event = "BufLeave" }))
+  else
+    table.insert(plugins, { value, event = "BufLeave" })
+  end
 end
 
 return plugins

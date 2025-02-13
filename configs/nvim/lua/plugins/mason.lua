@@ -1,3 +1,5 @@
+local lsp_servers = { "bashls", "lua_ls", "pyright", "ts_ls", "yamlls" }
+
 return {
   "williamboman/mason.nvim",
 
@@ -6,6 +8,7 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim"
   },
 
+  lsp_servers = lsp_servers,
   config = function()
     require("mason").setup()
 
@@ -25,7 +28,7 @@ return {
 
     ----------- lspconfig
     require("mason-lspconfig").setup({
-      ensure_installed = { "bashls", "lua_ls", "pyright", "ts_ls", "yamlls" }
+      ensure_installed = lsp_servers
     })
     require("mason-lspconfig").setup_handlers(vim.tbl_extend(
       "keep",

@@ -6,6 +6,7 @@ return {
 
     npairs.setup({
       map_cr = true,
+      disable_filetype = { "TelescopePrompt", "spectre_panel", "snacks_picker_input" },
       ignored_next_char = "", --string.gsub([[ [%w%%%'%[%"%.] ]],"%s+", "")
       fast_wrap = {
         map = "<M-e>",
