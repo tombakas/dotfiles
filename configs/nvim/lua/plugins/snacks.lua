@@ -28,7 +28,12 @@ return {
         { section = "header", padding = 4, enabled = vim.fn.winwidth(0) > 51 },
         { section = "keys", padding = 1 },
         { title = "MRU ", file = vim.fn.fnamemodify(".", ":~"), padding = 1 },
-        { section = "recent_files", cwd = true, limit = 8, padding = 1 },
+        {
+          section = "recent_files",
+          cwd = true,
+          limit = 8,
+          padding = 1,
+        },
         { title = "MRU", padding = 1 },
         { section = "recent_files", limit = 8, padding = 1 },
       },
@@ -38,45 +43,170 @@ return {
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
       },
-      picker = {
+    },
+    picker = {
       -- your picker configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
-    }
     },
   },
   keys = {
     -- Top Pickers & Explorer
-    { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
-    { "<leader>t", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-    { "<leader>a", function() Snacks.picker.grep() end, desc = "Grep" },
-    { "<leader>f:", function() Snacks.picker.command_history() end, desc = "Command History" },
-    { "<leader>n", function() Snacks.picker.notifications() end, desc = "Notification History" },
-    { "<leader>e", function() Snacks.explorer() end, desc = "File Explorer" },
-    { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
-    { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
-    { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent" },
+    {
+      "<leader>ff",
+      function()
+        Snacks.picker.files()
+      end,
+      desc = "Find Files",
+    },
+    {
+      "<leader>t",
+      function()
+        Snacks.picker.smart()
+      end,
+      desc = "Smart Find Files",
+    },
+    {
+      "<leader>a",
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = "Grep",
+    },
+    {
+      "<leader>f:",
+      function()
+        Snacks.picker.command_history()
+      end,
+      desc = "Command History",
+    },
+    {
+      "<leader>n",
+      function()
+        Snacks.picker.notifications()
+      end,
+      desc = "Notification History",
+    },
+    {
+      "<leader>e",
+      function()
+        Snacks.explorer()
+      end,
+      desc = "File Explorer",
+    },
+    {
+      "<leader>fb",
+      function()
+        Snacks.picker.buffers()
+      end,
+      desc = "Buffers",
+    },
+    {
+      "<leader>fp",
+      function()
+        Snacks.picker.projects()
+      end,
+      desc = "Projects",
+    },
+    {
+      "<leader>fh",
+      function()
+        Snacks.picker.recent()
+      end,
+      desc = "Recent",
+    },
 
-    { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status" },
-    { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
-    { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log" },
+    {
+      "<leader>gs",
+      function()
+        Snacks.picker.git_status()
+      end,
+      desc = "Git Status",
+    },
+    {
+      "<leader>gl",
+      function()
+        Snacks.picker.git_log()
+      end,
+      desc = "Git Log",
+    },
 
     -- Grep
-    { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines" },
-    { "<leader>sB", function() Snacks.picker.grep_buffers() end, desc = "Grep Open Buffers" },
-    { "<leader>fw", function() Snacks.picker.grep_word() end, desc = "Visual selection or word", mode = { "n", "x" } },
+    {
+      "<leader>sb",
+      function()
+        Snacks.picker.lines()
+      end,
+      desc = "Buffer Lines",
+    },
+    {
+      "<leader>sB",
+      function()
+        Snacks.picker.grep_buffers()
+      end,
+      desc = "Grep Open Buffers",
+    },
+    {
+      "<leader>fw",
+      function()
+        Snacks.picker.grep_word()
+      end,
+      desc = "Visual selection or word",
+      mode = { "n", "x" },
+    },
 
     -- search
-    { '<leader>"', function() Snacks.picker.registers() end, desc = "Registers" },
-    { '<leader>fh', function() Snacks.picker.search_history() end, desc = "Search History" },
-    { "<leader>sa", function() Snacks.picker.autocmds() end, desc = "Autocmds" },
-    { "<leader>fH", function() Snacks.picker.highlights() end, desc = "Highlights" },
-    { "<leader>fk", function() Snacks.picker.keymaps() end, desc = "Keymaps" },
-    { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History" },
-    { "<leader>fc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes" },
+    {
+      '<leader>"',
+      function()
+        Snacks.picker.registers()
+      end,
+      desc = "Registers",
+    },
+    {
+      "<leader>sa",
+      function()
+        Snacks.picker.autocmds()
+      end,
+      desc = "Autocmds",
+    },
+    {
+      "<leader>fH",
+      function()
+        Snacks.picker.highlights()
+      end,
+      desc = "Highlights",
+    },
+    {
+      "<leader>fk",
+      function()
+        Snacks.picker.keymaps()
+      end,
+      desc = "Keymaps",
+    },
+    {
+      "<leader>su",
+      function()
+        Snacks.picker.undo()
+      end,
+      desc = "Undo History",
+    },
+    {
+      "<leader>fc",
+      function()
+        Snacks.picker.colorschemes()
+      end,
+      desc = "Colorschemes",
+    },
 
     -- LSP
-    { "<leader>fs", function() Snacks.picker.lsp_symbols() end, desc = "LSP symbols" },
+    {
+      "<leader>fs",
+      function()
+        Snacks.picker.lsp_symbols()
+      end,
+      desc = "LSP symbols",
+    },
     {
       "<leader>q",
       function()
