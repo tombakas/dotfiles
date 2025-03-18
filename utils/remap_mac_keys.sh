@@ -21,7 +21,7 @@ printf "\t1. Map switch of \` and §\n"
 printf "\t2. Unmap switch of \` and §\n"
 
 while true ; do
-  if ! read -t 3 -n 1 key; then
+  if ! read -r -t 3 -n 1 key; then
     exit ;
   else
     case "$key" in
