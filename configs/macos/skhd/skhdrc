@@ -1,4 +1,4 @@
-# Changing Window Focus
+#Changing Window Focus
 # =====================
 
 # Change window focus within space
@@ -117,4 +117,5 @@ ctrl + alt - r : yabai --service-restart
 # ----
 # Prevent Macos from annoyingly hiding windows
 cmd - h : true
-shift + ctrl - p : toggle_spotify.sh
+ctrl + alt - p : osascript ~/Documents/AppleScipt/toggle_spotify.scpt
+ctrl + alt - l : ~/.local/bin/bgsounds.sh
