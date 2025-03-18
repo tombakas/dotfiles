@@ -11,13 +11,18 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+config.set_environment_variables = {
+  PATH = "/opt/homebrew/bin/:" .. os.getenv("PATH") .. ":" .. os.getenv("HOME") .. "/local/bin",
+  SHELL = "/opt/homebrew/bin/fish",
+}
+
 -- This is where you actually apply your config choices
 config.color_scheme = "Dracula"
 config.window_background_opacity = 1
-config.font = wezterm.font {
+config.font = wezterm.font({
   family = "FiraCode Nerd Font Mono",
-  harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' },
-}
+  harfbuzz_features = { "calt=0", "clig=0", "liga=0" },
+})
 config.font_size = 14.0
 config.window_decorations = "RESIZE"
 config.window_padding = {
@@ -27,10 +32,9 @@ config.window_padding = {
   bottom = 0,
 }
 
-config.set_environment_variables = {
-  PATH = "/opt/homebrew/bin/:" .. os.getenv("PATH") .. ":" .. os.getenv("HOME") .. "/local/bin",
-  SHELL = "/opt/homebrew/bin/fish",
-}
+config.default_prog = { 'fish' }
+
+config.use_fancy_tab_bar = false
 
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.keys = {
@@ -96,17 +100,16 @@ config.keys = {
   {
     key = "h",
     mods = "CTRL|SHIFT",
-    action = 'DisableDefaultAssignment'
+    action = "DisableDefaultAssignment",
   },
   {
     key = "l",
     mods = "CTRL|SHIFT",
-    action = 'DisableDefaultAssignment'
+    action = "DisableDefaultAssignment",
   },
-  {key = 'o', mods = 'LEADER|CTRL', action = act.RotatePanes 'Clockwise' },
-  { key = 'k', mods = 'CTRL|SHIFT', action = act.ScrollByPage(-1) },
-  { key = 'j', mods = 'CTRL|SHIFT', action = act.ScrollByPage(1) },
-
+  { key = "o", mods = "LEADER|CTRL", action = act.RotatePanes("Clockwise") },
+  { key = "k", mods = "CTRL|SHIFT", action = act.ScrollByPage(-1) },
+  { key = "j", mods = "CTRL|SHIFT", action = act.ScrollByPage(1) },
 }
 
 config.disable_default_key_bindings = false

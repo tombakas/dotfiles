@@ -28,3 +28,6 @@ disabled = true
 
 [rlang]
 disabled = true
+
+[bun]
+disabled = true

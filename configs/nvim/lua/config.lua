@@ -68,3 +68,17 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx,
   end
   orig_handler(err, result, ctx, config)
 end
+
+if vim.g.neovide then
+  -- Put anything you want to happen only in Neovide here
+  vim.g.neovide_input_macos_option_key_is_meta = "only_left"
+  vim.g.neovide_input_ime = false
+  vim.g.neovide_cursor_vfx_mode = "railgun"
+  vim.g.neovide_cursor_vfx_particle_density = 7.0
+  vim.o.shell = "/opt/homebrew/bin/fish"
+  vim.o.guifont = "FiraCode Nerd Font Mono"
+
+  -- vim.cmd("source /Users/ttombakas/Projects/neovim/envrc_loader.lua")
+  -- vim.cmd("cd /Users/ttombakas/Projects/fareharbor.com/")
+  vim.fn.setenv("PATH", "/Users/ttombakas/.local/share/nvim/mason/bin" .. ":" .. vim.fn.getenv("PATH"))
+end

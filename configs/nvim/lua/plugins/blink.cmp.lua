@@ -2,7 +2,19 @@ return {
 
   {
     "saghen/blink.cmp",
-    dependencies = { "L3MON4D3/LuaSnip", version = "v2.*" },
+    dependencies = {
+      { "L3MON4D3/LuaSnip", version = "v2.*" },
+
+      {
+        "saghen/blink.compat",
+        -- use the latest release, via version = '*', if you also use the latest release for blink.cmp
+        version = "*",
+        -- lazy.nvim will automatically load the plugin when it's required by blink.cmp
+        lazy = true,
+        -- make sure to set opts so that lazy.nvim calls blink.compat's setup
+        opts = {},
+      },
+    },
 
     -- use a release tag to download pre-built binaries
     version = "*",
@@ -36,7 +48,12 @@ return {
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
       sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
+        default = {
+          "lsp",
+          "path",
+          "snippets",
+          "buffer",
+        },
 
         providers = {
           path = {
