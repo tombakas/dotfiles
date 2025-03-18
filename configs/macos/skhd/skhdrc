@@ -117,4 +117,4 @@ ctrl + alt - r : yabai --service-restart
 # ----
 # Prevent Macos from annoyingly hiding windows
 cmd - h : true
-shift + ctrl - p : toggle_spotify.sh
+ctrl + alt - p : toggle_spotify.sh
