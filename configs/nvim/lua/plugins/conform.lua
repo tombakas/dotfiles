@@ -20,6 +20,7 @@ return {
         lua = { "stylua" },
         less = { "stylelint" },
         javascript = { "prettier" },
+        vue = { "prettier" },
         htmldjango = { "djlint" },
         html = { "djlint" },
         typescript = { "prettier" },
@@ -57,6 +58,11 @@ return {
 
         djlint = {
           prepend_args = { "--indent", "2" },
+        },
+
+        black = {
+          require_cwd = true,
+          cwd = require("conform.util").root_file({ ".editorconfig", "package.json", "pyproject.toml" }),
         },
 
         sqlfluff = {

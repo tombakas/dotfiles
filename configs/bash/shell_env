@@ -21,7 +21,7 @@ alias gd="git diff"
 alias gl='git log'
 alias gs="git status"
 
-alias dc='docker-compose'
+alias dc='docker compose'
 alias dli='docker images --format "table {{.Repository}}\t{{.Tag}}"'
 alias ds='docker ps'
 alias dss='docker ps --format "table {{.Names}}\t{{.Ports}}"'
@@ -33,3 +33,4 @@ alias vim="nvim"
 alias kssh="kitty +kitten ssh"
 
 alias zb='cd $(get_repo_root.sh)'
+alias lzg='lazygit'
