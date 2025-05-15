@@ -11,6 +11,11 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+config.set_environment_variables = {
+  PATH = "/opt/homebrew/bin/:" .. os.getenv("PATH") .. ":" .. os.getenv("HOME") .. "/local/bin",
+  SHELL = "/opt/homebrew/bin/fish",
+}
+
 -- This is where you actually apply your config choices
 config.color_scheme = "Dracula"
 config.window_background_opacity = 1
@@ -27,7 +32,7 @@ config.window_padding = {
   bottom = 0,
 }
 
-config.default_prog = { "fish" }
+config.default_prog = { 'fish' }
 
 config.use_fancy_tab_bar = false
 
