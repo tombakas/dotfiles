@@ -1,18 +1,16 @@
 local lsp_servers = { "bashls", "lua_ls", "pyright", "ts_ls", "yamlls" }
 
 return {
-  "williamboman/mason.nvim",
+  "mason-org/mason.nvim",
 
   dependencies = {
-    "williamboman/mason-lspconfig.nvim",
+    "mason-org/mason-lspconfig.nvim",
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
 
-  lsp_servers = lsp_servers,
   config = function()
     require("mason").setup()
 
-    ----------- generic tools
     require("mason-tool-installer").setup({
       ensure_installed = {
         "black",
@@ -26,10 +24,8 @@ return {
       },
     })
 
-    ----------- lspconfig
     require("mason-lspconfig").setup({
-      ensure_installed = lsp_servers
+      ensure_installed = lsp_servers,
     })
-    require("mason-lspconfig").setup_handlers(require("lsp_configs"))
-  end,
+  end
 }
