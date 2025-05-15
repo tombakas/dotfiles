@@ -2,7 +2,7 @@ return {
   -- Top Pickers & Explorer
   { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
   { "<leader>t",  function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-  { "<leader>a",  function() Snacks.picker.grep() end, desc = "Grep" },
+  { "<leader>fg",  function() Snacks.picker.grep() end, desc = "Grep" },
   { "<leader>f:", function() Snacks.picker.command_history() end, desc = "Command History" },
   { "<leader>n",  function() Snacks.picker.notifications() end, desc = "Notification History" },
   { "<leader>e",  function() Snacks.explorer() end, desc = "File Explorer" },

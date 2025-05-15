@@ -78,6 +78,12 @@ keymap("s", "<bs>", "<bs>i")
 -- replaces the K mapping with the lsp hover function
 keymap("n", "gk", "K")
 
+-- LSP
+keymap("n", "<leader>rn", function() vim.lsp.buf.rename() end)
+keymap("n", "<leader>fr", function() vim.lsp.buf.references() end)
+keymap('n', 'gd', function() vim.lsp.buf.definition() end)
+
+-- Diagnostics
 keymap("n", "]d", function()
   vim.diagnostic.goto_next()
 end)
