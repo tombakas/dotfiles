@@ -62,7 +62,7 @@ if vim.g.neovide then
   -- Put anything you want to happen only in Neovide here
   vim.g.neovide_input_macos_option_key_is_meta = "only_left"
   vim.g.neovide_input_ime = false
-  -- vim.g.neovide_cursor_vfx_mode = "railgun"
+  vim.g.neovide_cursor_vfx_mode = "railgun"
   vim.g.neovide_cursor_vfx_particle_density = 7.0
   vim.o.shell = "/opt/homebrew/bin/fish"
   vim.o.guifont = "FiraCode Nerd Font Mono"
