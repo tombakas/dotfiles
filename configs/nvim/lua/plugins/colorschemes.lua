@@ -4,12 +4,26 @@ local colorschemes = {
   {
     "catppuccin/nvim",
     config = function()
-      require("catppuccin").setup({ term_colors = true })
+      require("catppuccin").setup({
+        term_colors = true,
+
+        custom_highlights = function(C)
+          local O = require("catppuccin").options
+          return {
+            ["@property"] = { fg = C.lavender, style = O.styles.properties or {} },
+          }
+        end,
+      })
+    end,
+  },
+  {
+    "navarasu/onedark.nvim",
+    config = function()
+      require("onedark").setup({ style = "deep" })
     end,
   },
   "ellisonleao/gruvbox.nvim",
   "folke/tokyonight.nvim",
-  "navarasu/onedark.nvim",
   "projekt0n/github-nvim-theme",
   "rebelot/kanagawa.nvim",
   "sainnhe/everforest",

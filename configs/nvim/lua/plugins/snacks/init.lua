@@ -39,7 +39,7 @@ return {
       },
       preset = {
         keys = {
-          { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+          { icon = " ", key = "n", desc = "New File", action = ":ene" },
           { icon = " ", key = "q", desc = "Quit", action = ":qa" },
         },
       },

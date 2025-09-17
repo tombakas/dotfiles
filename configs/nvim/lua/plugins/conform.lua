@@ -15,7 +15,7 @@ return {
 
       formatters_by_ft = {
         sql = { "sqlfluff" },
-        python = { "isort", "black" },
+        python = { "ruff_organize_imports", "ruff_format" },
         markdown = { "injected" },
         lua = { "stylua" },
         less = { "stylelint" },

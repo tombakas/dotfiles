@@ -10,6 +10,8 @@ return {
           "css",
           "html",
           "javascript",
+          "typescript",
+          "vue",
           "lua",
           "markdown",
           "python",

@@ -9,6 +9,7 @@ return {
   { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
   { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
   { "<leader>fh", function() Snacks.picker.recent() end, desc = "Recent" },
+  { "<leader>fm", function() Snacks.picker.marks() end, desc = "Recent" },
   { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status", },
   { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log", },
   { "<leader>ft", require("plugins.snacks.pickers").fileTypePicker, desc = "File types", },
@@ -30,16 +31,6 @@ return {
 
   -- LSP
   { "<leader>fs", function() Snacks.picker.lsp_symbols() end, desc = "LSP symbols", },
-  { "<leader>q",  function() Snacks.bufdelete() end, desc = "Delete Buffer", },
-  { "<leader>Q",
-    function()
-      Snacks.bufdelete()
-      if vim.fn.winnr("$") > 1 then
-        vim.api.nvim_win_close(0, false)
-      end
-      end,
-    desc = "Delete Buffer",
-  },
   { "<leader>gb", mode = "v", function() require("snacks").gitbrowse() end, desc = "Git browse", },
   { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit", },
   { "<leader>;", function() Snacks.dashboard.open() end, desc = "Open dashboard", },

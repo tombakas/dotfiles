@@ -1,3 +1,4 @@
 return {
-  'andymass/vim-matchup'
+  'andymass/vim-matchup',
+  lazy = true
 }
