@@ -1,6 +1,6 @@
 return {
   {
-    "echasnovski/mini.nvim",
+    "nvim-mini/mini.nvim",
     version = false,
     event = "VeryLazy",
     config = function()
@@ -28,6 +28,37 @@ return {
           { expr = true, desc = "Put empty line above" }
         ),
       })
+
+      require("mini.surround").setup({
+        mappings = {
+          add = "ysa", -- Add surrounding in Normal and Visual modes
+          delete = "ds", -- Delete surrounding
+          find = "", -- Find surrounding (to the right)
+          find_left = "", -- Find surrounding (to the left)
+          highlight = "", -- Highlight surrounding
+          replace = "cs", -- Replace surrounding
+
+          suffix_last = "", -- Suffix to search with "prev" method
+          suffix_next = "", -- Suffix to search with "next" method
+        },
+      })
+
+      require("mini.pairs").setup({
+        mappings = {
+          [" "] = { action = "open", pair = "  ", neigh_pattern = "[{(%[][})%]]", register = { cr = true } },
+        },
+      })
+
+      vim.keymap.set("n", "<leader>q", function()
+        if vim.fn.winnr("$") > 1 then
+          require("mini.bufremove").unshow(0)
+        else
+          vim.api.nvim_win_close(0, false)
+        end
+      end)
+      vim.keymap.set("n", "<leader>Q", function()
+        require("mini.bufremove").delete(0)
+      end)
 
       -- files
       require("mini.files").setup({
