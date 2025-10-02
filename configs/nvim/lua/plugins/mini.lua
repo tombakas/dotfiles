@@ -31,7 +31,7 @@ return {
 
       require("mini.surround").setup({
         mappings = {
-          add = "ysa", -- Add surrounding in Normal and Visual modes
+          add = "ys", -- Add surrounding in Normal and Visual modes
           delete = "ds", -- Delete surrounding
           find = "", -- Find surrounding (to the right)
           find_left = "", -- Find surrounding (to the left)
@@ -45,7 +45,8 @@ return {
 
       require("mini.pairs").setup({
         mappings = {
-          [" "] = { action = "open", pair = "  ", neigh_pattern = "[{(%[][})%]]", register = { cr = true } },
+          [" "] = { action = "open", pair = "  ", neigh_pattern = "[{()}]", register = { cr = true } },
+          ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^\\^`].", register = { cr = false } },
         },
       })
 

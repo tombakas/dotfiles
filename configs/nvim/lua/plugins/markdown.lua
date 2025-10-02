@@ -1,13 +1,18 @@
 return {
-  'MeanderingProgrammer/render-markdown.nvim',
-  ft = { 'markdown', 'quarto' },
-  opts = {
-     render_modes = { 'n', 'c', 't' },
-    sign = {
-        enabled = false,
-    },
-    heading = {
-      icons = {" ", "󰉫 ", "󰉬 ", "󰉭 ", "󰉮 " }
-    }
-  }
+  "OXY2DEV/markview.nvim",
+  lazy = false,
+
+  -- For blink.cmp's completion
+  -- source
+  -- dependencies = {
+  --     "saghen/blink.cmp"
+  -- },
+  config = function()
+    require("markview").setup({
+      preview = {
+        modes = { "i", "n", "no", "c" },
+        hybrid_modes = { "i", "n" },
+      },
+    })
+  end,
 }
