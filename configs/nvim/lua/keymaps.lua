@@ -61,7 +61,7 @@ keymap("t", "<c-l>", "<c-\\><c-n><c-w>l")
 -- open terminal on ctrl+t
 keymap("n", "<c-t>", "<cmd>terminal<cr>", { noremap = true, silent = true })
 
-keymap("i", "<m-l>", "<cmd>lua EscapePair()<cr>")
+keymap("i", "<c-s-l>", "<cmd>lua EscapePair()<cr>")
 
 -- delete all buffers except current one
 keymap("n", "<leader>bo", "<cmd>%bd|e#|bd#<cr>")

@@ -13,10 +13,9 @@ return {
 
     require("mason-tool-installer").setup({
       ensure_installed = {
-        "black",
+        "ruff",
         "djlint",
         "flake8",
-        "isort",
         "prettier",
         "shellcheck",
         "sqlfluff",

@@ -31,6 +31,7 @@ return {
 
   -- LSP
   { "<leader>fs", function() Snacks.picker.lsp_symbols() end, desc = "LSP symbols", },
+  { "<leader>fS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP symbols", },
   { "<leader>gb", mode = "v", function() require("snacks").gitbrowse() end, desc = "Git browse", },
   { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit", },
   { "<leader>;", function() Snacks.dashboard.open() end, desc = "Open dashboard", },
