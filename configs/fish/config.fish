@@ -7,8 +7,8 @@ function initialize_hooks
    starship init fish | source
   end
 
-  if type -q direnv
-    direnv hook fish | source
+  if type -q mise
+    mise activate fish | source
   end
 end
 
