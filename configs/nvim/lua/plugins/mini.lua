@@ -47,7 +47,7 @@ return {
         mappings = {
           [" "] = { action = "open", pair = "  ", neigh_pattern = "[{()}].", register = { cr = true } },
           ["`"] = { action = "closeopen", pair = "``", neigh_pattern = "[^\\^`].", register = { cr = false } },
-          ["\""] = { action = "closeopen", pair = "\"\"", neigh_pattern = "[^\\\"].", register = { cr = false } },
+          ['"'] = { action = "closeopen", pair = '""', neigh_pattern = '[^\\"].', register = { cr = false } },
         },
       })
 

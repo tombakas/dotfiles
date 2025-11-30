@@ -46,6 +46,13 @@ opt.undodir = os.getenv("HOME") .. "/.local/share/nvim/undodir"
 opt.undofile = true
 opt.undolevels = 10000
 
+-- Folding
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevelstart = 99
+
+-- Colors
+vim.cmd.colorscheme("tokyonight-moon")
+
+-- Diagnostics
 vim.diagnostic.config({ virtual_text = true })
-vim.o.background="dark"
-vim.cmd.colorscheme("onedark")
