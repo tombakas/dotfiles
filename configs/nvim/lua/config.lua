@@ -52,6 +52,7 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldlevelstart = 99
 
 -- Colors
+vim.o.background = "dark"
 vim.cmd.colorscheme("tokyonight-moon")
 
 -- Diagnostics

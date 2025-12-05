@@ -31,6 +31,9 @@ def parse_args():
         "--sxhkd", action="store_true", default=False, help="Set up sxhkd"
     )
     parser.add_argument(
+        "--sway", action="store_true", default=False, help="Set up sway"
+    )
+    parser.add_argument(
         "--shells",
         action="store_true",
         default=False,
@@ -47,32 +50,16 @@ def parse_args():
 
 
 def setup_neovim(all=False):
-    print_title("neovim")
-    create_symlink("configs/nvim/", "~/.config/nvim/")
+    link_dotfiles("neovim", "configs/nvim/", "~/.config/nvim/")
 
     if all is True:
         create_symlink("configs/editorconfig", "~/.editorconfig")
         create_symlink("configs/sqlfluff", "~/.sqlfluff")
 
 
-def setup_kitty():
-    print_title("kitty")
-    create_symlink("configs/kitty/kitty.conf", "~/.config/kitty/kitty.conf")
-
-
-def setup_tmux():
-    print_title("tmux")
-    create_symlink("configs/tmux/tmux.conf", "~/.tmux.conf")
-
-
-def setup_starship():
-    print_title("starship")
-    create_symlink("configs/starship/starship.toml", "~/.config/starship.toml")
-
-
-def setup_sxhkd():
-    print_title("sxhkd")
-    create_symlink("configs/sxhkd/sxhkdrc", "~/.config/sxhkd/sxhkdrc")
+def link_dotfiles(tool, source, target):
+    print_title(tool)
+    create_symlink(source, target)
 
 
 def setup_dotfiles():
@@ -90,12 +77,16 @@ if __name__ == "__main__":
     if args.neovim or args.all:
         setup_neovim(all=args.neovim == "all" or args.all)
     if args.kitty or args.all:
-        setup_kitty()
+        link_dotfiles("kitty", "configs/kitty/kitty.conf", "~/.config/kitty/kitty.conf")
     if args.tmux or args.all:
-        setup_tmux()
+        link_dotfiles("tmux", "configs/tmux/tmux.conf", "~/.tmux.conf")
+    if args.sway or args.all:
+        link_dotfiles("sway", "configs/sway/config", "~/.config/sway/config")
     if args.starship or args.all:
-        setup_starship()
+        link_dotfiles(
+            "starship", "configs/starship/starship.toml", "~/.config/starship.toml"
+        )
     if args.sxhkd or args.all:
-        setup_sxhkd()
+        link_dotfiles("sxhkd", "configs/sxhkd/sxhkdrc", "~/.config/sxhkd/sxhkdrc")
     if args.shells or args.all:
         setup_dotfiles()

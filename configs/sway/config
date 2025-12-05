@@ -24,7 +24,7 @@ font pango:monospace 8
 # exec --no-startup-id dex-autostart --autostart --environment i3
 # exec --no-startup-id picom -b
 
-input "$(swaymsg -t get_inputs | awk '/identifier.*[Tt]ouchpad/{gsub("[\",]", "");print $2}')" {
+input "1739:31251:SYNA2393:00_06CB:7A13_Touchpad" {
     dwt enabled
     tap enabled
     middle_emulation enabled
@@ -115,8 +115,12 @@ bindsym $mod+e layout toggle split
 bindsym $mod+a focus parent
 
 # take screenshot of entire screen
-bindsym --release Print exec /home/tomas/Documents/dotfiles/utils/screenshot.sh
-bindsym --release Shift+Print exec "/home/tomas/Documents/dotfiles/utils/screenshot.sh -r"
+bindsym --release Print exec "GRIM_DEFAULT_DIR=$HOME grim"
+bindsym --release Shift+Print exec 'GRIM_DEFAULT_DIR=$HOME grim -g "$(slurp)"'
+
+# brightness controls
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
 # focus the child container
 bindsym $mod+c focus child
