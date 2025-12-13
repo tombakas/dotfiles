@@ -1,7 +1,7 @@
 return {
   "mattn/emmet-vim",
 
-  ft = { "html", "htmldjango", "vue", "scss", "less", "css" },
+  ft = { "html", "htmldjango", "vue", "scss", "less", "css", "typescript" },
   init = function()
     vim.g.user_emmet_install_global = 0
   end,

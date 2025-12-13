@@ -12,6 +12,8 @@ return {
 
     require("markview").setup({
       preview = {
+        filetypes = { "markdown", "codecompanion" },
+        ignore_buftypes = {},
         modes = { "i", "n", "no", "c" },
         hybrid_modes = { "i", "n" },
         linewise_hybrid_mode = true,

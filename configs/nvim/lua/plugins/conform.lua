@@ -22,6 +22,7 @@ return {
         javascript = { "prettier" },
         htmldjango = { "djlint" },
         html = { "djlint" },
+        typescript = { "prettier" },
       },
 
       formatters = {
