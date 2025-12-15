@@ -8,9 +8,10 @@ local opts = {
   },
 }
 
-if CC_config and CC_config.strategies and CC_config.adapters then
-  opts.strategies = CC_config.strategies
-  opts.adapters = CC_config.adapters
+if CC_config then
+  for k, v in pairs(CC_config) do
+    opts[k] = v
+  end
 end
 
 return {
@@ -18,7 +19,7 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
-  version = "v17.33.0",
+  version = "*",
   keys = {
     { "<leader>cc", ":CodeCompanionChat Toggle<cr>", desc = "Code companion chat" },
     { "<leader>ca", ":CodeCompanionActions<cr>", desc = "Code companion actions" },
