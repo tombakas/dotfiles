@@ -57,3 +57,6 @@ vim.cmd.colorscheme("tokyonight-moon")
 
 -- Diagnostics
 vim.diagnostic.config({ virtual_text = true })
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+	CustomOnPublishDiagnostics, {}
+)

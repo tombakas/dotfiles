@@ -35,3 +35,32 @@ function EscapePair()
     vim.api.nvim_win_set_cursor(0, { row, col + 1 })
   end
 end
+
+
+local function filter(arr, func)
+	-- Filter in place
+	-- https://stackoverflow.com/questions/49709998/how-to-filter-a-lua-array-inplace
+	local new_index = 1
+	local size_orig = #arr
+	for old_index, v in ipairs(arr) do
+		if func(v, old_index) then
+			arr[new_index] = v
+			new_index = new_index + 1
+		end
+	end
+	for i = new_index, size_orig do arr[i] = nil end
+end
+
+
+local function filter_diagnostics(diagnostic)
+	if string.match(diagnostic.message, 'Parameter.*is unused') then
+		return false
+	end
+
+	return true
+end
+
+function CustomOnPublishDiagnostics(a, params, client_id, c, config)
+	filter(params.diagnostics, filter_diagnostics)
+	vim.lsp.diagnostic.on_publish_diagnostics(a, params, client_id, c, config)
+end
