@@ -29,7 +29,10 @@ alias dss='docker ps --format "table {{.Names}}\t{{.Ports}}"'
 alias emacs="emacs -nw"
 alias tmux="tmux -2"
 alias vim="nvim"
+alias vimn="nvim -u NONE"
 
 alias kssh="kitty +kitten ssh"
 
 alias zb='cd $(get_repo_root.sh)'
+alias lzg='lazygit'
+alias lzd='lazydocker'

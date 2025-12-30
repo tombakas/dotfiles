@@ -60,6 +60,17 @@ return {
     open = {
       use_advanced_uri = true,
     },
+    daily_notes = {
+      folder = "dailies",
+      date_format = "%Y-%m-%d",
+    },
+    note_id_func = function(id, dir)
+      local daily_notes_dir = Obsidian.dir / Obsidian.opts.daily_notes.folder
+      if daily_notes_dir == dir then
+        return id
+      end
+      return require("obsidian.builtin").zettel_id() -- or whatever customizations you did
+    end,
     picker = {
       -- Set your preferred picker. Can be one of 'telescope.nvim', 'fzf-lua', 'mini.pick' or 'snacks.pick'.
       name = "snacks.pick",

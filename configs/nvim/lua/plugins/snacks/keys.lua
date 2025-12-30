@@ -13,6 +13,7 @@ return {
   { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status", },
   { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log", },
   { "<leader>ft", require("plugins.snacks.pickers").fileTypePicker, desc = "File types", },
+  { "<leader>f.", function () Snacks.explorer.reveal()  end, desc = "File types", },
 
   -- Grep
   { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines", },
