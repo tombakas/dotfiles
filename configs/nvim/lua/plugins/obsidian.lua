@@ -36,11 +36,18 @@ return {
       desc = "Obsidian backlinks",
     },
     {
-      "<leader>Od",
+      "<leader>Ot",
       function()
         vim.cmd("Obsidian today")
       end,
-      desc = "Obsidian daily",
+      desc = "Obsidian today",
+    },
+    {
+      "<leader>Od",
+      function()
+        vim.cmd("Obsidian dailies")
+      end,
+      desc = "Obsidian dailies",
     },
   },
   opts = {
