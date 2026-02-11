@@ -1,4 +1,4 @@
-local lsp_servers = { "bashls", "lua_ls", "pyright", "ts_ls", "yamlls" }
+local lsp_servers = { "bashls", "lua_ls", "ts_ls", "yamlls" }
 
 return {
   "mason-org/mason.nvim",

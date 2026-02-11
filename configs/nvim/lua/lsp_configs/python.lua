@@ -12,3 +12,24 @@ vim.lsp.config["pyright"] = {
     },
   },
 }
+
+vim.lsp.config["basedpyright"] = {
+  settings = {
+    basedpyright = {
+      analysis = {
+
+        typeCheckingMode = "standard",
+        -- This is the "magic" fix for 'nothing to rename' in many cases
+        diagnosticMode = "workspace",
+        useLibraryCodeForTypes = true,
+        diagnosticSeverityOverrides = {
+          reportUnknownVariableType = "none",
+          reportUnknownMemberType = "none",
+          reportUnknownArgumentType = "none",
+          reportIncompatibleVariableOverride = "none",
+        },
+      },
+      exclude = { "**/node_modules", "**/__pycache__" },
+    },
+  },
+}

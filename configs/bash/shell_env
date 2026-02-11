@@ -7,6 +7,7 @@ export NPM_BIN_DIR=$HOME/.npm-packages/bin/
 export PATH="$HOME/local/bin:$DOTFILE_DIR/utils:$NPM_BIN_DIR:$PATH"
 export GOPATH=$HOME/.go
 export GIT_EDITOR=nvim
+export GEMINI_API_KEY=AIzaSyCuDJOeEGFrK8ECBItY4nFj13aQx1fD0Ok
 # -------------------------------------------------------------------------------
 
 # Aliases
@@ -34,5 +35,7 @@ alias vimn="nvim -u NONE"
 alias kssh="kitty +kitten ssh"
 
 alias zb='cd $(get_repo_root.sh)'
+alias zv='cd "$(virt_env_cd.sh)"'
 alias lzg='lazygit'
 alias lzd='lazydocker'
+alias mr='mise run'
