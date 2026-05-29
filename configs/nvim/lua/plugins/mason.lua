@@ -1,4 +1,4 @@
-local lsp_servers = { "bashls", "lua_ls", "ts_ls", "yamlls" }
+local lsp_servers = { "bashls", "lua_ls", "ts_ls", "vtsls", "yamlls" }
 
 return {
   "mason-org/mason.nvim",
@@ -13,13 +13,16 @@ return {
 
     require("mason-tool-installer").setup({
       ensure_installed = {
-        "ruff",
         "djlint",
         "flake8",
         "prettier",
+        "ruff",
         "shellcheck",
+        "shfmt",
         "sqlfluff",
+        "stylelint",
         "stylua",
+        "vue-language-server",
       },
     })
 

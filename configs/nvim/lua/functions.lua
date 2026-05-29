@@ -1,7 +1,8 @@
-function ZoomToggle()
+local M = {}
+
+function M.ZoomToggle()
   if vim.t.zoomed == 1 then
-    -- Restore the previous window configuration by executing the stored ex
-    -- command.
+    -- Restore the previous window configuration by executing the stored ex command.
     vim.api.nvim_command(vim.t.zoom_winrestcmd)
     vim.t.zoomed = nil
   else
@@ -14,11 +15,10 @@ function ZoomToggle()
   end
 end
 
--- Find the closest closing character in insert mode and move right of it
-function EscapePair()
+function M.EscapePair()
   local closers = { ")", "]", "}", ">", "'", '"', "`", "," }
   local line = vim.api.nvim_get_current_line()
-  local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+  local row, col = table.unpack(vim.api.nvim_win_get_cursor(0))
   local after = line:sub(col + 1, -1)
   local closer_col = #after + 1
   local closer_i = nil
@@ -36,31 +36,4 @@ function EscapePair()
   end
 end
 
-
-local function filter(arr, func)
-	-- Filter in place
-	-- https://stackoverflow.com/questions/49709998/how-to-filter-a-lua-array-inplace
-	local new_index = 1
-	local size_orig = #arr
-	for old_index, v in ipairs(arr) do
-		if func(v, old_index) then
-			arr[new_index] = v
-			new_index = new_index + 1
-		end
-	end
-	for i = new_index, size_orig do arr[i] = nil end
-end
-
-
-local function filter_diagnostics(diagnostic)
-	if string.match(diagnostic.message, 'Parameter.*is unused') then
-		return false
-	end
-
-	return true
-end
-
-function CustomOnPublishDiagnostics(a, params, client_id, c, config)
-	filter(params.diagnostics, filter_diagnostics)
-	vim.lsp.diagnostic.on_publish_diagnostics(a, params, client_id, c, config)
-end
+return M

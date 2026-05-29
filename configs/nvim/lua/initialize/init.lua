@@ -1,7 +1,5 @@
 vim.g.mapleader = " "
 
--- vim.g.neovim_env = os.getenv("NEOVIM_ENV") or "/Users/ttombakas/.local/share/nvim/base_venv"
-
 vim.g.neovim_env = vim.fn.stdpath('data') .. '/neovim_venv'
 vim.g.python3_host_prog = vim.g.neovim_env .. '/bin/python'
 

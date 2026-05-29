@@ -9,11 +9,11 @@ return {
   { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers" },
   { "<leader>fp", function() Snacks.picker.projects() end, desc = "Projects" },
   { "<leader>fh", function() Snacks.picker.recent() end, desc = "Recent" },
-  { "<leader>fm", function() Snacks.picker.marks() end, desc = "Recent" },
+  { "<leader>fm", function() Snacks.picker.marks() end, desc = "Marks" },
   { "<leader>gs", function() Snacks.picker.git_status() end, desc = "Git Status", },
   { "<leader>gl", function() Snacks.picker.git_log() end, desc = "Git Log", },
   { "<leader>ft", require("plugins.snacks.pickers").fileTypePicker, desc = "File types", },
-  { "<leader>f.", function () Snacks.explorer.reveal()  end, desc = "File types", },
+  { "<leader>f.", function() Snacks.explorer.reveal() end, desc = "Reveal in explorer", },
 
   -- Grep
   { "<leader>sb", function() Snacks.picker.lines() end, desc = "Buffer Lines", },
@@ -27,12 +27,11 @@ return {
   { "<leader>fk", function() Snacks.picker.keymaps() end, desc = "Keymaps", },
   { "<leader>su", function() Snacks.picker.undo() end, desc = "Undo History", },
   { "<leader>fc", function() Snacks.picker.colorschemes() end, desc = "Colorschemes", },
-  { "<leader>fk", function() Snacks.picker.keymaps() end, desc = "Keymaps", },
   { "<leader>rs", function() Snacks.picker.resume() end, desc = "Resume", },
 
   -- LSP
   { "<leader>fs", function() Snacks.picker.lsp_symbols() end, desc = "LSP symbols", },
-  { "<leader>fS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP symbols", },
+  { "<leader>fS", function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP workspace symbols", },
   { "<leader>gb", mode = "v", function() require("snacks").gitbrowse() end, desc = "Git browse", },
   { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit", },
   { "<leader>;", function() Snacks.dashboard.open() end, desc = "Open dashboard", },

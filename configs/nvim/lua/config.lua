@@ -57,6 +57,14 @@ vim.cmd.colorscheme("tokyonight-moon")
 
 -- Diagnostics
 vim.diagnostic.config({ virtual_text = true })
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-	CustomOnPublishDiagnostics, {}
-)
+
+-- Filter noisy "Parameter X is unused" diagnostics globally
+local orig_handler = vim.lsp.handlers["textDocument/publishDiagnostics"]
+vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+  if result and result.diagnostics then
+    result.diagnostics = vim.tbl_filter(function(d)
+      return not d.message:match("Parameter.*is unused")
+    end, result.diagnostics)
+  end
+  orig_handler(err, result, ctx, config)
+end

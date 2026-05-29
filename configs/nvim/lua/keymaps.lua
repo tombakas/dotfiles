@@ -1,8 +1,6 @@
--- Shorten function name
 local keymap = vim.keymap.set
-
--- Silent keymap option
 local opts = { silent = true }
+local fns = require("functions")
 
 -- Modes
 --   normal_mode = "n",
@@ -28,7 +26,7 @@ keymap("n", "<leader>,", "<cmd>nohlsearch<cr>", opts)
 -- Search for highlighted string
 keymap("v", "//", 'y/<c-r>"<cr>')
 
--- Go to begginning/end of line in insert mode
+-- Go to beginning/end of line in insert mode
 keymap("i", "<C-a>", "<C-o>^")
 keymap("i", "<C-e>", "<C-o>$")
 
@@ -47,7 +45,7 @@ keymap("n", "<c-i>", "<c-i>")
 keymap("i", "<s-tab>", "<c-d>")
 
 -- Zoom in/out of a window
-keymap("n", "<leader>z", "<cmd>lua ZoomToggle()<cr>")
+keymap("n", "<leader>z", fns.ZoomToggle)
 
 -- Exit terminal by pressing ESC
 keymap("t", "<c-t>", "<c-\\><c-n>")
@@ -61,7 +59,7 @@ keymap("t", "<c-l>", "<c-\\><c-n><c-w>l")
 -- open terminal on ctrl+t
 keymap("n", "<c-t>", "<cmd>terminal<cr>", { noremap = true, silent = true })
 
-keymap("i", "<c-s-l>", "<cmd>lua EscapePair()<cr>")
+keymap("i", "<c-s-l>", fns.EscapePair)
 
 -- delete all buffers except current one
 keymap("n", "<leader>bo", "<cmd>%bd|e#|bd#<cr>")
@@ -70,7 +68,7 @@ keymap("n", "<leader>bo", "<cmd>%bd|e#|bd#<cr>")
 keymap("n", "<leader>l", "<cmd>Lazy<cr>")
 keymap("n", "<leader>m", "<cmd>Mason<cr>")
 
--- Switch to insert mode after deleting a charecter in select mode
+-- Switch to insert mode after deleting a character in select mode
 keymap("s", "<c-l>", "<bs>i")
 keymap("s", "<bs>", "<bs>i")
 
@@ -81,12 +79,8 @@ keymap("n", "gk", "K")
 -- LSP
 keymap("n", "<leader>rn", function() vim.lsp.buf.rename() end)
 keymap("n", "<leader>fr", function() vim.lsp.buf.references() end)
-keymap('n', 'gd', function() vim.lsp.buf.definition() end)
+keymap("n", "gd", function() vim.lsp.buf.definition() end)
 
 -- Diagnostics
-keymap("n", "]d", function()
-  vim.diagnostic.goto_next()
-end)
-keymap("n", "[d", function()
-  vim.diagnostic.goto_prev()
-end)
+keymap("n", "]d", function() vim.diagnostic.goto_next() end)
+keymap("n", "[d", function() vim.diagnostic.goto_prev() end)

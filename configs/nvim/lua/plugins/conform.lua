@@ -22,6 +22,8 @@ return {
         javascript = { "prettier" },
         htmldjango = { "djlint" },
         html = { "djlint" },
+        sh = { "shfmt" },
+        bash = { "shfmt" },
         typescript = { "prettier" },
       },
 
@@ -51,12 +53,12 @@ return {
             },
             -- Map of treesitter language to formatters to use
             -- (defaults to the value from formatters_by_ft)
-            lang_to_formatters = {},
+             lang_to_formatters = {},
           },
         },
 
         djlint = {
-          prepend_args = { "--indent", "2" },
+          prepend_args = { "--indent", "2", "--profile", "django"},
         },
 
         sqlfluff = {
