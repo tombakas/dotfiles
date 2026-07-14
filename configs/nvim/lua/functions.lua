@@ -36,4 +36,41 @@ function M.EscapePair()
   end
 end
 
+function M.LspLocationList(options)
+  local seen = {}
+  local items = {}
+
+  for _, item in ipairs(options.items) do
+    local key = table.concat({
+      vim.fs.normalize(item.filename or ""),
+      item.lnum or "",
+      item.col or "",
+      item.end_lnum or "",
+      item.end_col or "",
+    }, ":")
+
+    if not seen[key] then
+      seen[key] = true
+      table.insert(items, item)
+    end
+  end
+
+  if #items == 0 then
+    vim.notify("No locations found", vim.log.levels.INFO)
+    return
+  end
+
+  vim.fn.setqflist({}, " ", {
+    title = options.title,
+    items = items,
+    context = options.context,
+  })
+
+  if #items == 1 then
+    vim.cmd("cfirst")
+  else
+    vim.cmd("copen")
+  end
+end
+
 return M

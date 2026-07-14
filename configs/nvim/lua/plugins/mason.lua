@@ -1,4 +1,4 @@
-local lsp_servers = { "bashls", "lua_ls", "ts_ls", "vtsls", "yamlls" }
+local lsp_servers = { "bashls", "lua_ls", "vtsls", "yamlls" }
 
 return {
   "mason-org/mason.nvim",
@@ -28,6 +28,9 @@ return {
 
     require("mason-lspconfig").setup({
       ensure_installed = lsp_servers,
+      automatic_enable = {
+        exclude = { "ts_ls" },
+      },
     })
-  end
+  end,
 }

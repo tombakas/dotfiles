@@ -42,6 +42,7 @@ vim.api.nvim_set_decoration_provider(ns, {
 local group = vim.api.nvim_create_augroup("TreesitterSetup", { clear = true })
 
 local ignore_filetypes = {
+  "aerial",
   "checkhealth",
   "lazy",
   "mason",
