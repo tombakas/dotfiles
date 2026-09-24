@@ -19,3 +19,11 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     vim.bo.filetype = "htmldjango"
   end,
 })
+
+vim.api.nvim_create_autocmd("WinEnter", {
+  callback = function()
+    if vim.bo.buftype == "terminal" then
+      vim.cmd("startinsert")
+    end
+  end,
+})

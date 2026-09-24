@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
 import argparse
 import sys
+from enum import Enum
 from pathlib import Path
 
+from deploy.dotfiles import Dotfiles
 from deploy.utils import add_line_to_file, create_symlink, print_title
 
 
@@ -18,30 +19,14 @@ def parse_args():
         metavar="all",
         help="Set up neovim related dotfiles. Pass 'all' as an argument to also set up sqfluff and editorconfig",
     )
-    parser.add_argument(
-        "--kitty", action="store_true", default=False, help="Set up kitty terminal"
-    )
-    parser.add_argument(
-        "--tmux", action="store_true", default=False, help="Set up tmux"
-    )
-    parser.add_argument(
-        "--starship", action="store_true", default=False, help="Set up starship"
-    )
-    parser.add_argument(
-        "--sxhkd", action="store_true", default=False, help="Set up sxhkd"
-    )
-    parser.add_argument(
-        "--sway", action="store_true", default=False, help="Set up sway"
-    )
-    parser.add_argument(
-        "--shells",
-        action="store_true",
-        default=False,
-        help="Set up .bashrc and config.fish",
-    )
-    parser.add_argument(
-        "--all", action="store_true", default=False, help="Set up all dotfiles"
-    )
+
+    for dotfile in Dotfiles:
+        parser.add_argument(
+            f"--{dotfile.value.name}",
+            action="store_true",
+            default=False,
+            help=dotfile.value.help,
+        )
 
     if len(sys.argv) == 1:
         parser.print_help()
@@ -57,7 +42,16 @@ def setup_neovim(all=False):
         create_symlink("configs/sqlfluff", "~/.sqlfluff")
 
 
-def link_dotfiles(tool, source, target):
+def link_dotfiles(*args, **kwargs):
+    if len(args) == 1 and isinstance(args[0], Enum):
+        namespace = args[0].value
+        tool = namespace.name
+        source = namespace.source
+        target = namespace.target
+    else:
+        tool = args[0]
+        source = args[1]
+        target = args[2]
     print_title(tool)
     create_symlink(source, target)
 
@@ -77,16 +71,14 @@ if __name__ == "__main__":
     if args.neovim or args.all:
         setup_neovim(all=args.neovim == "all" or args.all)
     if args.kitty or args.all:
-        link_dotfiles("kitty", "configs/kitty/kitty.conf", "~/.config/kitty/kitty.conf")
+        link_dotfiles(Dotfiles.KITTY)
     if args.tmux or args.all:
-        link_dotfiles("tmux", "configs/tmux/tmux.conf", "~/.tmux.conf")
+        link_dotfiles(Dotfiles.TMUX)
     if args.sway or args.all:
-        link_dotfiles("sway", "configs/sway/config", "~/.config/sway/config")
+        link_dotfiles(Dotfiles.SWAY)
     if args.starship or args.all:
-        link_dotfiles(
-            "starship", "configs/starship/starship.toml", "~/.config/starship.toml"
-        )
+        link_dotfiles(Dotfiles.STARSHIP)
     if args.sxhkd or args.all:
-        link_dotfiles("sxhkd", "configs/sxhkd/sxhkdrc", "~/.config/sxhkd/sxhkdrc")
+        link_dotfiles(Dotfiles.SXHKD)
     if args.shells or args.all:
         setup_dotfiles()

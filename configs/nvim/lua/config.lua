@@ -46,6 +46,9 @@ opt.undodir = os.getenv("HOME") .. "/.local/share/nvim/undodir"
 opt.undofile = true
 opt.undolevels = 10000
 
+-- Terminal
+vim.o.shell = "fish"
+
 -- Folding
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"

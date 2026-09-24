@@ -49,6 +49,13 @@ return {
       end,
       desc = "Obsidian dailies",
     },
+    {
+      "<leader>O#",
+      function()
+        vim.cmd("Obsidian tags")
+      end,
+      desc = "Obsidian tags",
+    },
   },
   opts = {
     workspaces = {

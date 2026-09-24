@@ -55,6 +55,7 @@ keymap("t", "<c-h>", "<c-\\><c-n><c-w>h")
 keymap("t", "<c-j>", "<c-\\><c-n><c-w>j")
 keymap("t", "<c-k>", "<c-\\><c-n><c-w>k")
 keymap("t", "<c-l>", "<c-\\><c-n><c-w>l")
+keymap("t", "<C-[>", [[<C-\><C-N>]], { silent = true })
 
 -- open terminal on ctrl+t
 keymap("n", "<c-t>", "<cmd>terminal<cr>", { noremap = true, silent = true })
