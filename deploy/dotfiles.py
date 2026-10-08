@@ -12,6 +12,12 @@ class Dotfile:
 
 
 class Dotfiles(Enum):
+    GHOSTTY = Dotfile(
+        "ghostty",
+        "Set up ghostty",
+        Path("configs/ghostty/config"),
+        Path("~/.config/ghostty/config"),
+    )
     KITTY = Dotfile(
         "kitty",
         "Set up kitty terminal",

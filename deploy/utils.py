@@ -53,7 +53,7 @@ def create_directory(target):
 
 def append_to_file(text, file):
     ColorPrint.green(
-        pre_text="Adding ", color_text=text, post_text=" to {}".format(file)
+        pre_text="Adding ", color_text=text, post_text=f" to {file}"
     )
     with open(Path(file).expanduser(), "a") as f:
         f.write("\n" + text + "\n")
@@ -63,7 +63,7 @@ def add_line_to_file(line, file):
     if not Path(file).expanduser().exists():
         ColorPrint.yellow(
             pre_text="File ",
-            color_text="{}".format(Path(file).expanduser()),
+            color_text=f"{Path(file).expanduser()}",
             post_text=" does not exist. Creating it...",
         )
         Path(file).expanduser().touch()
@@ -71,12 +71,12 @@ def add_line_to_file(line, file):
         append_to_file(line, file)
     else:
         ColorPrint.bold(
-            color_text="{}".format(line),
+            color_text=f"{line}",
             end="",
         )
         ColorPrint.yellow(
             pre_text=" already in ",
-            color_text="{}".format(file),
+            color_text=f"{file}",
         )
 
 
@@ -88,6 +88,6 @@ def text_in_file(text, file):
     return False
 
 
-def print_title(text):
+def print_title(text: str) -> None:
     print(f"\n{text}")
     print("=" * len(text))

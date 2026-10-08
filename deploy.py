@@ -5,7 +5,7 @@ import sys
 from enum import Enum
 from pathlib import Path
 
-from deploy.dotfiles import Dotfiles
+from deploy.dotfiles import Dotfile, Dotfiles
 from deploy.utils import add_line_to_file, create_symlink, print_title
 
 
@@ -68,17 +68,19 @@ def setup_dotfiles():
 if __name__ == "__main__":
     args = parse_args()
 
+    for dotfile in [
+        Dotfiles.KITTY,
+        Dotfiles.GHOSTTY,
+        Dotfiles.TMUX,
+        Dotfiles.SWAY,
+        Dotfiles.STARSHIP,
+        Dotfiles.SXHKD,
+    ]:
+        if getattr(args, dotfile.value.name) or args.all:
+            link_dotfiles(dotfile)
+
     if args.neovim or args.all:
         setup_neovim(all=args.neovim == "all" or args.all)
-    if args.kitty or args.all:
-        link_dotfiles(Dotfiles.KITTY)
-    if args.tmux or args.all:
-        link_dotfiles(Dotfiles.TMUX)
-    if args.sway or args.all:
-        link_dotfiles(Dotfiles.SWAY)
-    if args.starship or args.all:
-        link_dotfiles(Dotfiles.STARSHIP)
-    if args.sxhkd or args.all:
-        link_dotfiles(Dotfiles.SXHKD)
+
     if args.shells or args.all:
         setup_dotfiles()
