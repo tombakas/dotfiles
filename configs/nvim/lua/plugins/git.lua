@@ -1,22 +1,22 @@
 return {
-  {
-    "lewis6991/gitsigns.nvim",
+	{
+		"lewis6991/gitsigns.nvim",
 
-    opts = {
-      signs = {
-        add = { text = "+" },
-        change = { text = "~" },
-        delete = { text = "-" },
-        topdelete = { text = "" },
-        changedelete = { text = "▎" },
-        untracked = { text = "▎" },
-      },
-      on_attach = function(buffer)
-        local gs = package.loaded.gitsigns
+		opts = {
+			signs = {
+				add = { text = "+" },
+				change = { text = "~" },
+				delete = { text = "-" },
+				topdelete = { text = "" },
+				changedelete = { text = "▎" },
+				untracked = { text = "▎" },
+			},
+			on_attach = function(buffer)
+				local gs = package.loaded.gitsigns
 
-        local function map(mode, l, r, desc)
-          vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
-        end
+				local function map(mode, l, r, desc)
+					vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc })
+				end
 
       -- stylua: ignore start
       map("n", "]h", gs.next_hunk, "Next Hunk")
@@ -28,30 +28,17 @@ return {
       map("n", "<leader>ghR", gs.reset_buffer, "Reset Buffer")
       map("n", "<leader>ghp", gs.prev_hunk, "Prev Hunk")
       map("n", "<leader>ghn", gs.next_hunk, "Next Hunk")
+      map("n", "<leader>gb", gs.blame, "Git blame")
       map("n", "<leader>ghb", function() gs.blame_line({ full = true }) end, "Blame Line")
       map("n", "<leader>ghd", gs.diffthis, "Diff This")
       map("n", "<leader>ghD", function() gs.diffthis("~") end, "Diff This ~")
       map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>", "GitSigns Select Hunk")
-      end,
-    },
-  },
-  {
-    "sindrets/diffview.nvim",
-
-    keys = {
-      {
-        "<leader>gd", function ()
-          local lib = require("diffview.lib")
-          local view = lib.get_current_view()
-          if view then
-            -- Current tabpage is a Diffview; close it
-            vim.cmd.DiffviewClose()
-          else
-            -- No open Diffview exists: open a new one
-            vim.cmd.DiffviewOpen()
-          end
-        end
-      }
-    }
-  },
+			end,
+		},
+	},
+	{
+		"esmuellert/codediff.nvim",
+		cmd = "CodeDiff",
+		build = "./build.sh",
+	},
 }

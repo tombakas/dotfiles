@@ -44,6 +44,8 @@ local group = vim.api.nvim_create_augroup("TreesitterSetup", { clear = true })
 local ignore_filetypes = {
   "aerial",
   "checkhealth",
+  "conf",
+  "lazy_backdrop",
   "lazy",
   "mason",
   "snacks_dashboard",

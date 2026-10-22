@@ -15,5 +15,11 @@ keybind = ctrl+a>l=goto_split:right
 keybind = ctrl+a>l=goto_split:right
 keybind = ctrl+a>k=goto_split:up
 keybind = ctrl+a>j=goto_split:down
-
 keybind = ctrl+a>z=toggle_split_zoom
+
+# History exploration
+keybind = ctrl+a>s=write_scrollback_file:open
+keybind = ctrl+a>ctrl+s=write_screen_file:open
+
+# Ghostty internals
+keybind = ctrl+a>i=inspector:toggle

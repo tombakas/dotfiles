@@ -1,6 +1,5 @@
 local colorschemes = {
   "EdenEast/nightfox.nvim",
-  "arcticicestudio/nord-vim",
   {
     "catppuccin/nvim",
     config = function()
@@ -26,7 +25,6 @@ local colorschemes = {
   "folke/tokyonight.nvim",
   "projekt0n/github-nvim-theme",
   "rebelot/kanagawa.nvim",
-  "sainnhe/everforest",
   "sainnhe/gruvbox-material",
   "sainnhe/sonokai",
 }
