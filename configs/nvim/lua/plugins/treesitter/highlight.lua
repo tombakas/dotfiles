@@ -45,6 +45,7 @@ local ignore_filetypes = {
   "aerial",
   "checkhealth",
   "conf",
+  "tmux",
   "lazy_backdrop",
   "lazy",
   "mason",
